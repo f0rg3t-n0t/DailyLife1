@@ -316,9 +316,7 @@
           <!-- !!메모리얼 파크:로렘의 묘비 --> 
     <div id="memorial-lorem" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
-    <div id="flower-button-box">
-    <button onclick="giveflower()">헌화한다</button><br>
-  </div>
+    <button id="flowerbtn" onclick="giveflower('flowerbtn')">헌화한다</button><br>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
     <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
@@ -501,13 +499,19 @@ function goToWithoutzzapsea(page) {
 }
 
 
-function giveflower() {
+
+function giveflower(buttonId) {
   if (currentUser.key === 1) {
+    // 버튼 제거
+    const btn = document.getElementById(buttonId);
+    if (btn) btn.remove();  // 단 한 번만 제거
+
     goTo('flowerpage');
   } else {
     alert("꽃을 가지고 있지 않다. 어디서 구할 수 있을까...");
   }
 }
+
 
 
 function checkSecretCode() {
