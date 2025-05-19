@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
-<meta charset="utf-8"/>
-<title>zzapGame</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet"/>
-<style>
+  <meta charset="UTF-8" />
+  <title>zzapGame</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
+  <style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
       background-color: #f5f5f5;
@@ -13,25 +12,9 @@
       text-align: center;
       padding: 2em;
     }
-    img.logo {
-      width: 200px;
-      margin-bottom: 1em;
-    }
     .hidden { display: none; }
-    button {
-      font-size: 1em;
-      padding: 10px 20px;
-      margin: 10px;
-      border: none;
-      background-color: #3f40d3;
-      color: white;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #2c2db2;
-    }
-    #coin-display {
+
+    #user-display {
       position: fixed;
       top: 10px;
       left: 10px;
@@ -39,48 +22,14 @@
       background-color: white;
       padding: 6px 10px;
       border-radius: 6px;
+      text-align: left;
+      font-size: 0.9em;
       font-weight: bold;
+      line-height: 1.4;
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
     }
-    #bgm-player {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-    #bgm-player button {
-      background-color: #3f40d3 !important;
-      color: white;
-    }
-      .nav-button {
-      background-color: #444;
-      color: white;
-      font-size: 0.85em;
-      padding: 5px 12px;
-    }
-    #bgm-player button {
-      background-color: #3f40d3 !important;
-      color: white;
-    }
-      .nav-button {
-      background-color: #444 !important;
-      color: white !important;
-      font-size: 0.85em !important;
-      padding: 5px 12px !important;
-    }
-      .fade-in {
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards;
-    }
 
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-      .typewriter {
+    .typewriter {
       font-weight: bold;
       font-size: 1.1em;
       white-space: nowrap;
@@ -99,101 +48,133 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
-  
-#user-display {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  z-index: 9999;
-  background-color: white;
-  padding: 6px 10px;
-  border-radius: 6px;
-  text-align: left;
-  font-size: 0.9em;
-  font-weight: bold;
-  line-height: 1.4;
-  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-}</style>
+
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #3f40d3;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2c2db2;
+    }
+    .nav-button {
+      background-color: #444 !important;
+      font-size: 0.85em !important;
+      padding: 5px 12px !important;
+    }
+  </style>
 </head>
 <body>
-<div class="hidden" id="user-display" style><p id="user-class-line"></p><p id="coin-line">Coin: 0</p></div>
-<div id="bgm-player">
-<audio id="bgm" loop="" src="zzapbgm.m4a"></audio>
-<button onclick="document.getElementById('bgm').play()">▶</button>
-<button onclick="document.getElementById('bgm').pause()">⏸</button>
-</div>
-<img class="logo" src="zzaplogo.png"/>
-<div id="login-page">
-<p>ID를 입력하세요.</p>
-<input id="id-input" type="text"/>
-<button onclick="checkLogin()">확인</button>
-<p id="login-error" style="color: #ff4444;"></p>
-</div>
-<div class="hidden" id="main-page">
-<p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
-<button onclick="goTo('gym')">체육관</button>
-<button onclick="goTo('library')">도서관</button>
-<button onclick="goTo('kitchen')">주방</button>
-</div>
-<div class="hidden" id="gym">
-<p>문이 굳게 잠겨 있다.</p>
-<button onclick="kickDoor()">문을 발로 찬다</button><br/>
-<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-<button class="nav-button" onclick="goBack()">뒤로 가기</button>
-<p id="gym-result"></p>
-</div>
-<div class="hidden" id="library">
-<p>책들이 아주 많다.</p>
-<button onclick="readBook()">책을 읽는다</button>
-<button onclick="goTo('bookshelf')">책장을 본다</button><br/>
-<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-<button class="nav-button" onclick="goBack()">뒤로 가기</button>
-<p id="library-result"></p>
-</div>
-<div class="hidden" id="bookshelf">
-<p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
-<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-<button class="nav-button" onclick="goBack()">뒤로 가기</button>
-</div>
-<div class="hidden" id="kitchen">
-<p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
-<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-<button class="nav-button" onclick="goBack()">뒤로 가기</button>
-</div>
-<script>
-  const userData = {
-    mung0515: {
-      class: "피자마스터 으믕",
-      STR: 2,
-      INT: 5,
-      OBS: 5,
-      POW: 5,
-      LUC: 5,
-      key: 0,
-      coin: 0
-    }
-  };
 
-  let currentUser = null;
-  let pageHistory = [];
-  const outputIds = ['gym-result', 'library-result'];
+  <!-- 로그인 후 좌상단에 보일 코인 정보 -->
+  <div id="user-display" class="hidden">
+    <p id="user-class-line"></p>
+    <p id="coin-line">Coin: 0</p>
+  </div>
+
+  <!-- 로그인 화면 -->
+  <div id="login-page">
+    <p>ID를 입력하세요.</p>
+    <input id="id-input" type="text" />
+    <button onclick="checkLogin()">확인</button>
+    <p id="login-error" style="color: #ff4444;"></p>
+  </div>
+
+  <!-- 메인 페이지 -->
+  <div id="main-page" class="hidden">
+    <p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
+    <button onclick="goTo('gym')">체육관</button>
+    <button onclick="goTo('library')">도서관</button>
+    <button onclick="goToWithSound('kitchen', 'zzapaudio.mp3')">주방</button>
+  </div>
+
+  <!-- 체육관 -->
+  <div id="gym" class="hidden">
+    <p>문이 굳게 잠겨 있다.</p>
+    <button onclick="kickDoor()">문을 발로 찬다</button><br/>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <p id="gym-result"></p>
+  </div>
+
+  <!-- 도서관 -->
+  <div id="library" class="hidden">
+    <p>책들이 아주 많다.</p>
+    <button onclick="readBook()">책을 읽는다</button>
+    <button onclick="goTo('bookshelf')">책장을 본다</button><br/>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <p id="library-result"></p>
+  </div>
+
+  <!-- 책장 -->
+  <div id="bookshelf" class="hidden">
+    <p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
+    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+  </div>
+
+  <!-- 주방 -->
+  <div id="kitchen" class="hidden">
+    <p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const userData = {
+      mung0515: {
+        class: "피자마스터 으믕",
+        STR: 2,
+        INT: 5,
+        OBS: 5,
+        POW: 5,
+        LUC: 5,
+        key: 0,
+        coin: 0
+      }
+    };
+
+    let currentUser = null;
+    let pageHistory = [];
+    const outputIds = ['gym-result', 'library-result'];
 
     function checkLogin() {
       const id = document.getElementById('id-input').value;
       if (userData[id]) {
         currentUser = userData[id];
-        showUserInfo();
-        document.getElementById('login-page').classList.add('hidden');
-        document.getElementById('main-page').classList.remove('hidden');
-        pageHistory.push('main-page');
+        showWelcomeMessage(currentUser.class);
       } else {
         document.getElementById('login-error').innerText = "아이디가 일치하지 않습니다.";
       }
     }
 
+    function showWelcomeMessage(userClass) {
+      document.getElementById('login-page').classList.add('hidden');
+
+      const container = document.createElement('div');
+      container.classList.add('typewriter');
+      container.innerHTML = `초세계급 "${userClass}" 님을 환영합니다. . .`;
+
+      document.body.appendChild(container);
+
+      setTimeout(() => {
+        container.remove();
+        showUserInfo();
+        document.getElementById('main-page').classList.remove('hidden');
+        pageHistory.push('main-page');
+      }, 3600);
+    }
+
     function showUserInfo() {
       const userBox = document.getElementById('user-display');
-      document.getElementById('user-class-line').innerHTML = `초세계급 ${currentUser.class}`;
+      document.getElementById('user-class-line').innerHTML = `초세계급 "${currentUser.class}"`;
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
       userBox.classList.remove('hidden');
     }
@@ -202,94 +183,66 @@
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
     }
 
-function showWelcomeMessage(userClass) {
-  document.getElementById('login-page').classList.add('hidden');
-
-  const container = document.createElement('div');
-  container.classList.add('typewriter');
-  container.innerHTML = `초세계급 "${userClass}" 님을 환영합니다. . .`;
-
-  // ✅ body 맨 끝에 메시지 삽입
-  document.body.appendChild(container);
-
-  setTimeout(() => {
-    container.remove();              // 메시지 제거
-    showUserInfo();                  // ← 이제 Coin + class 표시
-    document.getElementById('main-page').classList.remove('hidden'); // main-page 표시
-    pageHistory.push('main-page');
-  }, 3600);
-}
-
-
-  function clearOutputs() {
-    outputIds.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.innerText = '';
-    });
-  }
-
-  function goTo(page) {
-    document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
-    const target = document.getElementById(page);
-    target.classList.remove('hidden');
-    target.classList.add('fade-in');
-    clearOutputs();
-    pageHistory.push(page);
-
-    if (page === 'kitchen' || page === 'gym') {
-      const audio = new Audio('zzapaudio.mp3');
-      audio.loop = false;
-      audio.play();
+    function clearOutputs() {
+      outputIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = '';
+      });
     }
-    if (page === 'kitchen') {
-      currentUser.key = 1;
-    }
-    if (page === 'kitchen') {
-  currentUser.coin = (currentUser.coin || 0) + 1;
-  updateCoinDisplay(); // 코인 UI 업데이트
-}
-  }
 
-  function goBack() {
-    if (pageHistory.length > 1) {
-      pageHistory.pop();
-      const prev = pageHistory[pageHistory.length - 1];
+    function goTo(page) {
       document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
-      const target = document.getElementById(prev);
+      const target = document.getElementById(page);
       target.classList.remove('hidden');
       target.classList.add('fade-in');
       clearOutputs();
+      pageHistory.push(page);
+
+      if (page === 'kitchen') {
+        currentUser.key = 1;
+        currentUser.coin = (currentUser.coin || 0) + 1;
+        updateCoinDisplay();
+      }
     }
-  }
 
-  function kickDoor() {
-    const result = document.getElementById('gym-result');
-    let messages = [];
-    if (currentUser.key === 1) {
-      messages.push("해피해피 코드");
+    // ✅ 효과음 + 페이지 이동 겸용 함수
+    function goToWithSound(page, soundFile) {
+      const audio = new Audio(soundFile);
+      audio.loop = false;
+      audio.play();
+      goTo(page);
     }
-    if (currentUser.STR <= 2) {
-      messages.push("발이 아프다. 들어갈 수 없는 것 같다.");
-    } else {
-      messages.push("문이 열린다!");
+
+    function goBack() {
+      if (pageHistory.length > 1) {
+        pageHistory.pop();
+        const prev = pageHistory[pageHistory.length - 1];
+        document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+        const target = document.getElementById(prev);
+        target.classList.remove('hidden');
+        target.classList.add('fade-in');
+        clearOutputs();
+      }
     }
-    result.innerText = messages.join("\\n");
-  }
 
-  function readBook() {
-    document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
-  }
+    function kickDoor() {
+      const result = document.getElementById('gym-result');
+      let messages = [];
+      if (currentUser.key === 1) {
+        messages.push("해피해피 코드");
+      }
+      if (currentUser.STR <= 2) {
+        messages.push("발이 아프다. 들어갈 수 없는 것 같다.");
+      } else {
+        messages.push("문이 열린다!");
+      }
+      result.innerText = messages.join("\\n");
+    }
 
-  function updateCoinDisplay() {
-  document.getElementById('coin-display').innerText = `Coin: ${currentUser.coin || 0}`;
-}
+    function readBook() {
+      document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
+    }
+  </script>
+</body>
+</html>
 
-
-function showUserInfo() {
-  const userBox = document.getElementById('user-display');
-  document.getElementById('user-class-line').innerHTML = `초세계급 "${currentUser.class}"`;
-  document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
-  userBox.classList.remove('hidden');
-}
-</script>
-</body></html>
