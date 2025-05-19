@@ -460,11 +460,7 @@ function goTodel(targetPage, buttonId) {
     const audio = new Audio(soundFile);
     audio.loop = true;
     audio.play();
-  }
-  goTo(page);
-}
-
-    
+  }  
 function goBack() {
   if (pageHistory.length > 1) {
     pageHistory.pop();
@@ -485,7 +481,6 @@ function goBack() {
     clearOutputs();
   }
 }
-
 function goToWithoutzzapsea(page) {
   try {
     zzapseaAudio.pause();
@@ -495,8 +490,6 @@ function goToWithoutzzapsea(page) {
   }
   goTo(page);
 }
-
-
 
 function giveflower(buttonId) {
   if (currentUser.key === 1) {
