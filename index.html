@@ -335,10 +335,14 @@
       });
     }
 
+
+
     function goTo(page) {
-      document.querySelectorAll('div').forEach(div => {
-        if (div.id !== 'user-display') div.classList.add('hidden');
-      });
+  document.querySelectorAll('div').forEach(div => {
+  if (!['user-display', 'user-text'].includes(div.id)) {
+    div.classList.add('hidden');
+  }
+});
       const target = document.getElementById(page);
       target.classList.remove('hidden');
       target.classList.add('fade-in');
