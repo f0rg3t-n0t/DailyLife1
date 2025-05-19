@@ -450,12 +450,19 @@ if (page === 'notary4' && codebox) {
       goTo(page);
     }
 
-        function goToWithSoundNL(page, soundFile) {
-      const audio = new Audio(soundFile);
-      audio.loop = true;
-      audio.play();
-      goTo(page);
-    }
+    function goToWithSoundNL(page, soundFile) {
+  if (soundFile.includes('zzapsea.wav')) {
+    zzapSeaAudio = new Audio(soundFile); // 전역 변수로 저장
+    zzapSeaAudio.loop = true;
+    zzapSeaAudio.play();
+  } else {
+    const audio = new Audio(soundFile);
+    audio.loop = true;
+    audio.play();
+  }
+  goTo(page);
+}
+
     
 function goBack() {
   if (pageHistory.length > 1) {
