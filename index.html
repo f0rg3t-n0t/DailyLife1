@@ -1,10 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <title>zzapGame</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-  <style>
+<meta charset="utf-8"/>
+<title>zzapGame</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&amp;display=swap" rel="stylesheet"/>
+<style>
     body {
       font-family: 'Noto Sans KR', sans-serif;
       background-color: #f5f5f5;
@@ -98,66 +99,68 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
-  </style>
+  
+#user-display {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  background-color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  text-align: left;
+  font-size: 0.9em;
+  font-weight: bold;
+  line-height: 1.4;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+}</style>
 </head>
 <body>
-
-  <div id="coin-display" style="position: fixed; top: 10px; left: 10px; font-weight: bold;">
-  초세계급 "${userClass}"<br>Coin: 0
+<div class="hidden" id="user-display" style><p id="user-class-line"></p><p id="coin-line">Coin: 0</p></div>
+<div id="bgm-player">
+<audio id="bgm" loop="" src="zzapbgm.m4a"></audio>
+<button onclick="document.getElementById('bgm').play()">▶</button>
+<button onclick="document.getElementById('bgm').pause()">⏸</button>
 </div>
-
-  <div id="bgm-player">
-    <audio id="bgm" src="zzapbgm.m4a" loop></audio>
-    <button onclick="document.getElementById('bgm').play()">▶</button>
-    <button onclick="document.getElementById('bgm').pause()">⏸</button>
-  </div>
-
-  <img src="zzaplogo.png" class="logo">
-
-  <div id="login-page">
-    <p>ID를 입력하세요.</p>
-    <input type="text" id="id-input">
-    <button onclick="checkLogin()">확인</button>
-    <p id="login-error" style="color: #ff4444;"></p>
-  </div>
-
-  <div id="main-page" class="hidden">
-    <p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
-    <button onclick="goTo('gym')">체육관</button>
-    <button onclick="goTo('library')">도서관</button>
-    <button onclick="goTo('kitchen')">주방</button>
-  </div>
-
-  <div id="gym" class="hidden">
-    <p>문이 굳게 잠겨 있다.</p>
-    <button onclick="kickDoor()">문을 발로 찬다</button><br>
-    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <p id="gym-result"></p>
-  </div>
-
-  <div id="library" class="hidden">
-    <p>책들이 아주 많다.</p>
-    <button onclick="readBook()">책을 읽는다</button>
-    <button onclick="goTo('bookshelf')">책장을 본다</button><br>
-    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <p id="library-result"></p>
-  </div>
-
-  <div id="bookshelf" class="hidden">
-    <p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
-    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-  </div>
-
-  <div id="kitchen" class="hidden">
-    <p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
-    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-  </div>
-
-  <script>
+<img class="logo" src="zzaplogo.png"/>
+<div id="login-page">
+<p>ID를 입력하세요.</p>
+<input id="id-input" type="text"/>
+<button onclick="checkLogin()">확인</button>
+<p id="login-error" style="color: #ff4444;"></p>
+</div>
+<div class="hidden" id="main-page">
+<p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
+<button onclick="goTo('gym')">체육관</button>
+<button onclick="goTo('library')">도서관</button>
+<button onclick="goTo('kitchen')">주방</button>
+</div>
+<div class="hidden" id="gym">
+<p>문이 굳게 잠겨 있다.</p>
+<button onclick="kickDoor()">문을 발로 찬다</button><br/>
+<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+<button class="nav-button" onclick="goBack()">뒤로 가기</button>
+<p id="gym-result"></p>
+</div>
+<div class="hidden" id="library">
+<p>책들이 아주 많다.</p>
+<button onclick="readBook()">책을 읽는다</button>
+<button onclick="goTo('bookshelf')">책장을 본다</button><br/>
+<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+<button class="nav-button" onclick="goBack()">뒤로 가기</button>
+<p id="library-result"></p>
+</div>
+<div class="hidden" id="bookshelf">
+<p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
+<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+<button class="nav-button" onclick="goBack()">뒤로 가기</button>
+</div>
+<div class="hidden" id="kitchen">
+<p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
+<button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+<button class="nav-button" onclick="goBack()">뒤로 가기</button>
+</div>
+<script>
   const userData = {
     mung0515: {
       class: "피자마스터 으믕",
@@ -263,6 +266,12 @@
   document.getElementById('coin-display').innerText = `Coin: ${currentUser.coin || 0}`;
 }
 
-</script>
 
-  
+function showUserInfo() {
+  const userBox = document.getElementById('user-display');
+  document.getElementById('user-class-line').innerHTML = `초세계급 "${currentUser.class}"`;
+  document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
+  userBox.classList.remove('hidden');
+}
+</script>
+</body></html>
