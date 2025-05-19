@@ -169,7 +169,7 @@
     <p><span style="font-weight: bold;">[카운터]</span><br><br>보통이라면 직원이 서 있어야 할 카운터 너머에는 아무도 없다. 가까이 다가가자 공증인의 목소리가 울린다.<br><br><em>”섬 내부는 잘 돌아보고 계신가요?”</em><br><br><em>”꼼꼼히 둘러봐 주신 분들을 위해 작은 퀴즈를 준비했습니다. 기분이 내키신다면 말을 걸어 주세요. 잠시 쉬어가고 싶으실 때는 잡담을 주고받는 것도 좋겠죠.”</em></p>
     <button onclick="goTo('notary')">공증인과 대화하기</button><br>
     <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">로비로 나가기</button>
  </div>
     <!-- 로비:카운터:notary --> 
     <div id="notary" class="hidden">
@@ -285,7 +285,7 @@
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>짧게 깎인 잔디 위로 새하얀 비석이 햇빛을 반사하며 눈길을 끈다.<br>이곳은 세상을 떠난 초세계급을 기리는 메모리얼 파크. 묻힌 사람은 아직 하나뿐이다.<br>규칙적으로 들려오는 파도 소리가 장송곡처럼 잔잔히 흐른다.<br>메모리얼 파크를 가로지르는 길은 꽃이 만발한 <span style="color: #3f40d3;">화원</span>으로 이어진다.</p>
     <button onclick="goTo('memorial-lorem')">로렘의 묘비</button><br>
     <button onclick="goTo('garden')">화원</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
         <!-- !!메모리얼 파크:화원 --> 
@@ -293,7 +293,7 @@
     <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
     <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로 돌아가기</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:화원:꽃 --> 
@@ -303,14 +303,14 @@
     <button onclick="goTo('flowerobtain')">장미</button><br>
     <button onclick="goTo('flowerobtain')">국화</button><br>
     <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
         <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="flowerobtain" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
     <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
           <!-- !!메모리얼 파크:로렘의 묘비 --> 
@@ -431,7 +431,7 @@ function goTo(page) {
   const flowerButton = document.getElementById('flower-button-box');
 if (flowerButton) {
   // 한 번이라도 헌화한 경우에는 다시 보이지 않음
-  flowerButton.style.display = (page === 'flowerpage' || currentUser.key === 1) ? 'none' : 'block';
+  flowerButton.style.display = (page === 'flowerpage') ? 'none' : 'block';
 }
   const codebox = document.getElementById('codebox');
 if (page === 'notary4' && codebox) {
