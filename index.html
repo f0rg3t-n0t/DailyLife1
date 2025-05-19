@@ -441,11 +441,18 @@ if (page === 'notary4' && codebox) {
   document.getElementById('user-display').classList.remove('hidden');
 }
 
+function goTodel(targetPage, buttonId) {
+  const btn = document.getElementById(buttonId);
+  if (btn) btn.remove(); // 한 번만 지움
+
+  goTo(targetPage); // 기존 페이지 이동 로직 재사용
+}
 
 
     function goToWithSound(page, soundFile) {
       const audio = new Audio(soundFile);
       audio.loop = false;
+      audio.volume = 0.7;
       audio.play();
       goTo(page);
     }
