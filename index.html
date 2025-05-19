@@ -275,7 +275,7 @@
     <!-- 메모리얼 파크 --> 
     <div id="memorial" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
-    <button onclick="goToWithSoundNL('memorial1', 'zzapsea.wav')">메모리얼 파크에 입장한다</button><br>
+    <button onclick="goToWithSoundNL('memorial1', 'zzapsea.mp3')">메모리얼 파크에 입장한다</button><br>
     <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goTo('outside')">뒤로 가기</button>
   </div>
@@ -451,7 +451,7 @@ if (page === 'notary4' && codebox) {
     }
 
     function goToWithSoundNL(page, soundFile) {
-  if (soundFile.includes('zzapsea.wav')) {
+  if (soundFile.includes('zzapsea.mp3')) {
     zzapSeaAudio = new Audio(soundFile); // 전역 변수로 저장
     zzapSeaAudio.loop = true;
     zzapSeaAudio.play();
