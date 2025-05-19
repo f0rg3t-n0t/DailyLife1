@@ -319,7 +319,7 @@
 
     function showUserInfo() {
       const userBox = document.getElementById('user-display');
-      document.getElementById('user-class-line').innerHTML = `User ID: ${currentUser.id}`;
+      document.getElementById('user-class-line').innerHTML = `초세계급 "${currentUser.class}"`;
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
       userBox.classList.remove('hidden');
     }
@@ -335,26 +335,21 @@
       });
     }
 
-function goTo(page) {
-  document.querySelectorAll('div').forEach(div => {
-    // user-display 안의 요소들까지 hidden이 안 먹도록 완전 제외
-    if (!['user-display', 'user-text', 'barcode-icon'].includes(div.id)) {
-      div.classList.add('hidden');
+    function goTo(page) {
+      document.querySelectorAll('div').forEach(div => {
+        if (div.id !== 'user-display') div.classList.add('hidden');
+      });
+      const target = document.getElementById(page);
+      target.classList.remove('hidden');
+      target.classList.add('fade-in');
+      clearOutputs();
+      pageHistory.push(page);
+      if (page === 'kitchen'|| page === 'elevator1'|| page === 'notary3-2') {
+        currentUser.key = 1;
+        currentUser.coin = (currentUser.coin || 0) + 1;
+        updateCoinDisplay();
+      }
     }
-  });
-  const target = document.getElementById(page);
-  target.classList.remove('hidden');
-  target.classList.add('fade-in');
-  clearOutputs();
-  pageHistory.push(page);
-  if (['kitchen', 'elevator1', 'notary3-2'].includes(page)) {
-    currentUser.key = 1;
-    currentUser.coin = (currentUser.coin || 0) + 1;
-    updateCoinDisplay();
-  }
-  // 🆕 항상 사용자 정보는 보이도록 보장
-  document.getElementById('user-display').classList.remove('hidden');
-}
 
 
     function goToWithSound(page, soundFile) {
