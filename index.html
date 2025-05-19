@@ -119,8 +119,8 @@
   <!-- 내부 1층 --> 
   <div id="inside" class="hidden">
     <p><span style="font-weight: bold;">[건물 1층]</span><br><br>대리석 바닥이 반짝거리는 건물 1층. 정면에 방문객을 맞이하는 <span style="color: #3f40d3;">로비</span>가 보이고, 로비 좌측과 우측으로 긴 복도가 뻗어나간다. 왼쪽은 <span style="color: #3f40d3;">'레스토랑'</span>, 오른쪽은 <span style="color: #3f40d3;">'내빈용 객실'</span>.</p>
-    <button onclick="goTo('lobby')">로비</button>
     <button onclick="goTo('restaurant')">레스토랑</button>
+    <button onclick="goTo('lobby')">로비</button>
     <button onclick="goTo('suite')">내빈용 객실</button><br>
     <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
@@ -152,14 +152,21 @@
   
     <!-- 로비:엘리베이터 --> 
     <div id="elevator" class="hidden">
-    <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>공사중.</p>
+    <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>아앗~ 공사중이라서 이용할 수 없어! 대신 엘베 바닥이라도 샅샅이 뒤져보자!</p>
+    <button id="elevatorbutton" onclick="goTodel('elevator1', 'elevatorbutton')">샅샅이 뒤진다</button>
     <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
  </div>      
+      <!-- 로비:엘리베이터:탐색 --> 
+    <div id="elevator1" class="hidden">
+    <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>와~ 코인을 하나 찾았어~ 대박대박~</p>
+    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+ </div>     
   
     <!-- 레스토랑 --> 
     <div id="restaurant" class="hidden">
-    <p><span style="font-weight: bold;">[레스토랑]</span><br><br>공사중.</p>
+    <p><span style="font-weight: bold;">[레스토랑]</span><br><br>공사중.<br>조리실 같은 걸 넣나...</p>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
@@ -266,7 +273,7 @@
       target.classList.add('fade-in');
       clearOutputs();
       pageHistory.push(page);
-      if (page === 'kitchen') {
+      if (page === 'kitchen'|| page === 'elevator1') {
         currentUser.key = 1;
         currentUser.coin = (currentUser.coin || 0) + 1;
         updateCoinDisplay();
@@ -309,6 +316,13 @@
     function readBook() {
       document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
     }
+
+    function goTodel(targetPage, buttonId) {
+  const btn = document.getElementById(buttonId);
+  if (btn) btn.remove(); // 한 번만 지움
+  goTo(targetPage); // 기존 페이지 이동 로직 재사용
+}
+
   </script>
 </body>
 </html>
