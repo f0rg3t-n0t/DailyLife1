@@ -376,9 +376,9 @@ function goBack() {
     pageHistory.pop();
     const prev = pageHistory[pageHistory.length - 1];
 
-    // 모든 div를 숨기되 user-display만 예외 처리
+    // user-display 및 그 자식들은 숨기지 않음
     document.querySelectorAll('div').forEach(div => {
-      if (div.id !== 'user-display') {
+      if (!div.closest('#user-display')) {
         div.classList.add('hidden');
       }
     });
@@ -386,10 +386,9 @@ function goBack() {
     const target = document.getElementById(prev);
     target.classList.remove('hidden');
     target.classList.add('fade-in');
-    clearOutputs();
 
-    // 다시 한 번 보장: user-display는 항상 보이게
     document.getElementById('user-display').classList.remove('hidden');
+    clearOutputs();
   }
 }
 
