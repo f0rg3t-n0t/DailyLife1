@@ -209,15 +209,17 @@ function showWelcomeMessage(userClass) {
   container.classList.add('typewriter');
   container.innerHTML = `초세계급 "${userClass}" 님을 환영합니다. . .`;
 
+  // ✅ body 맨 끝에 메시지 삽입
   document.body.appendChild(container);
 
   setTimeout(() => {
-    container.remove();
-    showUserInfo();  // ← Coin 표시를 "환영 메시지 이후"에 실행
-    document.getElementById('main-page').classList.remove('hidden');
+    container.remove();              // 메시지 제거
+    showUserInfo();                  // ← 이제 Coin + class 표시
+    document.getElementById('main-page').classList.remove('hidden'); // main-page 표시
     pageHistory.push('main-page');
   }, 3600);
 }
+
 
   function clearOutputs() {
     outputIds.forEach(id => {
