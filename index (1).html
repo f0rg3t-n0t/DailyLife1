@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>zzapGame</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background-color: #f5f5f5;
+      color: black;
+      text-align: center;
+      padding: 2em;
+    }
+    img.logo {
+      width: 200px;
+      margin-bottom: 1em;
+    }
+    .hidden { display: none; }
+    button {
+      font-size: 1em;
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #3f40d3;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2c2db2;
+    }
+    #bgm-player {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #bgm-player button {
+      background-color: #3f40d3 !important;
+      color: white;
+    }
+      .nav-button {
+      background-color: #444;
+      color: white;
+      font-size: 0.85em;
+      padding: 5px 12px;
+    }
+    #bgm-player button {
+      background-color: #3f40d3 !important;
+      color: white;
+    }
+      .nav-button {
+      background-color: #444 !important;
+      color: white !important;
+      font-size: 0.85em !important;
+      padding: 5px 12px !important;
+    }
+      .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+      .typewriter {
+      font-weight: bold;
+      font-size: 1.1em;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 2px solid #3f40d3;
+      width: 0;
+      animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+      margin-bottom: 1em;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+  </style>
+</head>
+<body>
+  <div id="bgm-player">
+    <audio id="bgm" src="zzapbgm.m4a" loop></audio>
+    <button onclick="document.getElementById('bgm').play()">▶</button>
+    <button onclick="document.getElementById('bgm').pause()">⏸</button>
+  </div>
+
+  <img src="zzaplogo.png" class="logo">
+
+  <div id="login-page">
+    <p>ID를 입력하세요.</p>
+    <input type="text" id="id-input">
+    <button onclick="checkLogin()">확인</button>
+    <p id="login-error" style="color: #ff4444;"></p>
+  </div>
+
+  <div id="main-page" class="hidden">
+    <p>다음과 같은 장소를 살펴볼 수 있다.</p>
+    <button onclick="goTo('gym')">체육관</button>
+    <button onclick="goTo('library')">도서관</button>
+    <button onclick="goTo('kitchen')">주방</button>
+  </div>
+
+  <div id="gym" class="hidden">
+    <p>문이 굳게 잠겨 있다.</p>
+    <button onclick="kickDoor()">문을 발로 찬다</button><br>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <p id="gym-result"></p>
+  </div>
+
+  <div id="library" class="hidden">
+    <p>책들이 아주 많다.</p>
+    <button onclick="readBook()">책을 읽는다</button>
+    <button onclick="goTo('bookshelf')">책장을 본다</button><br>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <p id="library-result"></p>
+  </div>
+
+  <div id="bookshelf" class="hidden">
+    <p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+  </div>
+
+  <div id="kitchen" class="hidden">
+    <p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
+    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+  </div>
+
+  <script>
+  const userData = {
+    mung0515: {
+      class: "피자마스터",
+      STR: 2,
+      INT: 5,
+      OBS: 5,
+      POW: 5,
+      LUC: 5,
+      key: 0
+    }
+  };
+
+  let currentUser = null;
+  let pageHistory = [];
+  const outputIds = ['gym-result', 'library-result'];
+
+  function checkLogin() {
+    const id = document.getElementById('id-input').value;
+    if (userData[id]) {
+      currentUser = userData[id];
+      showWelcomeMessage(currentUser.class);
+    } else {
+      document.getElementById('login-error').innerText = "아이디가 일치하지 않습니다. 확인 후 다시 입력해 주세요.";
+    }
+  }
+
+  function showWelcomeMessage(userClass) {
+    document.getElementById('login-page').classList.add('hidden');
+
+    const container = document.createElement('div');
+    container.classList.add('typewriter');
+    container.textContent = `미래기관이 초세계급 "${userClass}" 를 환영합니다. . .`;
+    document.body.insertBefore(container, document.getElementById('main-page'));
+
+    setTimeout(() => {
+      container.remove();
+      document.getElementById('main-page').classList.remove('hidden');
+      pageHistory.push('main-page');
+    }, 3600);
+  }
+
+  function clearOutputs() {
+    outputIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerText = '';
+    });
+  }
+
+  function goTo(page) {
+    document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+    const target = document.getElementById(page);
+    target.classList.remove('hidden');
+    target.classList.add('fade-in');
+    clearOutputs();
+    pageHistory.push(page);
+
+    if (page === 'kitchen' || page === 'gym') {
+      const audio = new Audio('zzapaudio.mp3');
+      audio.loop = false;
+      audio.play();
+    }
+    if (page === 'kitchen') {
+      currentUser.key = 1;
+    }
+  }
+
+  function goBack() {
+    if (pageHistory.length > 1) {
+      pageHistory.pop();
+      const prev = pageHistory[pageHistory.length - 1];
+      document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+      const target = document.getElementById(prev);
+      target.classList.remove('hidden');
+      target.classList.add('fade-in');
+      clearOutputs();
+    }
+  }
+
+  function kickDoor() {
+    const result = document.getElementById('gym-result');
+    let messages = [];
+    if (currentUser.key === 1) {
+      messages.push("해피해피 코드");
+    }
+    if (currentUser.STR <= 2) {
+      messages.push("발이 아프다. 들어갈 수 없는 것 같다.");
+    } else {
+      messages.push("문이 열린다!");
+    }
+    result.innerText = messages.join("\\n");
+  }
+
+  function readBook() {
+    document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
+  }
+</script>
