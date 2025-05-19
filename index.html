@@ -14,20 +14,34 @@
     }
     .hidden { display: none; }
 
-    #user-display {
-      position: fixed;
-      top: 10px;
-      left: 10px;
-      z-index: 9999;
-      background-color: white;
-      padding: 6px 10px;
-      border-radius: 6px;
-      text-align: left;
-      font-size: 0.9em;
-      font-weight: bold;
-      line-height: 1.4;
-      box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
-    }
+#user-display {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  background-color: #F5F5F5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  font-family: monospace;
+  color: #3F40D3;
+  border: 1px solid #ddd;
+  min-width: 180px;
+}
+
+#barcode-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+#user-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
     #bgm-player {
       position: fixed;
@@ -90,9 +104,13 @@
 <body>
 
   <div id="user-display" class="hidden">
-    <p id="user-class-line"></p>
-    <p id="coin-line">Coin: 0</p>
+  <img src="zzapbarcode.png" alt="barcode" id="barcode-icon">
+  <div id="user-text">
+    <div id="user-class-line">User ID :</div>
+    <div id="coin-line">Coin :</div>
   </div>
+</div>
+
 
   <div id="bgm-player">
     <audio id="bgm" src="zzapbgm.m4a" loop></audio>
@@ -249,6 +267,7 @@
     const userData = {
       mung0515: {
         class: "피자마스터 으믕",
+        id: ThePizzaMaster
         STR: 2,
         INT: 5,
         OBS: 5,
@@ -289,7 +308,7 @@
 
     function showUserInfo() {
       const userBox = document.getElementById('user-display');
-      document.getElementById('user-class-line').innerHTML = `초세계급 "${currentUser.class}"`;
+      document.getElementById('user-class-line').innerHTML = `${currentUser.id}`;
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
       userBox.classList.remove('hidden');
     }
