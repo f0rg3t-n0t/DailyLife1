@@ -337,23 +337,31 @@
 
 
 
-    function goTo(page) {
+function goTo(page) {
+  // 숨기되 user-display 전체만 제외 (자식 포함해서 숨겨지지 않도록)
+  const exceptions = ['user-display'];
+  
   document.querySelectorAll('div').forEach(div => {
-  if (!['user-display', 'user-text'].includes(div.id)) {
-    div.classList.add('hidden');
-  }
-});
-      const target = document.getElementById(page);
-      target.classList.remove('hidden');
-      target.classList.add('fade-in');
-      clearOutputs();
-      pageHistory.push(page);
-      if (page === 'kitchen'|| page === 'elevator1'|| page === 'notary3-2') {
-        currentUser.key = 1;
-        currentUser.coin = (currentUser.coin || 0) + 1;
-        updateCoinDisplay();
-      }
+    if (!exceptions.includes(div.id) && !div.closest('#user-display')) {
+      div.classList.add('hidden');
     }
+  });
+
+  const target = document.getElementById(page);
+  target.classList.remove('hidden');
+  target.classList.add('fade-in');
+  clearOutputs();
+  pageHistory.push(page);
+
+  if (['kitchen', 'elevator1', 'notary3-2'].includes(page)) {
+    currentUser.key = 1;
+    currentUser.coin = (currentUser.coin || 0) + 1;
+    updateCoinDisplay();
+  }
+
+  document.getElementById('user-display').classList.remove('hidden');
+}
+
 
 
     function goToWithSound(page, soundFile) {
