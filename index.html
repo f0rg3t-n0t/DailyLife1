@@ -285,7 +285,7 @@
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>짧게 깎인 잔디 위로 새하얀 비석이 햇빛을 반사하며 눈길을 끈다.<br>이곳은 세상을 떠난 초세계급을 기리는 메모리얼 파크. 묻힌 사람은 아직 하나뿐이다.<br>규칙적으로 들려오는 파도 소리가 장송곡처럼 잔잔히 흐른다.<br>메모리얼 파크를 가로지르는 길은 꽃이 만발한 <span style="color: #3f40d3;">화원</span>으로 이어진다.</p>
     <button onclick="goTo('memorial-lorem')">로렘의 묘비</button><br>
     <button onclick="goTo('garden')">화원</button>
-    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
         <!-- !!메모리얼 파크:화원 --> 
@@ -293,7 +293,7 @@
     <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
     <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:화원:꽃 --> 
@@ -303,14 +303,14 @@
     <button onclick="goTo('flowerobtain')">장미</button><br>
     <button onclick="goTo('flowerobtain')">국화</button><br>
     <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
         <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="flowerobtain" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
     <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
           <!-- !!메모리얼 파크:로렘의 묘비 --> 
@@ -320,14 +320,14 @@
     <button onclick="giveflower()">헌화한다</button><br>
   </div>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
     <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
     <div id="flowerpage" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
     <!-- 산책로 --> 
@@ -459,9 +459,9 @@ function goTodel(targetPage, buttonId) {
 
     function goToWithSoundNL(page, soundFile) {
   if (soundFile.includes('zzapsea.mp3')) {
-    zzapSeaAudio = new Audio(soundFile); // 전역 변수로 저장
-    zzapSeaAudio.loop = true;
-    zzapSeaAudio.play();
+    zzapseaAudio = new Audio(soundFile); // 전역 변수로 저장
+    zzapseaAudio.loop = true;
+    zzapseaAudio.play();
   } else {
     const audio = new Audio(soundFile);
     audio.loop = true;
@@ -492,10 +492,10 @@ function goBack() {
   }
 }
 
-function goToWithoutZzapSea(page) {
-  if (zzapSeaAudio && !zzapSeaAudio.paused) {
-    zzapSeaAudio.pause();
-    zzapSeaAudio.currentTime = 0;
+function goToWithoutzzapsea(page) {
+  if (zzapseaAudio && !zzapseaAudio.paused) {
+    zzapseaAudio.pause();
+    zzapseaAudio.currentTime = 0;
   }
   goTo(page);
 }
@@ -503,11 +503,6 @@ function goToWithoutZzapSea(page) {
 
 function giveflower() {
   if (currentUser.key === 1) {
-    // 헌화한 경우, 페이지 이동 + 버튼 숨김
-    const flowerButton = document.getElementById('flower-button-box');
-    if (flowerButton) {
-      flowerButton.style.display = 'none';
-    }
     goTo('flowerpage');
   } else {
     alert("꽃을 가지고 있지 않다. 어디서 구할 수 있을까...");
