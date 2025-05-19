@@ -208,7 +208,13 @@
  </div>
       <!-- 로비:카운터:notary4 --> 
     <div id="notary4" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"그럼 문제입니다. 초세계급 기록자 세세 님의 생년월일을 아시는지요?"</em><br><br>문제를 맞히면 코인으로 연동</p>
+    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"그럼 문제입니다. 초세계급 기록자 세세 님의 생년월일을 아시는지요?"</em><br><br>8자리 숫자로 대답하자.</p>
+    <input type="text" id="secret-code-input">
+    <div id="codebox">
+    <button onclick="checkSecretCode()">확인</button>
+  </div>
+
+    <p id="secret-code-result"></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
   
@@ -248,7 +254,6 @@
     <!-- 바깥 1층 --> 
     <div id="outside" class="hidden">
     <p><span style="font-weight: bold;">[건물 바깥]</span><br><br>소금기 섞인 바람이 저편에서부터 불어온다. 바깥은 더할 나위 없이 평화롭다.<br>건물에서 나가는 길을 쭉 따라가면 <span style="color: #3f40d3;">항구</span>로 이어진다.<br>항구에서 조금 떨어진 곳에 <span style="color: #3f40d3;">메모리얼 파크</span>가 위치해 있고, 묘지에서 섬 뒤편으로 이어지는 <span style="color: #3f40d3;">산책로</span>가 희미하게 보인다.</p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
     <button onclick="goToWithSound('port', 'zzapwalk_seaside.wav')">항구</button>
     <button onclick="goToWithSound('memorial', 'zzapwalk_seaside.wav')">메모리얼 파크</button>
     <button onclick="goToWithSound('street', 'zzapwalk_seaside.wav')">산책로</button><br>
@@ -258,14 +263,67 @@
     <!-- 항구 --> 
     <div id="port" class="hidden">
     <p><span style="font-weight: bold;">[항구]</span><br><br>공사중.<br>곧 폭파될 예정이다. 아마 백사장을 추가.</p>
+    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
 
     <!-- 메모리얼 파크 --> 
     <div id="memorial" class="hidden">
-    <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>공사중.<br>조리실 같은 걸 넣나...</p>
+    <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
+    <button onclick="goToWithSoundNL('memorial1', 'zzapsea.wav')">메모리얼 파크에 입장한다</button><br>
+    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
+    <button class="nav-button" onclick="goTo('outside')">뒤로 가기</button>
+  </div>
+
+      <!-- 메모리얼 파크:1 --> 
+    <div id="memorial1" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>짧게 깎인 잔디 위로 새하얀 비석이 햇빛을 반사하며 눈길을 끈다.<br>이곳은 세상을 떠난 초세계급을 기리는 메모리얼 파크. 묻힌 사람은 아직 하나뿐이다.<br>규칙적으로 들려오는 파도 소리가 장송곡처럼 잔잔히 흐른다.<br>메모리얼 파크를 가로지르는 길은 꽃이 만발한 <span style="color: #3f40d3;">화원</span>으로 이어진다.</p>
+    <button onclick="goTo('memorial-lorem')">로렘의 묘비</button><br>
+    <button onclick="goTo('garden')">화원</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+  </div>
+
+        <!-- !!메모리얼 파크:화원 --> 
+    <div id="garden" class="hidden">
+    <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
+    <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
+    <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로 돌아가기</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+  </div>
+
+      <!-- !!메모리얼 파크:화원:꽃 --> 
+    <div id="gardenflower" class="hidden">
+    <p><span style="font-weight: bold;">[화원]</span><br><br>마음에 드는 꽃을 고르자.</p>
+    <button onclick="goTo('flowerobtain')">수국</button><br>
+    <button onclick="goTo('flowerobtain')">장미</button><br>
+    <button onclick="goTo('flowerobtain')">국화</button><br>
+    <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+  </div>
+
+        <!-- !!메모리얼 파크:화원:꽃 --> 
+    <div id="flowerobtain" class="hidden">
+    <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
+    <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+  </div>
+
+          <!-- !!메모리얼 파크:로렘의 묘비 --> 
+    <div id="memorial-lorem" class="hidden">
+    <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
+    <div id="flower-button-box">
+    <button onclick="giveflower()">헌화한다</button><br>
+  </div>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
+  </div>
+
+    <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
+    <div id="flowerpage" class="hidden">
+    <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button onclick="goToWithoutZzapSea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
     <!-- 산책로 --> 
@@ -274,18 +332,6 @@
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
-
-  <div id="bookshelf" class="hidden">
-    <p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
-    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-  </div>
-
-  <div id="kitchen" class="hidden">
-    <p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
-    <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-  </div>
 
   <script>
     const userData = {
@@ -366,12 +412,19 @@ function goTo(page) {
   clearOutputs();
   pageHistory.push(page);
 
-  if (['kitchen', 'elevator1', 'notary3-2'].includes(page)) {
-    currentUser.key = 1;
+  if (['kitchen', 'elevator1', 'notary3-2','flowerpage'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
-
+  if (['flowerobtain'].includes(page)) {
+    currentUser.key = 1;
+    updateCoinDisplay();
+  }
+  const flowerButton = document.getElementById('flower-button-box');
+if (flowerButton) {
+  // 한 번이라도 헌화한 경우에는 다시 보이지 않음
+  flowerButton.style.display = (page === 'flowerpage' || currentUser.key === 1) ? 'none' : 'block';
+}
   document.getElementById('user-display').classList.remove('hidden');
 }
 
@@ -384,6 +437,13 @@ function goTo(page) {
       goTo(page);
     }
 
+        function goToWithSoundNL(page, soundFile) {
+      const audio = new Audio(soundFile);
+      audio.loop = true;
+      audio.play();
+      goTo(page);
+    }
+    
 function goBack() {
   if (pageHistory.length > 1) {
     pageHistory.pop();
@@ -405,28 +465,43 @@ function goBack() {
   }
 }
 
-
-    function kickDoor() {
-      const result = document.getElementById('gym-result');
-      let messages = [];
-      if (currentUser.key === 1) messages.push("해피해피 코드");
-      if (currentUser.STR <= 2) {
-        messages.push("발이 아프다. 들어갈 수 없는 것 같다.");
-      } else {
-        messages.push("문이 열린다!");
-      }
-      result.innerText = messages.join("\n");
-    }
-
-    function readBook() {
-      document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
-    }
-
-    function goTodel(targetPage, buttonId) {
-  const btn = document.getElementById(buttonId);
-  if (btn) btn.remove(); // 한 번만 지움
-  goTo(targetPage); // 기존 페이지 이동 로직 재사용
+function goToWithoutZzapSea(page) {
+  if (zzapSeaAudio && !zzapSeaAudio.paused) {
+    zzapSeaAudio.pause();
+    zzapSeaAudio.currentTime = 0;
+  }
+  goTo(page);
 }
+
+
+function giveflower() {
+  if (currentUser.key === 1) {
+    // 헌화한 경우, 페이지 이동 + 버튼 숨김
+    const flowerButton = document.getElementById('flower-button-box');
+    if (flowerButton) {
+      flowerButton.style.display = 'none';
+    }
+    goTo('flowerpage');
+  } else {
+    alert("꽃을 가지고 있지 않다. 어디서 구할 수 있을까...");
+  }
+}
+
+
+function checkSecretCode() {
+  const code = document.getElementById('secret-code-input').value;
+  const result = document.getElementById('secret-code-result');
+  if (code === "1111") {
+    goTo("pageB");
+  } else if (code === "2222") {
+    result.innerText = "비슷하지만 다시 시도해 보자";
+  } else if (code === "3333") {
+    result.innerText = "틀렸다";
+  } else {
+    result.innerText = "";
+  }
+}
+
 
   </script>
 </body>
