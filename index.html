@@ -267,7 +267,6 @@
     <!-- 항구 --> 
     <div id="port" class="hidden">
     <p><span style="font-weight: bold;">[항구]</span><br><br>공사중.<br>곧 폭파될 예정이다. 아마 백사장을 추가.</p>
-    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
@@ -276,16 +275,15 @@
     <div id="memorial" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
     <button onclick="goToWithSoundNL('memorial1', 'zzapsea.mp3')">메모리얼 파크에 입장한다</button><br>
-    <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goTo('outside')">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('outside')">건물 바깥으로 돌아가기</button>
   </div>
 
       <!-- 메모리얼 파크:1 --> 
     <div id="memorial1" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>짧게 깎인 잔디 위로 새하얀 비석이 햇빛을 반사하며 눈길을 끈다.<br>이곳은 세상을 떠난 초세계급을 기리는 메모리얼 파크. 묻힌 사람은 아직 하나뿐이다.<br>규칙적으로 들려오는 파도 소리가 장송곡처럼 잔잔히 흐른다.<br>메모리얼 파크를 가로지르는 길은 꽃이 만발한 <span style="color: #3f40d3;">화원</span>으로 이어진다.</p>
-    <button onclick="goTo('memorial-lorem')">로렘의 묘비</button><br>
-    <button onclick="goTo('garden')">화원</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button onclick="goTo('memorial-lorem')">로렘의 묘비</button>
+    <button onclick="goTo('garden')">화원</button><br>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
         <!-- !!메모리얼 파크:화원 --> 
@@ -293,7 +291,7 @@
     <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
     <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
       <!-- !!메모리얼 파크:화원:꽃 --> 
@@ -302,23 +300,21 @@
     <button onclick="goTo('flowerobtain')">수국</button><br>
     <button onclick="goTo('flowerobtain')">장미</button><br>
     <button onclick="goTo('flowerobtain')">국화</button><br>
-    <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
         <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="flowerobtain" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
     <button class="nav-button" onclick="goTo('main-page')">화원 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
           <!-- !!메모리얼 파크:로렘의 묘비 --> 
     <div id="memorial-lorem" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
     <button id="flowerbtn" onclick="giveflower('flowerbtn')">헌화한다</button><br>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
     <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
@@ -491,11 +487,15 @@ function goBack() {
 }
 
 function goToWithoutzzapsea(page) {
-  if (zzapseaAudio && !zzapseaAudio.paused) {
+  try {
     zzapseaAudio.pause();
     zzapseaAudio.currentTime = 0;
+  } catch (e) {
+    // zzapseaAudio가 정의되지 않았거나 문제가 있어도 그냥 무시
   }
   goTo(page);
+}
+
 }
 
 
