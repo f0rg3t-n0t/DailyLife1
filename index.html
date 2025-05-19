@@ -37,11 +37,12 @@
   margin-right: 10px;
 }
 
-#user-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+#user-text > div {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #3F40D3;  /* 혹시 상속이 안 될 수도 있으니 명시 */
 }
+
 
     #bgm-player {
       position: fixed;
@@ -112,13 +113,14 @@
 </head>
 <body>
 
-  <div id="user-display" class="hidden">
+<div id="user-display" class="hidden">
   <img src="zzapbarcode.png" alt="barcode" id="barcode-icon">
   <div id="user-text">
-    <div id="user-class-line">User ID :</div>
-    <div id="coin-line">Coin :</div>
+    <p id="user-class-line">User ID :</p>
+    <p id="coin-line">Coin :</p>
   </div>
 </div>
+
 
 
   <div id="bgm-player">
