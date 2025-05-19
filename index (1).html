@@ -61,7 +61,7 @@
     }
       .fade-in {
       opacity: 0;
-      animation: fadeIn 0.8s ease forwards;
+      animation: fadeIn 1.5s ease forwards;
     }
 
     @keyframes fadeIn {
@@ -90,6 +90,11 @@
   </style>
 </head>
 <body>
+
+  <div id="coin-display" style="position: fixed; top: 10px; left: 10px; font-weight: bold;">
+  Coin: 0
+</div>
+
   <div id="bgm-player">
     <audio id="bgm" src="zzapbgm.m4a" loop></audio>
     <button onclick="document.getElementById('bgm').play()">▶</button>
@@ -106,7 +111,7 @@
   </div>
 
   <div id="main-page" class="hidden">
-    <p>다음과 같은 장소를 살펴볼 수 있다.</p>
+    <p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
     <button onclick="goTo('gym')">체육관</button>
     <button onclick="goTo('library')">도서관</button>
     <button onclick="goTo('kitchen')">주방</button>
@@ -150,7 +155,8 @@
       OBS: 5,
       POW: 5,
       LUC: 5,
-      key: 0
+      key: 0,
+      coin: 0
     }
   };
 
@@ -206,6 +212,10 @@
     if (page === 'kitchen') {
       currentUser.key = 1;
     }
+    if (page === 'kitchen') {
+  currentUser.coin = (currentUser.coin || 0) + 1;
+  updateCoinDisplay(); // 코인 UI 업데이트
+}
   }
 
   function goBack() {
@@ -237,4 +247,11 @@
   function readBook() {
     document.getElementById('library-result').innerText = "룬의 아이들 3부 블러디드 많관부!!!!";
   }
+
+  function updateCoinDisplay() {
+  document.getElementById('coin-display').innerText = `Coin: ${currentUser.coin || 0}`;
+}
+
 </script>
+
+  
