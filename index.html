@@ -29,6 +29,20 @@
       box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
     }
 
+    #bgm-player {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #bgm-player button {
+      background-color: #3f40d3 !important;
+      color: white;
+    }
+
     .typewriter {
       font-weight: bold;
       font-size: 1.1em;
@@ -67,17 +81,27 @@
       font-size: 0.85em !important;
       padding: 5px 12px !important;
     }
+    .logo {
+      width: 200px;
+      margin-bottom: 1em;
+    }
   </style>
 </head>
 <body>
 
-  <!-- 로그인 후 좌상단에 보일 코인 정보 -->
   <div id="user-display" class="hidden">
     <p id="user-class-line"></p>
     <p id="coin-line">Coin: 0</p>
   </div>
 
-  <!-- 로그인 화면 -->
+  <div id="bgm-player">
+    <audio id="bgm" src="zzapbgm.m4a" loop></audio>
+    <button onclick="document.getElementById('bgm').play()">▶</button>
+    <button onclick="document.getElementById('bgm').pause()">⏸</button>
+  </div>
+
+  <img class="logo" src="zzaplogo.png"/>
+
   <div id="login-page">
     <p>ID를 입력하세요.</p>
     <input id="id-input" type="text" />
@@ -85,7 +109,6 @@
     <p id="login-error" style="color: #ff4444;"></p>
   </div>
 
-  <!-- 메인 페이지 -->
   <div id="main-page" class="hidden">
     <p>다음과 같은 <span style="color: #3f40d3;">장소</span>를 살펴볼 수 있다.</p>
     <button onclick="goTo('gym')">체육관</button>
@@ -93,7 +116,6 @@
     <button onclick="goToWithSound('kitchen', 'zzapaudio.mp3')">주방</button>
   </div>
 
-  <!-- 체육관 -->
   <div id="gym" class="hidden">
     <p>문이 굳게 잠겨 있다.</p>
     <button onclick="kickDoor()">문을 발로 찬다</button><br/>
@@ -102,7 +124,6 @@
     <p id="gym-result"></p>
   </div>
 
-  <!-- 도서관 -->
   <div id="library" class="hidden">
     <p>책들이 아주 많다.</p>
     <button onclick="readBook()">책을 읽는다</button>
@@ -112,21 +133,18 @@
     <p id="library-result"></p>
   </div>
 
-  <!-- 책장 -->
   <div id="bookshelf" class="hidden">
     <p>모든 책장에 룬의 아이들 시리즈가 꽂혀 있다.</p>
     <button class="nav-button" onclick="goTo('main-page')">건물 입구로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
-  <!-- 주방 -->
   <div id="kitchen" class="hidden">
     <p>으믕의 생일 축하 케이크가 시속 50km로 날아다니고 있다. 당신은 케이크에 맞아서 사망했다.</p>
     <button class="nav-button" onclick="goTo('main-page')">메인 홀로 돌아가기</button>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
-  <!-- SCRIPT -->
   <script>
     const userData = {
       mung0515: {
@@ -157,13 +175,10 @@
 
     function showWelcomeMessage(userClass) {
       document.getElementById('login-page').classList.add('hidden');
-
       const container = document.createElement('div');
       container.classList.add('typewriter');
       container.innerHTML = `초세계급 "${userClass}" 님을 환영합니다. . .`;
-
       document.body.appendChild(container);
-
       setTimeout(() => {
         container.remove();
         showUserInfo();
@@ -191,13 +206,14 @@
     }
 
     function goTo(page) {
-      document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+      document.querySelectorAll('div').forEach(div => {
+        if (div.id !== 'user-display') div.classList.add('hidden');
+      });
       const target = document.getElementById(page);
       target.classList.remove('hidden');
       target.classList.add('fade-in');
       clearOutputs();
       pageHistory.push(page);
-
       if (page === 'kitchen') {
         currentUser.key = 1;
         currentUser.coin = (currentUser.coin || 0) + 1;
@@ -205,7 +221,6 @@
       }
     }
 
-    // ✅ 효과음 + 페이지 이동 겸용 함수
     function goToWithSound(page, soundFile) {
       const audio = new Audio(soundFile);
       audio.loop = false;
@@ -217,7 +232,9 @@
       if (pageHistory.length > 1) {
         pageHistory.pop();
         const prev = pageHistory[pageHistory.length - 1];
-        document.querySelectorAll('div').forEach(div => div.classList.add('hidden'));
+        document.querySelectorAll('div').forEach(div => {
+          if (div.id !== 'user-display') div.classList.add('hidden');
+        });
         const target = document.getElementById(prev);
         target.classList.remove('hidden');
         target.classList.add('fade-in');
@@ -228,15 +245,13 @@
     function kickDoor() {
       const result = document.getElementById('gym-result');
       let messages = [];
-      if (currentUser.key === 1) {
-        messages.push("해피해피 코드");
-      }
+      if (currentUser.key === 1) messages.push("해피해피 코드");
       if (currentUser.STR <= 2) {
         messages.push("발이 아프다. 들어갈 수 없는 것 같다.");
       } else {
         messages.push("문이 열린다!");
       }
-      result.innerText = messages.join("\\n");
+      result.innerText = messages.join("\n");
     }
 
     function readBook() {
@@ -245,4 +260,3 @@
   </script>
 </body>
 </html>
-
