@@ -402,7 +402,7 @@
 
 function goTo(page) {
   // 숨기되 user-display 전체만 제외 (자식 포함해서 숨겨지지 않도록)
-  const exceptions = ['user-display'];
+  const exceptions = ['user-display','bgm-player','bgm-player button'];
   
   document.querySelectorAll('div').forEach(div => {
     if (!exceptions.includes(div.id) && !div.closest('#user-display')) {
