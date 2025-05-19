@@ -213,8 +213,12 @@
     <div id="codebox">
     <button onclick="checkSecretCode()">확인</button>
   </div>
-
     <p id="secret-code-result"></p>
+    <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
+ </div>
+      <!-- 로비:카운터:notary5 --> 
+    <div id="notary5" class="hidden">
+    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"정답입니다! 꽤 먼 곳까지 둘러보셨군요.”</em><br><br>짝짝짝, 박수 소리가 울리나 싶더니 어느새 카운터 위에 동전 두 개가 놓여 있다. 퀴즈를 맞힌 보상인 것 같다.<br><span style="font-weight: bold;">2코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
   
@@ -416,6 +420,10 @@ function goTo(page) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
+  if (['notary5'].includes(page)) {
+    currentUser.coin = (currentUser.coin || 0) + 2;
+    updateCoinDisplay();
+  }
   if (['flowerobtain'].includes(page)) {
     currentUser.key = 1;
     updateCoinDisplay();
@@ -424,6 +432,11 @@ function goTo(page) {
 if (flowerButton) {
   // 한 번이라도 헌화한 경우에는 다시 보이지 않음
   flowerButton.style.display = (page === 'flowerpage' || currentUser.key === 1) ? 'none' : 'block';
+}
+  const codebox = document.getElementById('codebox');
+if (page === 'notary4' && codebox) {
+  const alreadyUsed = codebox.getAttribute('data-used') === 'true';
+  codebox.style.display = alreadyUsed ? 'none' : 'block';
 }
   document.getElementById('user-display').classList.remove('hidden');
 }
@@ -489,16 +502,17 @@ function giveflower() {
 
 
 function checkSecretCode() {
-  const code = document.getElementById('secret-code-input').value;
-  const result = document.getElementById('secret-code-result');
-  if (code === "1111") {
-    goTo("pageB");
-  } else if (code === "2222") {
-    result.innerText = "비슷하지만 다시 시도해 보자";
-  } else if (code === "3333") {
-    result.innerText = "틀렸다";
+  const input = document.getElementById('secret-code-input').value;
+  if (input === "20020409") { // 원하는 정답
+    const codebox = document.getElementById('codebox');
+    if (codebox) {
+      codebox.style.display = 'none';
+      codebox.setAttribute('data-used', 'true');  // ✅ 한 번 사용했음을 표시
+    }
+    goTo('notary5');
   } else {
-    result.innerText = "";
+    const result = document.getElementById('secret-code-result');
+    result.innerText = "공증인은 침묵하고 있다... 아무래도 이게 정답이 아닌 것 같다.";
   }
 }
 
