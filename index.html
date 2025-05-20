@@ -470,7 +470,7 @@ function goBack() {
 
     // user-display 및 그 자식들은 숨기지 않음
     document.querySelectorAll('div').forEach(div => {
-      if (!div.closest('#user-display')) {
+      if (!div.closest('#user-display','bgm-player','bgm-player button')) {
         div.classList.add('hidden');
       }
     });
