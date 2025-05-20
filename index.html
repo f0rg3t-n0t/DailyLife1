@@ -139,6 +139,16 @@
     <!-- Report -->
   <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
 </div>
+
+<!-- main-page 버튼 이미지 배치 -->
+<div id="main-page" class="hidden" style="position: relative; height: 100vh;">
+  <!-- Initiation -->
+  <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
+  <!-- Guide -->
+  <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
+  <!-- Report -->
+  <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
+</div>
 <style>
   .menu-button {
     position: absolute;
@@ -146,28 +156,29 @@
     transition: transform 0.4s ease, box-shadow 0.4s ease;
     transform-style: preserve-3d;
   }
-  /* 위치 지정 */
+  /* 위치 및 크기 조정 (비율 유지하면서 축소) */
   .initiation {
-    top: 5%;
+    top: 8%;
     left: 50%;
     transform: translateX(-50%);
-    width: 642px;
+    width: 30%;
     height: auto;
   }
   .guide {
-    top: 40%;
+    top: 38%;
     left: 50%;
     transform: translateX(-50%);
-    width: 699px;
+    width: 32%;
     height: auto;
   }
   .report {
-    bottom: 5%;
+    bottom: 8%;
     left: 50%;
     transform: translateX(-50%);
-    width: 733px;
+    width: 34%;
     height: auto;
   }
+
   /* 기본 깜빡임 효과 */
   @keyframes blink {
     0%, 100% { opacity: 1; }
