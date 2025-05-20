@@ -111,8 +111,10 @@
     }
   </style>
 </head>
-<body>
 
+<!-- !!!!여기서부터 BODY!!!! -->
+<body>
+  <!-- 유저 디스플레이 -->
 <div id="user-display">
   <img src="zzapbarcode.png" alt="barcode" id="barcode-icon">
   <div id="user-text">
@@ -120,17 +122,17 @@
     <p id="coin-line">Coin : ???</p>
   </div>
 </div>
-
-
-
+  <!-- 브금 플레이어 -->
   <div id="bgm-player">
     <audio id="bgm" src="zzapbgm.m4a" loop></audio>
     <button onclick="document.getElementById('bgm').play()">▶</button>
     <button onclick="document.getElementById('bgm').pause()">⏸</button>
   </div>
-
+  <!-- 로고 -->
   <img class="logo" src="zzaplogo.png"/>
 
+<!-- !!!!여기서부터 BODY 안의 페이지들!!!! -->
+  <!-- 로그인 화면 -->
   <div id="login-page">
     <p>ID를 입력하세요.</p>
     <input id="id-input" type="text" />
