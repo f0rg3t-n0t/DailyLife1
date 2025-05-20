@@ -288,7 +288,7 @@
     <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
-        <!-- !!메모리얼 파크:화원 --> 
+      <!-- !!메모리얼 파크:화원 --> 
     <div id="garden" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
@@ -304,34 +304,36 @@
     <button onclick="goTo('flowerobtain')">국화</button><br>
   </div>
 
-        <!-- !!메모리얼 파크:화원:꽃 --> 
+      <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="flowerobtain" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
     <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로</button>
   </div>
 
-          <!-- !!메모리얼 파크:로렘의 묘비 --> 
+      <!-- !!메모리얼 파크:로렘의 묘비 --> 
     <div id="memorial-lorem" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
     <button id="flowerbtn" onclick="giveflower('flowerbtn')">헌화한다</button><br>
     <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
-    <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
+      <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
     <div id="flowerpage" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
     <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
   </div>
 
-    <!-- 산책로 --> 
+      <!-- 산책로 --> 
     <div id="street" class="hidden">
     <p><span style="font-weight: bold;">[산책로]</span><br><br>공사중.<br>자전거 대여 가능.</p>
     <button class="nav-button" onclick="goBack()">뒤로 가기</button>
   </div>
 
-
+<!-- !!!!여기서부터 스크립트!!!! -->
   <script>
+
+//★★★★★[중요]유저 데이터★★★★★
     const userData = {
       mung0515: {
         class: "피자마스터 으믕",
@@ -349,7 +351,8 @@
     let currentUser = null;
     let pageHistory = [];
     const outputIds = ['gym-result', 'library-result'];
-
+    
+//★★★★★로그인★★★★★
     function checkLogin() {
       const id = document.getElementById('id-input').value;
       if (userData[id]) {
@@ -359,7 +362,7 @@
         document.getElementById('login-error').innerText = "아이디가 일치하지 않습니다.";
       }
     }
-
+//★★★★★환영 메시지★★★★★
     function showWelcomeMessage(userClass) {
       document.getElementById('login-page').classList.add('hidden');
       const container = document.createElement('div');
@@ -373,18 +376,17 @@
         pageHistory.push('main-page');
       }, 3600);
     }
-
+//★★★★★유저 인포메이션 창★★★★★
     function showUserInfo() {
       const userBox = document.getElementById('user-display');
       document.getElementById('user-class-line').innerHTML = `User ID: ${currentUser.id}`;
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
       userBox.classList.remove('hidden');
     }
-
     function updateCoinDisplay() {
       document.getElementById('coin-line').innerText = `Coin: ${currentUser.coin || 0}`;
     }
-
+//★★★★★출력된 텍스트 아웃풋 창 넘어갈 때 지우기 (goTo 연동용)★★★★★
     function clearOutputs() {
       outputIds.forEach(id => {
         const el = document.getElementById(id);
@@ -392,24 +394,22 @@
       });
     }
 
-
-
+//★★★★★goTo★★★★★
 function goTo(page) {
-  // 숨기되 user-display 전체만 제외 (자식 포함해서 숨겨지지 않도록)
-  const exceptions = ['user-display','bgm-player','bgm-player button'];
-  
+  // 창 이동시 숨겨지지 않는 디스플레이 설정
+  const exceptions = ['user-display','bgm-player','bgm-player button'];  
   document.querySelectorAll('div').forEach(div => {
     if (!exceptions.includes(div.id) && !div.closest('#user-display')) {
       div.classList.add('hidden');
     }
   });
-
+  //지우고 페이드 인
   const target = document.getElementById(page);
   target.classList.remove('hidden');
   target.classList.add('fade-in');
   clearOutputs();
   pageHistory.push(page);
-
+  //[중요]특정 페이지 진입 시 스탯(코인 등)변동
   if (['kitchen', 'elevator1', 'notary3-2','flowerpage'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
@@ -422,6 +422,7 @@ function goTo(page) {
     currentUser.key = 1;
     updateCoinDisplay();
   }
+  //얘네는 버튼 없애기용인데 이렇게 하지 말고 goTodel 사용을 고려할 것 ...
   const flowerButton = document.getElementById('flower-button-box');
 if (flowerButton) {
   // 한 번이라도 헌화한 경우에는 다시 보이지 않음
@@ -435,22 +436,23 @@ if (page === 'notary4' && codebox) {
   document.getElementById('user-display').classList.remove('hidden');
 }
 
+//★★★★★goTodel(이동과 동시에 버튼 삭제)★★★★★   
 function goTodel(targetPage, buttonId) {
   const btn = document.getElementById(buttonId);
   if (btn) btn.remove(); // 한 번만 지움
-
   goTo(targetPage); // 기존 페이지 이동 로직 재사용
 }
 
-
-    function goToWithSound(page, soundFile) {
+//★★★★★goToWithSound(페이지 이동 버튼 누를 때 효과음(일시) 재생)★★★★★   
+  function goToWithSound(page, soundFile) {
       const audio = new Audio(soundFile);
       audio.loop = false;
-      audio.volume = 0.7;
+      audio.volume = 0.3;
       audio.play();
       goTo(page);
     }
 
+//★★★★★goToWithSound(페이지 이동 버튼 누를 때 효과음 계속해서 재생, 루프)★★★★★  
     function goToWithSoundNL(page, soundFile) {
   if (soundFile.includes('zzapsea.mp3')) {
     zzapseaAudio = new Audio(soundFile); // 전역 변수로 저장
@@ -464,19 +466,17 @@ function goTodel(targetPage, buttonId) {
   goTo(page);
 }
 
-    
+//★★★★★goBack★★★★★  
 function goBack() {
   if (pageHistory.length > 1) {
     pageHistory.pop();
     const prev = pageHistory[pageHistory.length - 1];
-
-    // user-display 및 그 자식들은 숨기지 않음
+    // 유저 디스플레이 등, 숨기지 않을 요소 설정
     document.querySelectorAll('div').forEach(div => {
       if (!div.closest('#user-display','bgm-player','bgm-player button')) {
         div.classList.add('hidden');
       }
     });
-
     const target = document.getElementById(prev);
     target.classList.remove('hidden');
     target.classList.add('fade-in');
@@ -486,6 +486,7 @@ function goBack() {
   }
 }
 
+//★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
 function goToWithoutzzapsea(page) {
   if (zzapseaAudio && !zzapseaAudio.paused) {
     zzapseaAudio.pause();
@@ -494,7 +495,8 @@ function goToWithoutzzapsea(page) {
   goTo(page);
 }
 
-
+//여기서부터 특정 장소에서 사용하도록 되어 있는 함수!!!!
+//★★★★★헌화★★★★★
 function giveflower(buttonId) {
   if (currentUser.key === 1) {
     // 버튼 제거
@@ -505,9 +507,7 @@ function giveflower(buttonId) {
     alert("꽃을 가지고 있지 않다. 어디서 구할 수 있을까...");
   }
 }
-
-
-
+//★★★★★퀴즈★★★★★
 function checkSecretCode() {
   const input = document.getElementById('secret-code-input').value;
   if (input === "20020409") { // 원하는 정답
