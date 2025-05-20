@@ -135,10 +135,8 @@
 <div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
   <!-- Initiation -->
   <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
-
   <!-- Guide -->
   <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
-
   <!-- Report -->
   <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
 </div>
@@ -151,22 +149,22 @@
     transform-style: preserve-3d;
   }
 
-  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) */
+  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) 17 차이, 24 차이*/
   .initiation {
-    top: 8%;
-    left: 42%;
+    top: 1%;
+    left: 38%;
     width: 12%;
     height: auto;
   }
   .guide {
-    top: 25%;
+    top: 18%;
     right: 42%;
     width: 14%;
     height: auto;
   }
   .report {
-    top: 42%;
-    left: 42%;
+    top: 40%;
+    left: 36%;
     width: 15%;
     height: auto;
   }
@@ -205,15 +203,15 @@
 
   /* 추가 3D 회전 효과 */
   .initiation:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 15deg);
-  }
-
-  .guide:hover {
     transform: perspective(800px) rotate3d(0, 1, 0, -15deg);
   }
 
-  .report:hover {
+  .guide:hover {
     transform: perspective(800px) rotate3d(0, 1, 0, 15deg);
+  }
+
+  .report:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, -15deg);
   }
 </style>
 
