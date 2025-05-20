@@ -130,52 +130,44 @@
   </div>
   <!-- 로고 -->
   <img class="logo" src="zzaplogo.png"/>
-  <!-- main-page 버튼 이미지 배치 -->
-<div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #ccc;">
-    <!-- Initiation -->
-  <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
-    <!-- Guide -->
-  <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
-    <!-- Report -->
-  <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
-</div>
-
+  
 <!-- main-page 버튼 이미지 배치 -->
-<div id="main-page" class="hidden" style="position: relative; height: 100vh;">
+<div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
   <!-- Initiation -->
   <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
+
   <!-- Guide -->
   <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
+
   <!-- Report -->
   <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
 </div>
+
 <style>
   .menu-button {
     position: absolute;
     cursor: pointer;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s ease;
     transform-style: preserve-3d;
   }
-  /* 위치 및 크기 조정 (비율 유지하면서 축소) */
+
+  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) */
   .initiation {
     top: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 30%;
+    left: 5%;
+    width: 12%;
     height: auto;
   }
   .guide {
-    top: 38%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 32%;
+    top: 40%;
+    right: 5%;
+    width: 14%;
     height: auto;
   }
   .report {
     bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 34%;
+    left: 5%;
+    width: 15%;
     height: auto;
   }
 
@@ -184,9 +176,11 @@
     0%, 100% { opacity: 1; }
     50% { opacity: 0.8; }
   }
+
   .blinking {
     animation: blink 1.8s infinite;
   }
+
   /* shine 효과 */
   .menu-button::after {
     content: '';
@@ -199,15 +193,29 @@
     transform: skewX(-20deg);
     pointer-events: none;
   }
+
   .menu-button:hover::after {
     animation: shine 0.8s ease-in-out;
   }
+
   @keyframes shine {
     0% { left: -75%; }
     100% { left: 125%; }
   }
-</style>
 
+  /* 추가 3D 회전 효과 */
+  .initiation:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, -8deg);
+  }
+
+  .guide:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, 8deg);
+  }
+
+  .report:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, -8deg);
+  }
+</style>
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
   <!-- 로그인 화면 -->
