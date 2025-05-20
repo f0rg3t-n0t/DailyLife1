@@ -135,14 +135,11 @@
 <div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
   <!-- Initiation -->
   <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
-
   <!-- Guide -->
   <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
-
   <!-- Report -->
   <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
 </div>
-
 <style>
   .menu-button {
     position: absolute;
@@ -150,23 +147,22 @@
     transition: transform 0.4s ease;
     transform-style: preserve-3d;
   }
-
   /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) */
   .initiation {
     top: 8%;
-    left: 5%;
+    left: 25%;
     width: 12%;
     height: auto;
   }
   .guide {
-    top: 40%;
-    right: 5%;
+    top: 25%;
+    right: 25%;
     width: 14%;
     height: auto;
   }
   .report {
-    bottom: 8%;
-    left: 5%;
+    top: 42%;
+    left: 25%;
     width: 15%;
     height: auto;
   }
@@ -193,27 +189,22 @@
     transform: skewX(-20deg);
     pointer-events: none;
   }
-
   .menu-button:hover::after {
     animation: shine 0.8s ease-in-out;
   }
-
   @keyframes shine {
     0% { left: -75%; }
     100% { left: 125%; }
   }
-
   /* 추가 3D 회전 효과 */
   .initiation:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, -8deg);
+    transform: perspective(800px) rotate3d(0, 1, 0, -15deg);
   }
-
   .guide:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 8deg);
+    transform: perspective(800px) rotate3d(0, 1, 0, 15deg);
   }
-
   .report:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, -8deg);
+    transform: perspective(800px) rotate3d(0, 1, 0, -15deg);
   }
 </style>
 
