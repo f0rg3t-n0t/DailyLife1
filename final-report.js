@@ -26,7 +26,16 @@ function loadFinalReport() {
   if (currentUser.key === 1) {
     lines.push({ html: `<div style="color: black; font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
   }
-
+  if (currentUser.unicycle === true) {
+    lines.push({ html: `<div style="color: black; font-style: italic;">외바퀴자전거 타는 법을 마스터했다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
+  }
+  if (currentUser.wishticket === true) {
+    lines.push({ html: `<div style="color: black; font-style: italic;">‘소원권’ 을 획득했다. 선물할 시 상대의 호감도에 +2 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
+  }
+  if (currentUser.notalove === true) {
+    lines.push({ html: `<div style="color: black; font-style: italic;">공증인의 호의를 얻은 것 같다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
+  }
+  
   lines.push({ html: `<div style="color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right', lineStyle: 'color: #888;' });
 
   const content = document.createElement('div');
