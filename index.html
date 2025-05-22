@@ -623,7 +623,6 @@ function goTodel(targetPage, buttonId) {
 //★★★★★goBack★★★★★  
 function goBack() {
   if (pageHistory.length > 1) {
-    // 현재 페이지 제거
     pageHistory.pop();
     const prevPage = pageHistory[pageHistory.length - 1];
 
@@ -643,24 +642,17 @@ function goBack() {
       target.classList.add('fade-in');
     }
 
-    // 절대 숨기면 안 되는 요소 다시 보이게
+    // 고정된 UI는 확실히 다시 보이게
     ['user-display', 'bgm-player', 'persistent-nav'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('hidden');
     });
 
-    // ✅ 유저 정보 다시 써주기 (직접)
-    if (currentUser) {
-      const idLine = document.getElementById('user-class-line');
-      const coinLine = document.getElementById('coin-line');
-      if (idLine) idLine.innerText = `User ID: ${currentUser.id}`;
-      if (coinLine) coinLine.innerText = `Coin: ${currentUser.coin || 0}`;
-    }
-
+    // ✅ 여기에 유저 정보 갱신 함수 호출
+    if (currentUser) showUserInfo();
     clearOutputs();
   }
 }
-
 
 
 //★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
