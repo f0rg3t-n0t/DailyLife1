@@ -711,8 +711,7 @@ function checkSecretCode() {
   }
 }
 
-// 최종 결과
-// 🔹 Final Report Page (Typing in Hangul Jamo Units with Directional Ghost Effect)
+// 최종 결과 출력
 function loadFinalReport() {
   document.body.innerHTML = '';
 
@@ -739,7 +738,7 @@ function loadFinalReport() {
     { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left', lineStyle: 'color: black;' }
   ];
 
-  if (currentUser.key === 1) {
+  if (currentUser.coin === 1) {
     lines.push({ html: `<div style="color: black; font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
   }
 
@@ -790,10 +789,13 @@ function loadFinalReport() {
     const totalGhost = loremUnits.length;
     const totalReal = units.length;
 
+    let realStarted = false;
+    let ghostCleared = false;
+
     function typeBoth() {
-      // ghost 타자기 + fade 효과: 글자마다 opacity 적용
+      // ghost 타자기 + fade 효과
       if (ghostFrame < totalGhost) {
-        const fadeDistance = 6; // 최근 n글자만 선명하게
+        const fadeDistance = 6;
         const fadedUnits = loremUnits.slice(0, ghostFrame).map((char, idx, arr) => {
           const age = arr.length - idx;
           const opacity = Math.max(0, (fadeDistance - age) / fadeDistance);
@@ -801,26 +803,30 @@ function loadFinalReport() {
         }).join('');
         ghostSpan.innerHTML = `<span class="ghost-text">${fadedUnits}</span>`;
         ghostFrame++;
-        setTimeout(typeBoth, 20); // 빠르게 ghost만 타자
-        return;
+        setTimeout(typeBoth, 20);
+      } else if (!ghostCleared) {
+        ghostSpan.innerHTML = ''; // ghost 완전히 지우기
+        ghostCleared = true;
       }
 
-      // ghost가 끝났다면, 0.3초 후에 real 텍스트 시작
-      setTimeout(() => {
-        function typeReal() {
-          if (realFrame <= totalReal) {
-            real.innerHTML = `<span style="${lineStyle}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
-            realFrame++;
-            setTimeout(typeReal, 60);
-          } else {
-            ghost.innerHTML = '';
-            real.innerHTML = realText;
-            index++;
-            setTimeout(typeLine, 600);
+      // real 텍스트는 ghost가 시작되면 0.3초 후 시작
+      if (!realStarted) {
+        realStarted = true;
+        setTimeout(() => {
+          function typeReal() {
+            if (realFrame <= totalReal) {
+              real.innerHTML = `<span style="${lineStyle}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+              realFrame++;
+              setTimeout(typeReal, 60);
+            } else {
+              real.innerHTML = realText;
+              index++;
+              setTimeout(typeLine, 600);
+            }
           }
-        }
-        typeReal();
-      }, 300); // 0.3초 지연
+          typeReal();
+        }, 300);
+      }
     }
 
     typeBoth();
@@ -866,6 +872,7 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
+
 
 
   </script>
