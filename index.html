@@ -712,23 +712,17 @@ function checkSecretCode() {
 }
 
 // 최종 결과
-// 🔹 Final Report Page (Dynamically Created with Typing + Per-line Ghost Typing Effect + scoped styling)
+// 🔹 Final Report Page (Standalone Render with Typing + Per-line Ghost Typing Effect)
 function loadFinalReport() {
-  const existing = document.getElementById('final-report');
-  if (existing) {
-    goTo('final-report');
-    return;
-  }
-  const wrapper = document.createElement('div');
-  wrapper.id = 'final-report';
-  wrapper.className = 'hidden';
-  wrapper.style = 'position: relative;';
+  // 모든 요소 제거
+  document.body.innerHTML = '';
 
   const div = document.createElement('div');
+  div.id = 'final-report';
   div.className = 'fade-in';
   div.style = `
     max-width: 700px;
-    margin: 0 auto;
+    margin: 100px auto;
     background: white;
     border: 3px solid #3f40d3;
     border-radius: 10px;
@@ -754,10 +748,7 @@ function loadFinalReport() {
 
   const content = document.createElement('div');
   div.appendChild(content);
-  wrapper.appendChild(div);
-  document.body.appendChild(wrapper);
-
-  goTo('final-report');
+  document.body.appendChild(div);
 
   let index = 0;
   function typeLine() {
@@ -793,7 +784,7 @@ function loadFinalReport() {
       let charIndex = 0;
       function typeRealChar() {
         if (charIndex <= clean.length) {
-          real.innerHTML = clean.substring(0, charIndex) + '<span class="report-cursor">|</span>';
+          real.innerHTML = clean.substring(0, charIndex) + '<span class="final-cursor">|</span>';
           charIndex++;
           setTimeout(typeRealChar, 25);
         } else {
@@ -830,11 +821,11 @@ style.innerHTML = `
     position: relative;
     z-index: 1;
   }
-  .report-cursor {
+  .final-cursor {
     color: #3f40d3;
-    animation: blink 0.8s step-end infinite;
+    animation: blink-final 0.8s step-end infinite;
   }
-  @keyframes blink {
+  @keyframes blink-final {
     from, to { opacity: 1; }
     50% { opacity: 0; }
   }
