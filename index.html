@@ -777,7 +777,7 @@ function loadFinalReport() {
 
     content.appendChild(container);
 
-    const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...';
+    const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...';
     const loremUnits = splitHangul(lorem);
 
     const ghostSpan = document.createElement('span');
@@ -791,37 +791,36 @@ function loadFinalReport() {
     const totalGhost = loremUnits.length;
     const totalReal = units.length;
 
-function typeBoth() {
-  // ghost 타이핑
-  if (ghostFrame <= totalGhost) {
-    ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
-    ghostFrame++;
+    function typeBoth() {
+      // ghost 타자기 + fade 효과: 글자마다 opacity 적용
+      if (ghostFrame <= totalGhost) {
+        const fadedUnits = loremUnits.slice(0, ghostFrame).map((char, idx, arr) => {
+          let fadeRatio = align === 'right'
+            ? (arr.length - idx - 1) / arr.length
+            : idx / arr.length;
+          const opacity = 1 - Math.min(fadeRatio, 1);
+          return `<span style="opacity: ${opacity.toFixed(2)}">${char}</span>`;
+        }).join('');
+        ghostSpan.innerHTML = `<span class="ghost-text">${fadedUnits}</span>`;
+        ghostFrame++;
+      }
 
-    // ghost 투명도 처리
-    if (ghostFrame > 3) {
-      const ghostText = ghostSpan.querySelector('.ghost-text');
-      const fadePercent = (ghostFrame - 3) / (totalGhost * 0.4);
-      ghostText.style.opacity = `${1 - Math.min(fadePercent, 1)}`;
+      // 실제 텍스트 타이핑
+      if (realFrame <= totalReal) {
+        real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+        realFrame++;
+        setTimeout(typeBoth, 60);
+      } else {
+        ghost.innerHTML = '';
+        real.innerHTML = realText;
+        index++;
+        setTimeout(typeLine, 600);
+      }
     }
-  }
-
-  // real 텍스트 타이핑
-  if (realFrame <= totalReal) {
-    real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
-    realFrame++;
-    setTimeout(typeBoth, 60);
-  } else {
-    // 모든 타이핑 완료 시 다음 줄
-    ghost.innerHTML = '';
-    real.innerHTML = realText;
-    index++;
-    setTimeout(typeLine, 600);
-  }
-}
-
 
     typeBoth();
   }
+
   typeLine();
 }
 
