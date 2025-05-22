@@ -325,7 +325,7 @@
     <button onclick="goToWithSound('restaurant', 'zzapwalk_inside.wav')">레스토랑</button>
     <button onclick="goToWithSound('lobby', 'zzapwalk_inside.wav')">로비</button>
     <button onclick="goToWithSound('suite', 'zzapwalk_inside.wav')">내빈용 객실</button><br>
-    <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
+    <button class="nav-button" onclick="goTo('starting-point')">나가기</button>
   </div>
 
     <!-- 로비 --> 
@@ -334,18 +334,18 @@
     <button onclick="goTo('counter')">카운터</button>
     <button onclick="goTo('waitingspace')">대기 공간</button>
     <button onclick="goTo('elevator')">엘리베이터</button><br>
-    <button class="nav-button" onclick="goTo('inside')">로비 나가기</button>
+    <button class="nav-button" onclick="goTo('inside')">나가기</button>
   </div>
 
     <!-- 로비:카운터 --> 
     <div id="counter" class="hidden">
-    <p><span style="font-weight: bold;">[카운터]</span><br><br>보통이라면 직원이 서 있어야 할 카운터 너머에는 아무도 없다. 가까이 다가가자 공증인의 목소리가 울린다.<br><br><em>”섬 내부는 잘 돌아보고 계신가요?”</em><br><br><em>”꼼꼼히 둘러봐 주신 분들을 위해 작은 퀴즈를 준비했습니다. 기분이 내키신다면 말을 걸어 주세요. 잠시 쉬어가고 싶으실 때는 잡담을 주고받는 것도 좋겠죠.”</em></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]</span><br><br>보통이라면 직원이 서 있어야 할 카운터 너머에는 아무도 없다. 가까이 다가가자 공증인의 목소리가 울린다.<br><br><em>”섬 내부는 잘 돌아보고 계신가요?”</em><br><br><em>”꼼꼼히 둘러봐 주신 분들을 위해 작은 퀴즈를 준비했습니다. 기분이 내키신다면 말을 걸어 주세요. 잠시 쉬어가고 싶으실 때는 잡담을 주고받는 것도 좋겠죠.”</em></p>
     <button onclick="goTo('notary')">공증인과 대화하기</button><br>
-    <button class="nav-button" onclick="goTo('lobby')">카운터 나가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">나가기</button>
  </div>
     <!-- 로비:카운터:notary --> 
     <div id="notary" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br>스피커를 통해 흘러나오는 목소리는 정중하고 부드럽다.<br><em>"어떤 일을 도와드릴까요?"</em></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br>스피커를 통해 흘러나오는 목소리는 정중하고 부드럽다.<br><em>"어떤 일을 도와드릴까요?"</em></p>
     <button id="nota1" onclick="goTodel('notary1', 'nota1')">이 섬에 대해서</button><br>
     <button id="nota2" onclick="goTodel('notary2', 'nota2')">초세계급 기록자 로렘에 대해서</button><br>
     <button id="nota3" onclick="goTodel('notary3', 'nota3')">공증인에 대해서</button><br>
@@ -354,33 +354,33 @@
  </div>
     <!-- 로비:카운터:notary1 --> 
     <div id="notary1" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"이 섬은 미래기관에서 초세계급 여러분을 위해 준비한 시설입니다. 본래대로라면 올해 안에 외부에 정식 공개될 예정이었지만… 로렘 님의 추도식을 위해 공개를 앞당기게 되었습니다. 그러다 보니 아직 마땅한 이름조차 없는 장소가 되었지만요. 여러분이 계신 동안 섬 이름 공모전이라도 하는 것이 좋을까요? 하하…"</em></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"이 섬은 미래기관에서 초세계급 여러분을 위해 준비한 시설입니다. 본래대로라면 올해 안에 외부에 정식 공개될 예정이었지만… 로렘 님의 추도식을 위해 공개를 앞당기게 되었습니다. 그러다 보니 아직 마땅한 이름조차 없는 장소가 되었지만요. 여러분이 계신 동안 섬 이름 공모전이라도 하는 것이 좋을까요? 하하…"</em></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
     <!-- 로비:카운터:notary2 --> 
     <div id="notary2" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"로렘 님은 미래기관 1짱이셨습니다 기록에 의하면 시속 50km로 날아다니는 케이크를 맨손으로 캐치 가능하셨다고 해요 어쩌고저쩌고"</em></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"로렘 님은 미래기관 1짱이셨습니다 기록에 의하면 시속 50km로 날아다니는 케이크를 맨손으로 캐치 가능하셨다고 해요 어쩌고저쩌고"</em></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
     <!-- 로비:카운터:notary3 --> 
     <div id="notary3" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"저는 로렘 님의 유언을 절차대로 집행하기 위해 만들어진 공증인 AI입니다. 이곳에 머무르시는 여러분의 편의를 위해 안내와 통번역을 포함한 다양한 역할도 함께 수행하고 있습니다. 섬 어디서든 말을 걸어 주시면 응답하겠습니다."</em></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"저는 로렘 님의 유언을 절차대로 집행하기 위해 만들어진 공증인 AI입니다. 이곳에 머무르시는 여러분의 편의를 위해 안내와 통번역을 포함한 다양한 역할도 함께 수행하고 있습니다. 섬 어디서든 말을 걸어 주시면 응답하겠습니다."</em></p>
     <button id="nota3-1" onclick="goTodel('notary3-1', 'nota3-1')">AI보다는 사람이 좋다고 항의한다</button>
     <button id="nota3-2" onclick="goTodel('notary3-2', 'nota3-2')">잘 부탁한다고 인사한다</button><br>
  </div>
     <!-- 로비:카운터:notary3-1 --> 
     <div id="notary3-1" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"그렇군요… 희망에 부응할 수 없어 유감입니다."</em><br><br>공증인은 풀이 죽은 것 같다.</p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"그렇군요… 희망에 부응할 수 없어 유감입니다."</em><br><br>공증인은 풀이 죽은 것 같다.</p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
     <!-- 로비:카운터:notary3-2 --> 
     <div id="notary3-2" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"네, 잘 부탁드립니다. 초세계급 여러분의 편의를 위해 최선을 다하겠습니다.”</em><br><br>공증인과 인사를 하자, 어느새 카운터 위에 반짝이는 코인이 하나 올라와 있다. 이건 선물일까?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"네, 잘 부탁드립니다. 초세계급 여러분의 편의를 위해 최선을 다하겠습니다.”</em><br><br>공증인과 인사를 하자, 어느새 카운터 위에 반짝이는 코인이 하나 올라와 있다. 이건 선물일까?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
       <!-- 로비:카운터:notary4 --> 
     <div id="notary4" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"그럼 문제입니다. 초세계급 기록자 세세 님의 생년월일을 아시는지요?"</em><br><br>8자리 숫자로 대답하자.</p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"그럼 문제입니다. 초세계급 기록자 세세 님의 생년월일을 아시는지요?"</em><br><br>8자리 숫자로 대답하자.</p>
     <input type="text" id="secret-code-input">
     <div id="codebox">
     <button onclick="checkSecretCode()">확인</button>
@@ -390,39 +390,39 @@
  </div>
       <!-- 로비:카운터:notary5 --> 
     <div id="notary5" class="hidden">
-    <p><span style="font-weight: bold;">[공증인]</span><br><br><em>"정답입니다! 꽤 먼 곳까지 둘러보셨군요.”</em><br><br>짝짝짝, 박수 소리가 울리나 싶더니 어느새 카운터 위에 동전 두 개가 놓여 있다. 퀴즈를 맞힌 보상인 것 같다.<br><span style="font-weight: bold;">2코인을 획득했다.</span></p>
+    <p><span style="font-weight: bold;">[로비]<br>[카운터]<br>[공증인]</span><br><br><em>"정답입니다! 꽤 먼 곳까지 둘러보셨군요.”</em><br><br>짝짝짝, 박수 소리가 울리나 싶더니 어느새 카운터 위에 동전 두 개가 놓여 있다. 퀴즈를 맞힌 보상인 것 같다.<br><span style="font-weight: bold;">2코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
   
     <!-- 로비:대기 공간 --> 
     <div id="waitingspace" class="hidden">
-    <p><span style="font-weight: bold;">[대기 공간]</span><br><br>공사중.</p>
-    <button class="nav-button" onclick="goTo('lobby')">대기 공간 나가기</button>
+    <p><span style="font-weight: bold;">[로비]<br>[대기 공간]</span><br><br>공사중.</p>
+    <button class="nav-button" onclick="goTo('lobby')">나가기</button>
  </div>
   
     <!-- 로비:엘리베이터 --> 
     <div id="elevator" class="hidden">
-    <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>아앗~ 공사중이라서 이용할 수 없어! 대신 엘베 바닥이라도 샅샅이 뒤져보자!</p>
+    <p><span style="font-weight: bold;">[로비]<br>[엘리베이터]</span><br><br>아앗~ 공사중이라서 이용할 수 없어! 대신 엘베 바닥이라도 샅샅이 뒤져보자!</p>
     <button id="elevatorbutton" onclick="goTodel('elevator1', 'elevatorbutton')">샅샅이 뒤진다</button><br>
-    <button class="nav-button" onclick="goTo('lobby')">엘리베이터 나가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">나가기</button>
  </div>      
       <!-- 로비:엘리베이터:탐색 --> 
     <div id="elevator1" class="hidden">
-    <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>와~ 코인을 하나 찾았어~ 대박대박~<br><span style="font-weight: bold;">1코인을 획득했다!</span></p>
+    <p><span style="font-weight: bold;">[로비]<br>[엘리베이터]</span><br><br>와~ 코인을 하나 찾았어~ 대박대박~<br><span style="font-weight: bold;">1코인을 획득했다!</span></p>
     <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goTo('lobby')">엘리베이터 나가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">나가기</button>
  </div>     
   
     <!-- 레스토랑 --> 
     <div id="restaurant" class="hidden">
     <p><span style="font-weight: bold;">[레스토랑]</span><br><br>공사중.<br>조리실 같은 걸 넣나...</p>
-    <button class="nav-button" onclick="goTo('inside')">레스토랑 나가기</button>
+    <button class="nav-button" onclick="goTo('inside')">나가기</button>
   </div>
 
     <!-- 내빈용 객실 --> 
     <div id="suite" class="hidden">
     <p><span style="font-weight: bold;">[내빈용 객실]</span><br><br>이 자리에 초청된 초세계급들이 편히 쉴 수 있도록 개인실이 준비되어 있다. 벌써 들어가서 쉬기에는 기껏 나온 보람이 없다!</p>
-    <button class="nav-button" onclick="goTo('inside')">내빈용 객실 나가기</button>
+    <button class="nav-button" onclick="goTo('inside')">나가기</button>
   </div>
   
     <!-- 바깥 1층 --> 
@@ -437,7 +437,7 @@
     <!-- 항구 --> 
     <div id="port" class="hidden">
     <p><span style="font-weight: bold;">[항구]</span><br><br>공사중.<br>곧 폭파될 예정이다. 아마 백사장을 추가.</p>
-    <button class="nav-button" onclick="goTo('outside')">항구 나가기</button>
+    <button class="nav-button" onclick="goTo('outside')">나가기</button>
   </div>
 
 
@@ -445,23 +445,22 @@
     <div id="memorial" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크 입구]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
     <button onclick="goToWithSoundNL('memorial1', 'zzapsea.mp3')">메모리얼 파크에 입장한다</button><br>
-    <button class="nav-button" onclick="goTo('outside')">메모리얼 파크 입구 나가기</button>
+    <button class="nav-button" onclick="goTo('outside')">나가기</button>
   </div>
 
       <!-- 메모리얼 파크:1 --> 
     <div id="memorial1" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크]</span><br><br>짧게 깎인 잔디 위로 새하얀 비석이 햇빛을 반사하며 눈길을 끈다.<br>이곳은 세상을 떠난 초세계급을 기리는 메모리얼 파크. 묻힌 사람은 아직 하나뿐이다.<br>규칙적으로 들려오는 파도 소리가 장송곡처럼 잔잔히 흐른다.<br>메모리얼 파크를 가로지르는 길은 꽃이 만발한 <span style="color: #3f40d3;">화원</span>으로 이어진다.</p>
-    <button onclick="goTo('memorial-lorem')">로렘의 묘비</button><br>
-    <button onclick="goTo('garden')">화원</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button onclick="goTo('memorial-lorem')">로렘의 묘비</button>
+    <button onclick="goTo('garden')">화원</button><br>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:화원 --> 
     <div id="garden" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
-    <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로 돌아가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goTo('memorial1')">나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:화원:꽃 --> 
@@ -475,26 +474,26 @@
       <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="flowerobtain" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>정성을 들여 꽃을 골랐다. 이 정도면 괜찮으려나...</p>
-    <button class="nav-button" onclick="goTo('memorial1')">메모리얼 파크로</button>
+    <button class="nav-button" onclick="goTo('garden')">나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:로렘의 묘비 --> 
     <div id="memorial-lorem" class="hidden">
-    <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
+    <p><span style="font-weight: bold;">[메모리얼 파크]<br>[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
     <button id="flowerbtn" onclick="giveflower('flowerbtn')">헌화한다</button><br>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial1')">나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
     <div id="flowerpage" class="hidden">
-    <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
+    <p><span style="font-weight: bold;">[메모리얼 파크]<br>[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial1')">나가기</button>
   </div>
 
       <!-- 산책로 --> 
     <div id="street" class="hidden">
     <p><span style="font-weight: bold;">[산책로]</span><br><br>공사중.<br>자전거 대여 가능.</p>
-    <button class="nav-button" onclick="goTo('outside')">산책로 나가기</button>
+    <button class="nav-button" onclick="goTo('outside')">나가기</button>
   </div>
 
 <!-- !!!!여기서부터 스크립트!!!! -->
