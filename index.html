@@ -712,15 +712,19 @@ function checkSecretCode() {
 }
 
 // 최종 결과
+// 🔹 Final Report Page (Dynamically Created with Typing + Per-line Ghost Typing Effect + scoped styling)
 function loadFinalReport() {
   const existing = document.getElementById('final-report');
   if (existing) {
     goTo('final-report');
     return;
   }
+  const wrapper = document.createElement('div');
+  wrapper.id = 'final-report';
+  wrapper.className = 'hidden';
+  wrapper.style = 'position: relative;';
 
   const div = document.createElement('div');
-  div.id = 'final-report';
   div.className = 'fade-in';
   div.style = `
     max-width: 700px;
@@ -750,7 +754,8 @@ function loadFinalReport() {
 
   const content = document.createElement('div');
   div.appendChild(content);
-  document.body.appendChild(div);
+  wrapper.appendChild(div);
+  document.body.appendChild(wrapper);
 
   goTo('final-report');
 
@@ -788,7 +793,7 @@ function loadFinalReport() {
       let charIndex = 0;
       function typeRealChar() {
         if (charIndex <= clean.length) {
-          real.innerHTML = clean.substring(0, charIndex) + '<span class="cursor">|</span>';
+          real.innerHTML = clean.substring(0, charIndex) + '<span class="report-cursor">|</span>';
           charIndex++;
           setTimeout(typeRealChar, 25);
         } else {
@@ -825,7 +830,7 @@ style.innerHTML = `
     position: relative;
     z-index: 1;
   }
-  .cursor {
+  .report-cursor {
     color: #3f40d3;
     animation: blink 0.8s step-end infinite;
   }
@@ -835,6 +840,7 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
+
 
 
 
