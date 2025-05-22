@@ -588,12 +588,6 @@
     
 <!-- !!!!여기서부터 스크립트!!!! -->
   <script>
-// 애니메이션이 끝난 뒤 hover 작동 허용
-  document.querySelectorAll('.menu-button').forEach(button => {
-    button.addEventListener('animationend', () => {
-      button.style.pointerEvents = 'auto';
-    });
-  });
 //★★★★★[중요]유저 데이터★★★★★
     const userData = {
       mung0515: {
@@ -606,7 +600,18 @@
         LUC: 5,
         key: 0,
         coin: 0
-      }
+      },
+      sese0409: {
+        class: "감자마스터 세세",
+        id: "Linguistics",
+        STR: 5,
+        INT: 5,
+        OBS: 5,
+        POW: 5,
+        LUC: 5,
+        key: 0,
+        coin: 0
+      },
     };
 
     let currentUser = null;
