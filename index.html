@@ -763,10 +763,23 @@ function loadFinalReport() {
     const container = document.createElement('div');
     container.style = `position: relative; margin-bottom: 1.5em; min-height: 1.5em; text-align: ${align};`;
 
-    const ghost = document.createElement('div');
-    ghost.className = 'ghost-line';
-    ghost.style = `text-align: ${align}; ${lineStyle}`;
-    container.appendChild(ghost);
+    let ghost = null;
+    let ghostSpan = null;
+    let ghostFrame = 0;
+    let ghostCleared = false;
+
+    if (align !== 'right') {
+      ghost = document.createElement('div');
+      ghost.className = 'ghost-line';
+      ghost.style = `text-align: ${align}; ${lineStyle}`;
+      container.appendChild(ghost);
+
+      ghostSpan = document.createElement('span');
+      ghostSpan.className = 'ghost-fade';
+      ghostSpan.style = `${lineStyle}`;
+      ghostSpan.dataset.align = align;
+      ghost.appendChild(ghostSpan);
+    }
 
     const real = document.createElement('div');
     real.className = 'typed-line';
@@ -778,23 +791,14 @@ function loadFinalReport() {
     const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...';
     const loremUnits = splitHangul(lorem);
 
-    const ghostSpan = document.createElement('span');
-    ghostSpan.className = 'ghost-fade';
-    ghostSpan.style = `${lineStyle}`;
-    ghostSpan.dataset.align = align;
-    ghost.appendChild(ghostSpan);
-
-    let ghostFrame = 0;
-    let realFrame = 0;
     const totalGhost = loremUnits.length;
     const totalReal = units.length;
-
+    let realFrame = 0;
     let realStarted = false;
-    let ghostCleared = false;
 
     function typeBoth() {
-      // ghost 타자기 + fade 효과
-      if (ghostFrame < totalGhost) {
+      // ghost 출력 (왼쪽 정렬일 때만)
+      if (align !== 'right' && ghostFrame < totalGhost) {
         const fadeDistance = 6;
         const fadedUnits = loremUnits.slice(0, ghostFrame).map((char, idx, arr) => {
           const age = arr.length - idx;
@@ -803,13 +807,13 @@ function loadFinalReport() {
         }).join('');
         ghostSpan.innerHTML = `<span class="ghost-text">${fadedUnits}</span>`;
         ghostFrame++;
-        setTimeout(typeBoth, 20);
-      } else if (!ghostCleared) {
-        ghostSpan.innerHTML = ''; // ghost 완전히 지우기
+        setTimeout(typeBoth, 40);
+      } else if (align !== 'right' && !ghostCleared) {
+        ghostSpan.innerHTML = '';
         ghostCleared = true;
       }
 
-      // real 텍스트는 ghost가 시작되면 0.3초 후 시작
+      // real 출력은 ghost 시작과 무관하게 0.3초 후 시작
       if (!realStarted) {
         realStarted = true;
         setTimeout(() => {
@@ -825,7 +829,7 @@ function loadFinalReport() {
             }
           }
           typeReal();
-        }, 300);
+        }, 200);
       }
     }
 
@@ -872,9 +876,7 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
-
-
-
+    
   </script>
 </body>
 </html>
