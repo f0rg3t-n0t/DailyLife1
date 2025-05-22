@@ -791,30 +791,34 @@ function loadFinalReport() {
     const totalGhost = loremUnits.length;
     const totalReal = units.length;
 
-    function typeBoth() {
-      if (ghostFrame <= totalGhost) {
-        ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
-        ghostFrame++;
-      }
-      if (ghostFrame > 3 && ghostFrame <= totalGhost + 5) {
-        const ghostText = ghostSpan.querySelector('.ghost-text');
-        const fadePercent = (ghostFrame - 3) / (totalGhost * 0.4);
-        ghostText.style.opacity = `${1 - Math.min(fadePercent, 1)}`;
-      }
-      if (realFrame <= totalReal) {
-        real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
-        realFrame++;
-      }
+function typeBoth() {
+  // ghost 타이핑
+  if (ghostFrame <= totalGhost) {
+    ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
+    ghostFrame++;
 
-      if (realFrame > totalReal && ghostFrame > totalGhost + 5) {
-        ghost.innerHTML = '';
-        real.innerHTML = realText;
-        index++;
-        setTimeout(typeLine, 600);
-      } else {
-        setTimeout(typeBoth, 60);
-      }
+    // ghost 투명도 처리
+    if (ghostFrame > 3) {
+      const ghostText = ghostSpan.querySelector('.ghost-text');
+      const fadePercent = (ghostFrame - 3) / (totalGhost * 0.4);
+      ghostText.style.opacity = `${1 - Math.min(fadePercent, 1)}`;
     }
+  }
+
+  // real 텍스트 타이핑
+  if (realFrame <= totalReal) {
+    real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+    realFrame++;
+    setTimeout(typeBoth, 60);
+  } else {
+    // 모든 타이핑 완료 시 다음 줄
+    ghost.innerHTML = '';
+    real.innerHTML = realText;
+    index++;
+    setTimeout(typeLine, 600);
+  }
+}
+
 
     typeBoth();
   }
