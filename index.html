@@ -21,7 +21,7 @@
   z-index: 9999;
   display: flex;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: #F5F5F5;
   padding: 8px 12px;
   border-radius: 8px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
@@ -33,13 +33,13 @@
 
 #persistent-nav {
   position: fixed;
-  top: 115px;
+  top: 110px;
   left: 10px;
   z-index: 9999;
   display: none;
   flex-direction: column;
   gap: 4px; /* 버튼 사이 간격 줄임 */
-  background-color: #FFFFFF;
+  background-color: #F5F5F5;
   padding: 6px 8px; /* 네모 자체 여백 줄임 */
   border-radius: 6px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
@@ -60,7 +60,6 @@
   transition: background-color 0.2s ease;
 }
 
-
 #persistent-nav button:hover {
   background-color: #2c2db2;
 }
@@ -76,8 +75,6 @@
   line-height: 1.4;
   color: #3F40D3;  /* 혹시 상속이 안 될 수도 있으니 명시 */
 }
-
-
     #bgm-player {
       position: fixed;
       top: 10px;
@@ -120,7 +117,7 @@
     @keyframes blink {
       50% { border-color: transparent; }
     }
-
+    
     button {
       font-size: 1em;
       padding: 10px 20px;
@@ -168,7 +165,7 @@
   
   <!-- 내비게이션 -->
   <div id="persistent-nav">
-  <button onclick="goTo('main-page')">메인 화면</button>
+  <button onclick="goTo('main-page-2nd')">메인 화면</button>
   <button onclick="goTo('guide')">조사 가이드</button>
   <button onclick="goTo('starting-point')">건물 입구로</button>
 </div>
@@ -182,7 +179,6 @@
   <!-- Report -->
   <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
 </div>
-
 <style>
   .menu-button {
     position: absolute;
@@ -193,7 +189,6 @@
     opacity: 0;
     pointer-events: none; /* 애니메이션 끝날 때까지 hover 방지 */
   }
-
   /* Initiation 버튼 */
   .initiation {
     top: 1%;
@@ -206,7 +201,6 @@
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
-
   /* Guide 버튼 */
   .guide {
     top: 17%;
@@ -255,14 +249,14 @@
       opacity: 1;
     }
   }
-  /* Hover 효과 */
+/* 공통 Hover 발광 효과 */
 .initiation:hover,
 .guide:hover,
 .report:hover {
-  opacity: 0.9;
-  filter: brightness(1.1);
-  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(63, 64, 211, 0.6)); /* #3F40D3 계열 빛 */
+  transition: filter 0.4s ease-in-out;
 }
+
 </style>
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
@@ -284,6 +278,27 @@
     <br>
     <button class="nav-button" onclick="goBack()">나가기</button>
 </div>
+
+  <!-- 레포트 주의사항 -->
+  <div id="report" class="hidden">
+    <p>모든 조사를 마치고 최종 레포트를 작성합니다. 진행할 시 이전 단계로 되돌아갈 수 없습니다.<br>조사를 마칠까요?</p>
+    <button onclick="goTo('finalreport')">조사를 마친다</button>
+    <button onclick="goBack()">취소</button>
+  </div>
+
+    <!-- 레포트 -->
+  <div id="finalreport" class="hidden">
+    <p>흠흠</p>
+  </div>
+  
+  <!-- 뒤로가기 적용된 메인 페이지 -->
+<div id="main-page-2nd" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
+  <!-- Initiation -->
+  <img src="initiation.png" class="menu-button initiation" onclick="goBack()" alt="시작">
+  <!-- Guide -->
+  <img src="guide.png" class="menu-button guide" onclick="goTo('guide')" alt="가이드">
+  <!-- Report -->
+  <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
 
   <!-- 스타팅 포인트 -->  
   <div id="starting-point" class="hidden">
