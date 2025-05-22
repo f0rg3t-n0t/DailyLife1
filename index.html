@@ -282,7 +282,7 @@
   <!-- 레포트 주의사항 -->
   <div id="report" class="hidden">
     <p>모든 조사를 마치고 최종 레포트를 작성합니다. 진행할 시 이전 단계로 되돌아갈 수 없습니다.<br>조사를 마칠까요?</p>
-    <button onclick="goTo('finalreport')">조사를 마친다</button>
+    <button onclick="loadFinalReport()">조사를 마친다</button>
     <button onclick="goBack()">취소</button>
   </div>
 
@@ -710,6 +710,132 @@ function checkSecretCode() {
     result.innerText = "공증인은 침묵하고 있다... 아무래도 이게 정답이 아닌 것 같다.";
   }
 }
+
+// 최종 결과
+function loadFinalReport() {
+  const existing = document.getElementById('final-report');
+  if (existing) {
+    goTo('final-report');
+    return;
+  }
+
+  const div = document.createElement('div');
+  div.id = 'final-report';
+  div.className = 'fade-in';
+  div.style = `
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    border: 3px solid #3f40d3;
+    border-radius: 10px;
+    color: black;
+    padding: 2em;
+    font-family: 'Noto Sans KR', sans-serif;
+    position: relative;
+  `;
+
+  const lines = [
+    `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`,
+    `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`,
+    `<span style="color: black;">User ID : ${currentUser.id}</span>`,
+    `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`,
+    `<span style="color: black;">Coin : ${currentUser.coin}</span>`
+  ];
+
+  if (currentUser.coin === 1) {
+    lines.push(`<div style="text-align: right; color: black;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`);
+  }
+
+  lines.push(`<div style="text-align: right; color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`);
+
+  const content = document.createElement('div');
+  div.appendChild(content);
+  document.body.appendChild(div);
+
+  goTo('final-report');
+
+  let index = 0;
+  function typeLine() {
+    if (index < lines.length) {
+      const container = document.createElement('div');
+      container.style = 'position: relative; margin-bottom: 1.5em; min-height: 1.5em;';
+
+      const ghost = document.createElement('div');
+      ghost.className = 'ghost-line';
+      container.appendChild(ghost);
+
+      const real = document.createElement('div');
+      real.className = 'typed-line';
+      container.appendChild(real);
+
+      content.appendChild(container);
+
+      const realText = lines[index];
+      const clean = realText.replace(/<[^>]+>/g, '');
+
+      let ghostCharIndex = 0;
+      function typeGhostChar() {
+        if (ghostCharIndex <= clean.length) {
+          ghost.innerText = 'ipsum lorem ipsum dolor sit amet...'.substring(0, ghostCharIndex);
+          ghostCharIndex++;
+          setTimeout(typeGhostChar, 15);
+        } else {
+          ghost.style.animation = 'ghostFade 1s ease forwards';
+          typeRealChar();
+        }
+      }
+
+      let charIndex = 0;
+      function typeRealChar() {
+        if (charIndex <= clean.length) {
+          real.innerHTML = clean.substring(0, charIndex) + '<span class="cursor">|</span>';
+          charIndex++;
+          setTimeout(typeRealChar, 25);
+        } else {
+          real.innerHTML = realText;
+          index++;
+          setTimeout(typeLine, 400);
+        }
+      }
+
+      typeGhostChar();
+    }
+  }
+  typeLine();
+}
+
+const style = document.createElement('style');
+style.innerHTML = `
+  .ghost-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    color: rgba(150, 200, 255, 0.4);
+    font-style: italic;
+    font-size: 0.95em;
+    white-space: pre-wrap;
+  }
+  @keyframes ghostFade {
+    from { opacity: 0.5; }
+    to { opacity: 0; display: none; }
+  }
+  .typed-line {
+    text-align: left;
+    position: relative;
+    z-index: 1;
+  }
+  .cursor {
+    color: #3f40d3;
+    animation: blink 0.8s step-end infinite;
+  }
+  @keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+  }
+`;
+document.head.appendChild(style);
+
 
 
   </script>
