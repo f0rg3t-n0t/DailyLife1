@@ -756,67 +756,67 @@ function loadFinalReport() {
 
   let index = 0;
   function typeLine() {
-    if (index < lines.length) {
-      const { html: realText, align, style } = lines[index];
-      const clean = realText.replace(/<[^>]+>/g, '');
-      const units = splitHangul(clean);
+    if (index >= lines.length) return;
 
-      const container = document.createElement('div');
-      container.style = `position: relative; margin-bottom: 1.5em; min-height: 1.5em; text-align: ${align};`;
+    const { html: realText, align, style } = lines[index];
+    const clean = realText.replace(/<[^>]+>/g, '');
+    const units = splitHangul(clean);
 
-      const ghost = document.createElement('div');
-      ghost.className = 'ghost-line';
-      ghost.style = `text-align: ${align}; ${style}`;
-      container.appendChild(ghost);
+    const container = document.createElement('div');
+    container.style = `position: relative; margin-bottom: 1.5em; min-height: 1.5em; text-align: ${align};`;
 
-      const real = document.createElement('div');
-      real.className = 'typed-line';
-      real.style = `text-align: ${align}; ${style}`;
-      container.appendChild(real);
+    const ghost = document.createElement('div');
+    ghost.className = 'ghost-line';
+    ghost.style = `text-align: ${align}; ${style}`;
+    container.appendChild(ghost);
 
-      content.appendChild(container);
+    const real = document.createElement('div');
+    real.className = 'typed-line';
+    real.style = `text-align: ${align}; ${style}`;
+    container.appendChild(real);
 
-      const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...';
-      const loremUnits = splitHangul(lorem);
+    content.appendChild(container);
 
-      const ghostSpan = document.createElement('span');
-      ghostSpan.className = 'ghost-fade';
-      ghostSpan.style = `${style}`;
-      ghostSpan.dataset.align = align;
-      ghost.appendChild(ghostSpan);
+    const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...';
+    const loremUnits = splitHangul(lorem);
 
-      let ghostFrame = 0;
-      let realFrame = 0;
-      const totalGhost = loremUnits.length;
-      const totalReal = units.length;
+    const ghostSpan = document.createElement('span');
+    ghostSpan.className = 'ghost-fade';
+    ghostSpan.style = `${style}`;
+    ghostSpan.dataset.align = align;
+    ghost.appendChild(ghostSpan);
 
-      function typeBoth() {
-        if (ghostFrame <= totalGhost) {
-          ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
-          ghostFrame++;
-        }
-        if (ghostFrame > 5 && ghostFrame <= totalGhost + 10) {
-          const ghostText = ghostSpan.querySelector('.ghost-text');
-          const fadePercent = (ghostFrame - 5) / (totalGhost - 5);
-          ghostText.style.opacity = `${1 - fadePercent}`;
-        }
-        if (realFrame <= totalReal) {
-          real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
-          realFrame++;
-        }
+    let ghostFrame = 0;
+    let realFrame = 0;
+    const totalGhost = loremUnits.length;
+    const totalReal = units.length;
 
-        if (realFrame <= totalReal || ghostFrame <= totalGhost + 10) {
-          setTimeout(typeBoth, 60);
-        } else {
-          ghost.innerHTML = '';
-          real.innerHTML = realText;
-          index++;
-          setTimeout(typeLine, 600);
-        }
+    function typeBoth() {
+      if (ghostFrame <= totalGhost) {
+        ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
+        ghostFrame++;
+      }
+      if (ghostFrame > 3 && ghostFrame <= totalGhost + 5) {
+        const ghostText = ghostSpan.querySelector('.ghost-text');
+        const fadePercent = (ghostFrame - 3) / (totalGhost * 0.4);
+        ghostText.style.opacity = `${1 - Math.min(fadePercent, 1)}`;
+      }
+      if (realFrame <= totalReal) {
+        real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+        realFrame++;
       }
 
-      typeBoth();
+      if (realFrame > totalReal && ghostFrame > totalGhost + 5) {
+        ghost.innerHTML = '';
+        real.innerHTML = realText;
+        index++;
+        setTimeout(typeLine, 600);
+      } else {
+        setTimeout(typeBoth, 60);
+      }
     }
+
+    typeBoth();
   }
   typeLine();
 }
@@ -854,7 +854,6 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
-
 
   </script>
 </body>
