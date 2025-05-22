@@ -733,12 +733,11 @@ function loadFinalReport() {
   const lines = [
     { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left', lineStyle: 'color: #3f40d3; font-style: italic;' },
     { html: `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`, align: 'left', lineStyle: 'color: #3f40d3; font-style: italic;' },
-    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left', lineStyle: 'color: black;' },
-    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left', lineStyle: 'color: black;' },
+    { html: `<span style="color: black;">User ID : ${currentUser.id} | STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left', lineStyle: 'color: black;' },
     { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left', lineStyle: 'color: black;' }
   ];
 
-  if (currentUser.coin === 1) {
+  if (currentUser.key === 1) {
     lines.push({ html: `<div style="color: black; font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
   }
 
