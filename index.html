@@ -31,6 +31,38 @@
   min-width: 180px;
 }
 
+#persistent-nav {
+  position: fixed;
+  top: 70px; /* user-display 바로 아래 */
+  left: 10px;
+  z-index: 9999;
+  display: none; /* 처음엔 안 보임, starting-point 진입 이후 표시됨 */
+  flex-direction: column;
+  gap: 6px;
+  background-color: #F5F5F5;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd;
+  min-width: 180px;
+}
+
+#persistent-nav button {
+  background-color: #3F40D3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+#persistent-nav button:hover {
+  background-color: #2c2db2;
+}
+
 #barcode-icon {
   width: 60px;
   height: 40px;
@@ -128,8 +160,15 @@
     <button onclick="document.getElementById('bgm').play()">▶</button>
     <button onclick="document.getElementById('bgm').pause()">⏸</button>
   </div>
+  
   <!-- 로고 -->
   <img class="logo" src="zzaplogo.png"/>
+  
+  <!-- 내비게이션 -->
+  <div id="persistent-nav">
+  <button onclick="goTo('main-page')">메인 화면</button>
+  <button onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
+</div>
   
 <!-- main-page 버튼 이미지 배치 -->
 <div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
@@ -523,12 +562,25 @@
       });
     }
 
+
+
+
+
+
+
+  // 💡 최초로 starting-point 진입 시 persistent-nav 표시
+  if (page === 'starting-point') {
+    document.getElementById('persistent-nav').style.display = 'flex';
+  }
+}
+ 
 //★★★★★goTo★★★★★
 function goTo(page) {
   // 창 이동시 숨겨지지 않는 디스플레이 설정
-  const exceptions = ['user-display','bgm-player','bgm-player button'];  
+  const exceptions = ['user-display','persistent-nav','bgm-player','bgm-player button'];  
   document.querySelectorAll('div').forEach(div => {
-    if (!exceptions.includes(div.id) && !div.closest('#user-display')) {
+    const isException = exceptions.includes(div.id) || div.closest('#user-display') || div.closest('#persistent-nav');
+    if (!isException) {
       div.classList.add('hidden');
     }
   });
@@ -550,6 +602,9 @@ function goTo(page) {
   if (['flowerobtain'].includes(page)) {
     currentUser.key = 1;
     updateCoinDisplay();
+  }
+    if (page === 'starting-point') {
+    document.getElementById('persistent-nav').style.display = 'flex';
   }
   //얘네는 버튼 없애기용인데 이렇게 하지 말고 goTodel 사용을 고려할 것 ...
   const flowerButton = document.getElementById('flower-button-box');
