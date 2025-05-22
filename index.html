@@ -134,97 +134,61 @@
 <!-- main-page 버튼 이미지 배치 -->
 <div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
   <!-- Initiation -->
-  <img src="initiation.png" class="menu-button initiation blinking" onclick="goTo('starting-point')" alt="시작">
+  <img src="initiation.png" class="menu-button initiation" onclick="goTo('starting-point')" alt="시작">
   <!-- Guide -->
-  <img src="guide.png" class="menu-button guide blinking" onclick="goTo('guide')" alt="가이드">
+  <img src="guide.png" class="menu-button guide" onclick="goTo('guide')" alt="가이드">
   <!-- Report -->
-  <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
+  <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
 </div>
 
 <style>
   .menu-button {
     position: absolute;
     cursor: pointer;
-    transition: transform 0.4s ease;
     transform-style: preserve-3d;
-
-    /* 등장 애니메이션 추가 */
     opacity: 0;
-    animation-fill-mode: forwards;
   }
 
-  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) 17 차이, 24 차이 */
+  /* Initiation 버튼 */
   .initiation {
     top: 1%;
     left: 39%;
     width: 12%;
     height: auto;
 
-    /* 등장 애니메이션 */
-    animation: slideInLeft 1.2s ease-out 0.2s forwards;
+    animation-name: slideInLeft;
+    animation-duration: 1.2s;
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
+
+  /* Guide 버튼 */
   .guide {
     top: 17%;
     right: 40%;
     width: 14%;
     height: auto;
 
-    /* 등장 애니메이션 */
-    animation: slideInRight 1.2s ease-out 0.3s forwards;
+    animation-name: slideInRight;
+    animation-duration: 1.2s;
+    animation-delay: 0.3s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
+
+  /* Report 버튼 */
   .report {
     top: 36%;
     left: 39%;
     width: 15%;
     height: auto;
 
-    /* 등장 애니메이션 */
-    animation: slideInLeft 1.2s ease-out 0.4s forwards;
-  }
-
-  /* 기본 깜빡임 효과 */
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.8; }
-  }
-
-  .blinking {
-    animation: blink 1.8s infinite;
-  }
-
-  /* shine 효과 */
-  .menu-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-    transform: skewX(-20deg);
-    pointer-events: none;
-  }
-
-  .menu-button:hover::after {
-    animation: shine 0.8s ease-in-out;
-  }
-
-  @keyframes shine {
-    0% { left: -75%; }
-    100% { left: 125%; }
-  }
-
-  /* 추가 3D 회전 + 이동 효과 */
-  .initiation:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
-  }
-
-  .guide:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, -17deg) translateX(12px);
-  }
-
-  .report:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+    animation-name: slideInLeft;
+    animation-duration: 1.2s;
+    animation-delay: 0.4s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
   }
 
   /* 등장 애니메이션 정의 */
@@ -249,7 +213,43 @@
       opacity: 1;
     }
   }
+
+  /* shine 효과 */
+  .menu-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+    transform: skewX(-20deg);
+    pointer-events: none;
+  }
+
+  .menu-button:hover::after {
+    animation: shine 0.8s ease-in-out;
+  }
+
+  @keyframes shine {
+    0% { left: -75%; }
+    100% { left: 125%; }
+  }
+
+  /* 3D 회전 + 이동 효과 */
+  .initiation:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+  }
+
+  .guide:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, -17deg) translateX(12px);
+  }
+
+  .report:hover {
+    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+  }
 </style>
+
 
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
@@ -295,16 +295,14 @@
     <button onclick="goTo('counter')">카운터</button>
     <button onclick="goTo('waitingspace')">대기 공간</button>
     <button onclick="goTo('elevator')">엘리베이터</button><br>
-    <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('inside')">로비 나가기</button>
   </div>
 
     <!-- 로비:카운터 --> 
     <div id="counter" class="hidden">
     <p><span style="font-weight: bold;">[카운터]</span><br><br>보통이라면 직원이 서 있어야 할 카운터 너머에는 아무도 없다. 가까이 다가가자 공증인의 목소리가 울린다.<br><br><em>”섬 내부는 잘 돌아보고 계신가요?”</em><br><br><em>”꼼꼼히 둘러봐 주신 분들을 위해 작은 퀴즈를 준비했습니다. 기분이 내키신다면 말을 걸어 주세요. 잠시 쉬어가고 싶으실 때는 잡담을 주고받는 것도 좋겠죠.”</em></p>
     <button onclick="goTo('notary')">공증인과 대화하기</button><br>
-    <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goTo('lobby')">로비로 나가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">카운터 나가기</button>
  </div>
     <!-- 로비:카운터:notary --> 
     <div id="notary" class="hidden">
@@ -360,16 +358,14 @@
     <!-- 로비:대기 공간 --> 
     <div id="waitingspace" class="hidden">
     <p><span style="font-weight: bold;">[대기 공간]</span><br><br>공사중.</p>
-    <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">대기 공간 나가기</button>
  </div>
   
     <!-- 로비:엘리베이터 --> 
     <div id="elevator" class="hidden">
     <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>아앗~ 공사중이라서 이용할 수 없어! 대신 엘베 바닥이라도 샅샅이 뒤져보자!</p>
     <button id="elevatorbutton" onclick="goTodel('elevator1', 'elevatorbutton')">샅샅이 뒤진다</button><br>
-    <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('lobby')">엘리베이터 나가기</button>
  </div>      
       <!-- 로비:엘리베이터:탐색 --> 
     <div id="elevator1" class="hidden">
@@ -381,13 +377,13 @@
     <!-- 레스토랑 --> 
     <div id="restaurant" class="hidden">
     <p><span style="font-weight: bold;">[레스토랑]</span><br><br>공사중.<br>조리실 같은 걸 넣나...</p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('inside')">레스토랑 나가기</button>
   </div>
 
     <!-- 내빈용 객실 --> 
     <div id="suite" class="hidden">
     <p><span style="font-weight: bold;">[내빈용 객실]</span><br><br>이 자리에 초청된 초세계급들이 편히 쉴 수 있도록 개인실이 준비되어 있다. 벌써 들어가서 쉬기에는 기껏 나온 보람이 없다!</p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('inside')">내빈용 객실 나가기</button>
   </div>
   
     <!-- 바깥 1층 --> 
@@ -402,7 +398,7 @@
     <!-- 항구 --> 
     <div id="port" class="hidden">
     <p><span style="font-weight: bold;">[항구]</span><br><br>공사중.<br>곧 폭파될 예정이다. 아마 백사장을 추가.</p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('outside')">항구 나가기</button>
   </div>
 
 
@@ -410,7 +406,7 @@
     <div id="memorial" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크 입구]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
     <button onclick="goToWithSoundNL('memorial1', 'zzapsea.mp3')">메모리얼 파크에 입장한다</button><br>
-    <button class="nav-button" onclick="goTo('outside')">나가기</button>
+    <button class="nav-button" onclick="goTo('outside')">메모리얼 파크 입구 나가기</button>
   </div>
 
       <!-- 메모리얼 파크:1 --> 
@@ -447,20 +443,19 @@
     <div id="memorial-lorem" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>2002.04.09-2025.XX.XX</p>
     <button id="flowerbtn" onclick="giveflower('flowerbtn')">헌화한다</button><br>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
       <!-- !!메모리얼 파크:로렘의 묘비:헌화 --> 
     <div id="flowerpage" class="hidden">
     <p><span style="font-weight: bold;">[로렘의 묘비]</span><br><br>묘비 앞에 꽃을 가지런히 올려놓았다. 바람에 꽃잎이 살짝 흔들린다.<br>잠시 눈을 감았다 뜨니... 원래 여기 코인이 놓여 있었던가?<br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
-    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 입구로</button>
+    <button class="nav-button" onclick="goToWithoutzzapsea('memorial')">메모리얼 파크 나가기</button>
   </div>
 
       <!-- 산책로 --> 
     <div id="street" class="hidden">
     <p><span style="font-weight: bold;">[산책로]</span><br><br>공사중.<br>자전거 대여 가능.</p>
-    <button class="nav-button" onclick="goBack()">뒤로 가기</button>
+    <button class="nav-button" onclick="goTo('outside')">산책로 나가기</button>
   </div>
 
 <!-- !!!!여기서부터 스크립트!!!! -->
