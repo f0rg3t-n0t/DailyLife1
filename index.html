@@ -186,6 +186,8 @@
     position: absolute;
     cursor: pointer;
     transform-style: preserve-3d;
+    transform: translateX(0) scale(1); /* 기본 transform 값 설정 */
+    transition: transform 0.4s ease;   /* hover 부드럽게 */
     opacity: 0;
   }
 
@@ -276,21 +278,19 @@
     100% { left: 125%; }
   }
 
-  /* 3D 회전 + 이동 효과 */
+  /* Hover 시 3D 회전 + 이동 */
   .initiation:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
 
   .guide:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, -17deg) translateX(12px);
+    transform: translateX(12px) rotate3d(0, 1, 0, -17deg);
   }
 
   .report:hover {
-    transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
 </style>
-
-
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
   <!-- 로그인 화면 -->
