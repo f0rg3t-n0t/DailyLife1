@@ -142,10 +142,118 @@
       margin-bottom: 1em;
     }
   </style>
+
+/* 메인 페이지 컨테이너 */
+    #main-page {
+      position: relative;
+      height: 100vh;
+      background-color: #f5f5f5;
+    }
+
+    .menu-button {
+      position: absolute;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transform: translateX(0) scale(1); /* 애니메이션 최종 상태와 일치 */
+      transition: transform 0.4s ease;
+      opacity: 1;
+      pointer-events: none; /* 초기 hover 비활성화 (JS로 활성화) */
+    }
+
+    /* 버튼별 위치 */
+    .initiation {
+      top: 1%;
+      left: 39%;
+      width: 12%;
+      height: auto;
+      animation: slideInLeft 1.2s ease-out 0.2s forwards;
+    }
+
+    .guide {
+      top: 17%;
+      right: 40%;
+      width: 14%;
+      height: auto;
+      animation: slideInRight 1.2s ease-out 0.3s forwards;
+    }
+
+    .report {
+      top: 36%;
+      left: 39%;
+      width: 15%;
+      height: auto;
+      animation: slideInLeft 1.2s ease-out 0.4s forwards;
+    }
+
+    /* 등장 애니메이션 정의 */
+    @keyframes slideInLeft {
+      0% {
+        transform: translateX(-80%) scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInRight {
+      0% {
+        transform: translateX(80%) scale(0.9);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* hover 시 transform 누적 */
+    .initiation:hover {
+      transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
+    }
+
+    .guide:hover {
+      transform: translateX(0) scale(1) translateX(12px) rotate3d(0, 1, 0, -17deg);
+    }
+
+    .report:hover {
+      transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
+    }
+
+    /* shine 효과 */
+    .menu-button::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+      transform: skewX(-20deg);
+      pointer-events: none;
+    }
+
+    .menu-button:hover::after {
+      animation: shine 0.8s ease-in-out;
+    }
+
+    @keyframes shine {
+      0% { left: -75%; }
+      100% { left: 125%; }
+    }
+  </style>
 </head>
 
 <!-- !!!!여기서부터 BODY!!!! -->
 <body>
+<!-- 메인페이지 -->
+    <div id="main-page">
+    <img src="initiation.png" class="menu-button initiation" onclick="alert('start')" alt="시작">
+    <img src="guide.png" class="menu-button guide" onclick="alert('guide')" alt="가이드">
+    <img src="report.png" class="menu-button report" onclick="alert('report')" alt="종료">
+  </div>
+  
   <!-- 유저 디스플레이 -->
 <div id="user-display">
   <img src="zzapbarcode.png" alt="barcode" id="barcode-icon">
@@ -171,113 +279,6 @@
   <button onclick="goTo('starting-point')">건물 입구로</button>
 </div>
   
-<!-- main-page 버튼 이미지 배치 -->
-<div id="main-page" class="hidden" style="position: relative; height: 100vh; background-color: #f5f5f5;">
-  <!-- Initiation -->
-  <img src="initiation.png" class="menu-button initiation" onclick="goTo('starting-point')" alt="시작">
-  <!-- Guide -->
-  <img src="guide.png" class="menu-button guide" onclick="goTo('guide')" alt="가이드">
-  <!-- Report -->
-  <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
-</div>
-<style>
-  .menu-button {
-    position: absolute;
-    cursor: pointer;
-    transform-style: preserve-3d;
-    transform: translateX(0) scale(1); /* 기본 transform 값 설정 */
-    transition: transform 0.4s ease;   /* hover 부드럽게 */
-    opacity: 0;
-  }
-  /* Initiation 버튼 */
-  .initiation {
-    top: 1%;
-    left: 39%;
-    width: 12%;
-    height: auto;
-    animation-name: slideInLeft;
-    animation-duration: 1.2s;
-    animation-delay: 0.2s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-  }
-  /* Guide 버튼 */
-  .guide {
-    top: 17%;
-    right: 40%;
-    width: 14%;
-    height: auto;
-
-    animation-name: slideInRight;
-    animation-duration: 1.2s;
-    animation-delay: 0.3s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-  }
-  /* Report 버튼 */
-  .report {
-    top: 36%;
-    left: 39%;
-    width: 15%;
-    height: auto;
-
-    animation-name: slideInLeft;
-    animation-duration: 1.2s;
-    animation-delay: 0.4s;
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-out;
-  }
-  /* 등장 애니메이션 정의 */
-  @keyframes slideInLeft {
-    0% {
-      transform: translateX(-80%) scale(0.9);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0) scale(1);
-      opacity: 1;
-    }
-  }
-  @keyframes slideInRight {
-    0% {
-      transform: translateX(80%) scale(0.9);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0) scale(1);
-      opacity: 1;
-    }
-  }
-  /* shine 효과 */
-  .menu-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-    transform: skewX(-20deg);
-    pointer-events: none;
-  }
-  .menu-button:hover::after {
-    animation: shine 0.8s ease-in-out;
-  }
-  @keyframes shine {
-    0% { left: -75%; }
-    100% { left: 125%; }
-  }
-  /* Hover 시 3D 회전 + 이동 */
-  .initiation:hover {
-    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
-  }
-  .guide:hover {
-    transform: translateX(12px) rotate3d(0, 1, 0, -17deg);
-  }
-  .report:hover {
-    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
-  }
-</style>
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
   <!-- 로그인 화면 -->
@@ -697,6 +698,13 @@ function checkSecretCode() {
   }
 }
 
+    //★★★★★건드리지말것★★★★★
+    // 애니메이션 종료 후 hover 가능하게 설정
+    document.querySelectorAll('.menu-button').forEach(button => {
+      button.addEventListener('animationend', () => {
+        button.style.pointerEvents = 'auto';
+      });
+    });
 
   </script>
 </body>
