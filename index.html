@@ -140,32 +140,46 @@
   <!-- Report -->
   <img src="report.png" class="menu-button report blinking" onclick="goTo('report')" alt="종료">
 </div>
+
 <style>
   .menu-button {
     position: absolute;
     cursor: pointer;
     transition: transform 0.4s ease;
     transform-style: preserve-3d;
+
+    /* 등장 애니메이션 추가 */
+    opacity: 0;
+    animation-fill-mode: forwards;
   }
 
-  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) 17 차이, 24 차이*/
+  /* 위치 및 크기 조정 (비율 유지하면서 크게 축소) 17 차이, 24 차이 */
   .initiation {
     top: 1%;
     left: 39%;
     width: 12%;
     height: auto;
+
+    /* 등장 애니메이션 */
+    animation: slideInLeft 1.2s ease-out 0.2s forwards;
   }
   .guide {
     top: 17%;
     right: 40%;
     width: 14%;
     height: auto;
+
+    /* 등장 애니메이션 */
+    animation: slideInRight 1.2s ease-out 0.3s forwards;
   }
   .report {
     top: 36%;
     left: 39%;
     width: 15%;
     height: auto;
+
+    /* 등장 애니메이션 */
+    animation: slideInLeft 1.2s ease-out 0.4s forwards;
   }
 
   /* 기본 깜빡임 효과 */
@@ -199,6 +213,7 @@
     0% { left: -75%; }
     100% { left: 125%; }
   }
+
   /* 추가 3D 회전 + 이동 효과 */
   .initiation:hover {
     transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
@@ -210,6 +225,29 @@
 
   .report:hover {
     transform: perspective(800px) rotate3d(0, 1, 0, 17deg) translateX(-12px);
+  }
+
+  /* 등장 애니메이션 정의 */
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(-80%) scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInRight {
+    0% {
+      transform: translateX(80%) scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0) scale(1);
+      opacity: 1;
+    }
   }
 </style>
 
