@@ -541,22 +541,50 @@
   <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
   <button onclick="goTo('pond-money')">부자가 되고 싶다</button><br>
   <button onclick="goTo('pond-friend')">인기인이 되고 싶다</button><br>
-  <button onclick="goTo('street3')">소원의 호수</button><br>
+  <button onclick="goTo('pond-nota')">공증인의 마음을 가지고 싶다</button><br>
   </div>
 
-  <!-- asdf소원 빌기 --> 
+  <!-- 소원 빌기 --> 
   <div id="pond-money" class="hidden"> 
   <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"부자가 되고 싶다!"<br>소원을 빌었다...<br><br>어라? 아무것도 없던 하늘에서 갑자기 코인 두 개가 떨어졌다.<br>이 호수, 정말 효험이 있는 걸까...?<br><br><span style="font-weight: bold;">2코인을 획득했다.</span></p>
   <button class="nav-button" onclick="goTo('street3')">나가기</button>
   </div>
 
   <div id="pond-friend" class="hidden"> 
-  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"인기인이 되고 싶다!"<br>소원을 빌었다...<br><br>어라? 아무것도 없던 하늘에서 갑자기 종이 한 장이 떨어졌다. ...'소원권'?<br><br><span style="font-weight: bold;"> ‘소원권’ 을 획득했다. 선물할 시 상대의 호감도 +2. </span></p>
   <button class="nav-button" onclick="goTo('street3')">나가기</button>
   </div>
 
-
+  <!-- 공증인 공략 -->
+  <div id="pond-nota" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"공증인의 마음을 가지고 싶다!"<br>소원을 빌었다...<br><br><em>"...으흠. 큼. 그건... 다른 소원은 없으신지요?"</em><br><br>당황한 기색이 역력한 공증인의 목소리가 들려온다.</p>
+  <button class="nav-button" onclick="goTo('pond1')">다시 소원 빌기</button>
+  </div>
   
+  <div id="pond1" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
+  <button onclick="goTo('pond-money')">부자가 되고 싶다</button><br>
+  <button onclick="goTo('pond-friend')">인기인이 되고 싶다</button><br>
+  <button onclick="goTo('pond-nota1')">공증인의 마음을 가지고 싶다!!!</button><br>
+  </div>
+
+  <div id="pond-nota" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"공증인의 마음을 가지고 싶다!!!"<br>다시 한 번 소원을 빌었다...<br><br><em>"호의는 감사하지만, 저는 어디까지나 공증인 역할을 하는 AI이기 때문에..."</em><br><br>공증인은 곤란한 듯하다.</p>
+  <button class="nav-button" onclick="goTo('pond2')">다시 소원 빌기</button>
+  </div>
+
+  <div id="pond2" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
+  <button onclick="goTo('pond-money')">부자가 되고 싶다</button><br>
+  <button onclick="goTo('pond-friend')">인기인이 되고 싶다</button><br>
+  <button onclick="goTo('pond-nota2')">공증인의 마음을 가지고 싶다!!!!!!!!!!</button><br>
+  </div>
+
+  <div id="pond-nota2" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"공증인의 마음을 가지고 싶다!!!!!!!!!!"<br>끈질기게 소원을 빌었다...<br><br><em>"마음은 기쁘지만, 그건 들어 드릴 수 없는 소원이라서... 대신 이거라도..."</em><br><br>공증인의 헛기침 소리와 함께 허공에서 코인 2개가 떨어졌다.<br><br><span style="font-weight: bold;">2코인을 획득했다.</span><</p>
+  <button class="nav-button" onclick="goTo('pond2')">다시 소원 빌기</button>
+  <button class="nav-button" onclick="goTo('street3')">나가기</button>
+  </div>
     
 <!-- !!!!여기서부터 스크립트!!!! -->
   <script>
@@ -649,7 +677,7 @@ function goTo(page) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
-  if (['notary5','pond-money'].includes(page)) {
+  if (['notary5','pond-money','pond-nota2'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 2;
     updateCoinDisplay();
   }
