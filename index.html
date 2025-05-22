@@ -180,7 +180,6 @@
   <!-- Report -->
   <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
 </div>
-
 <style>
   .menu-button {
     position: absolute;
@@ -190,21 +189,18 @@
     transition: transform 0.4s ease;   /* hover 부드럽게 */
     opacity: 0;
   }
-
   /* Initiation 버튼 */
   .initiation {
     top: 1%;
     left: 39%;
     width: 12%;
     height: auto;
-
     animation-name: slideInLeft;
     animation-duration: 1.2s;
     animation-delay: 0.2s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
-
   /* Guide 버튼 */
   .guide {
     top: 17%;
@@ -218,7 +214,6 @@
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
-
   /* Report 버튼 */
   .report {
     top: 36%;
@@ -232,7 +227,6 @@
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
-
   /* 등장 애니메이션 정의 */
   @keyframes slideInLeft {
     0% {
@@ -244,7 +238,6 @@
       opacity: 1;
     }
   }
-
   @keyframes slideInRight {
     0% {
       transform: translateX(80%) scale(0.9);
@@ -255,7 +248,6 @@
       opacity: 1;
     }
   }
-
   /* shine 효과 */
   .menu-button::after {
     content: '';
@@ -268,25 +260,20 @@
     transform: skewX(-20deg);
     pointer-events: none;
   }
-
   .menu-button:hover::after {
     animation: shine 0.8s ease-in-out;
   }
-
   @keyframes shine {
     0% { left: -75%; }
     100% { left: 125%; }
   }
-
   /* Hover 시 3D 회전 + 이동 */
   .initiation:hover {
     transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
-
   .guide:hover {
     transform: translateX(12px) rotate3d(0, 1, 0, -17deg);
   }
-
   .report:hover {
     transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
@@ -641,21 +628,37 @@ function goTodel(targetPage, buttonId) {
 //★★★★★goBack★★★★★  
 function goBack() {
   if (pageHistory.length > 1) {
+    // 현재 페이지 제거
     pageHistory.pop();
-    const prev = pageHistory[pageHistory.length - 1];
-    // 유저 디스플레이 등, 숨기지 않을 요소 설정
+    const prevPage = pageHistory[pageHistory.length - 1];
+
+    // 모든 div 숨기기 (예외 제외)
     document.querySelectorAll('div').forEach(div => {
-      if (!div.closest('#user-display','#bgm-player','#bgm-player button')) {
+      const id = div.id;
+      const isPersistent = ['user-display', 'bgm-player', 'persistent-nav'].includes(id);
+      if (!isPersistent) {
         div.classList.add('hidden');
       }
     });
-    const target = document.getElementById(prev);
-    target.classList.remove('hidden');
-    target.classList.add('fade-in');
-    document.getElementById('user-display','bgm-player','bgm-player button').classList.remove('hidden');
+
+    // 이전 페이지 보여주기
+    const target = document.getElementById(prevPage);
+    if (target) {
+      target.classList.remove('hidden');
+      target.classList.add('fade-in');
+    }
+
+    // 절대 숨기면 안 되는 요소는 다시 한 번 확실하게 보이게
+    ['user-display', 'bgm-player', 'persistent-nav'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.classList.remove('hidden');
+    });
+
+    // 출력 초기화
     clearOutputs();
   }
 }
+
 
 //★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
 function goToWithoutzzapsea(page) {
