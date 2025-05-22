@@ -811,6 +811,10 @@ function goToWithoutzzapsea(page) {
     zzapseaAudio.pause();
     zzapseaAudio.currentTime = 0;
   }
+  if (zzapportAudio && !zzapportAudio.paused) {
+    zzapportAudio.pause();
+    zzapportAudio.currentTime = 0;
+  }
   goTo(page);
 }
 
