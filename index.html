@@ -33,32 +33,33 @@
 
 #persistent-nav {
   position: fixed;
-  top: 10px; /* user-display 바로 아래 */
-  left: 200px;
+  top: 170px;
+  left: 10px;
   z-index: 9999;
-  display: none; /* 처음엔 안 보임, starting-point 진입 이후 표시됨 */
+  display: none;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px; /* 버튼 사이 간격 줄임 */
   background-color: #F5F5F5;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 6px 8px; /* 네모 자체 여백 줄임 */
+  border-radius: 6px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
   border: 1px solid #ddd;
-  min-width: 180px;
+  min-width: 140px; /* 폭도 작게 */
 }
 
 #persistent-nav button {
   background-color: #3F40D3;
   color: white;
-  margin: 10px;
   border: none;
   border-radius: 4px;
-  padding: 6px 10px;
+  padding: 4px 6px;     /* 버튼 내부 여백 줄임 */
+  margin: 0;            /* 버튼 외부 여백 제거 */
   cursor: pointer;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 12px;      /* 글자 크기 줄임 */
   transition: background-color 0.2s ease;
 }
+
 
 #persistent-nav button:hover {
   background-color: #2c2db2;
