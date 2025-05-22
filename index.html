@@ -180,15 +180,18 @@
   <!-- Report -->
   <img src="report.png" class="menu-button report" onclick="goTo('report')" alt="종료">
 </div>
+
 <style>
   .menu-button {
     position: absolute;
     cursor: pointer;
     transform-style: preserve-3d;
-    transform: translateX(0) scale(1); /* 기본 transform 값 설정 */
-    transition: transform 0.4s ease;   /* hover 부드럽게 */
+    transform: translateX(0) scale(1); /* 애니메이션 최종 위치 */
+    transition: transform 0.4s ease;
     opacity: 0;
+    pointer-events: none; /* 애니메이션 끝날 때까지 hover 방지 */
   }
+
   /* Initiation 버튼 */
   .initiation {
     top: 1%;
@@ -201,32 +204,33 @@
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
+
   /* Guide 버튼 */
   .guide {
     top: 17%;
     right: 40%;
     width: 14%;
     height: auto;
-
     animation-name: slideInRight;
     animation-duration: 1.2s;
     animation-delay: 0.3s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
+
   /* Report 버튼 */
   .report {
     top: 36%;
     left: 39%;
     width: 15%;
     height: auto;
-
     animation-name: slideInLeft;
     animation-duration: 1.2s;
     animation-delay: 0.4s;
     animation-fill-mode: forwards;
     animation-timing-function: ease-out;
   }
+
   /* 등장 애니메이션 정의 */
   @keyframes slideInLeft {
     0% {
@@ -238,6 +242,7 @@
       opacity: 1;
     }
   }
+
   @keyframes slideInRight {
     0% {
       transform: translateX(80%) scale(0.9);
@@ -248,34 +253,18 @@
       opacity: 1;
     }
   }
-  /* shine 효과 */
-  .menu-button::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -75%;
-    width: 50%;
-    height: 100%;
-    background: linear-gradient(120deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-    transform: skewX(-20deg);
-    pointer-events: none;
-  }
-  .menu-button:hover::after {
-    animation: shine 0.8s ease-in-out;
-  }
-  @keyframes shine {
-    0% { left: -75%; }
-    100% { left: 125%; }
-  }
-  /* Hover 시 3D 회전 + 이동 */
+
+  /* Hover 시 기존 위치 유지 + 이동/회전 효과 */
   .initiation:hover {
-    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
+    transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
+
   .guide:hover {
-    transform: translateX(12px) rotate3d(0, 1, 0, -17deg);
+    transform: translateX(0) scale(1) translateX(12px) rotate3d(0, 1, 0, -17deg);
   }
+
   .report:hover {
-    transform: translateX(-12px) rotate3d(0, 1, 0, 17deg);
+    transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
   }
 </style>
 
@@ -486,7 +475,12 @@
 
 <!-- !!!!여기서부터 스크립트!!!! -->
   <script>
-
+// 애니메이션이 끝난 뒤 hover 작동 허용
+  document.querySelectorAll('.menu-button').forEach(button => {
+    button.addEventListener('animationend', () => {
+      button.style.pointerEvents = 'auto';
+    });
+  });
 //★★★★★[중요]유저 데이터★★★★★
     const userData = {
       mung0515: {
