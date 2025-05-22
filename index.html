@@ -749,15 +749,35 @@ function goTodel(targetPage, buttonId) {
     }
 
 //★★★★★goToWithSound(페이지 이동 버튼 누를 때 효과음 계속해서 재생, 루프)★★★★★  
-    function goToWithSoundNL(page, soundFile) {
-  if (soundFile.includes('zzapsea.mp3'|| soundFile.includes('zzapport.mp3'))) {
-    zzapseaAudio = new Audio(soundFile); // 전역 변수로 저장
+let zzapseaAudio = null;
+let zzapportAudio = null;
+
+function goToWithSoundNL(page, soundFile) {
+  if (soundFile.includes('zzapsea.mp3')) {
+    zzapseaAudio = new Audio(soundFile);
     zzapseaAudio.loop = true;
     zzapseaAudio.play();
+  } else if (soundFile.includes('zzapport.mp3')) {
+    zzapportAudio = new Audio(soundFile);
+    zzapportAudio.loop = true;
+    zzapportAudio.play();
   } else {
     const audio = new Audio(soundFile);
     audio.loop = true;
     audio.play();
+  }
+  goTo(page);
+}
+
+//★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
+function goToWithoutzzapsea(page) {
+  if (zzapseaAudio && !zzapseaAudio.paused) {
+    zzapseaAudio.pause();
+    zzapseaAudio.currentTime = 0;
+  }
+  if (zzapportAudio && !zzapportAudio.paused) {
+    zzapportAudio.pause();
+    zzapportAudio.currentTime = 0;
   }
   goTo(page);
 }
@@ -805,18 +825,6 @@ function goBack() {
 
 
 
-//★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
-function goToWithoutzzapsea(page) {
-  if (zzapseaAudio && !zzapseaAudio.paused) {
-    zzapseaAudio.pause();
-    zzapseaAudio.currentTime = 0;
-  }
-  if (zzapportAudio && !zzapportAudio.paused) {
-    zzapportAudio.pause();
-    zzapportAudio.currentTime = 0;
-  }
-  goTo(page);
-}
 
 //여기서부터 특정 장소에서 사용하도록 되어 있는 함수!!!!
 //★★★★★헌화★★★★★
