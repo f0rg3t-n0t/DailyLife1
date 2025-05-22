@@ -420,14 +420,22 @@
 
     <!-- 항구 --> 
     <div id="port" class="hidden">
-    <p><span style="font-weight: bold;">[항구]</span><br><br>공사중.<br>곧 폭파될 예정이다. 아마 백사장을 추가.</p>
+    <p><span style="font-weight: bold;">[항구]</span><br><br>배를 정박시킬 수 있는 작은 항구. 이 섬이 바깥 세상과 연결되어 있음을 알려 주는 유일한 표식이다.<br>소금 냄새가 선명해짐과 동시에 갈매기 우는 소리가 들려온다.<br><br>
+    <span style="color: #737373;">'항구 안쪽으로 들어간다' 버튼 클릭 시 효과음이 재생됩니다.</span></p>
+    <button onclick="goToWithSoundNL('port1', 'zzapport.mp3')">항구 안쪽으로 들어간다</button><br>    
     <button class="nav-button" onclick="goTo('outside')">나가기</button>
   </div>
-
+  
+    <!-- 항구 : 1 --> 
+      <div id="port1" class="hidden">
+    <p><span style="font-weight: bold;">[항구]</span><br><br>백사장이랑... 음... 아직 폭파되기 전이니까 우리가 타고 온 배...<br>항구에 또 뭐가 있더라? 아이디어 부탁합니다 갈매기 밥주기?</p>
+    <button class="nav-button" onclick="goToWithoutzzapsea('port')">나가기</button>
+  </div>
 
     <!-- 메모리얼 파크 --> 
     <div id="memorial" class="hidden">
-    <p><span style="font-weight: bold;">[메모리얼 파크 입구]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...</p>
+    <p><span style="font-weight: bold;">[메모리얼 파크 입구]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...<br><br>
+    <span style="color: #737373;">'메모리얼 파크에 입장한다' 버튼 클릭 시 효과음이 재생됩니다.</span></p>
     <button onclick="goToWithSoundNL('memorial1', 'zzapsea.mp3')">메모리얼 파크에 입장한다</button><br>
     <button class="nav-button" onclick="goTo('outside')">나가기</button>
   </div>
@@ -742,7 +750,7 @@ function goTodel(targetPage, buttonId) {
 
 //★★★★★goToWithSound(페이지 이동 버튼 누를 때 효과음 계속해서 재생, 루프)★★★★★  
     function goToWithSoundNL(page, soundFile) {
-  if (soundFile.includes('zzapsea.mp3')) {
+  if (soundFile.includes('zzapsea.mp3'|| soundFile.includes('zzapport.mp3'))) {
     zzapseaAudio = new Audio(soundFile); // 전역 변수로 저장
     zzapseaAudio.loop = true;
     zzapseaAudio.play();
