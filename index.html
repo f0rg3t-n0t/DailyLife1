@@ -623,13 +623,19 @@ function goTodel(targetPage, buttonId) {
 //★★★★★goBack★★★★★  
 function goBack() {
   if (pageHistory.length > 1) {
+    // 현재 페이지 제거
     pageHistory.pop();
     const prevPage = pageHistory[pageHistory.length - 1];
 
-    // 모든 div 숨기기 (예외 제외)
+    // 예외 요소들 (루트 + 내부 포함 전부 보호)
+    const persistentRoots = ['user-display', 'bgm-player', 'persistent-nav'];
+
+    // 모든 div를 숨기되, 예외 요소 또는 그 자식은 숨기지 않음
     document.querySelectorAll('div').forEach(div => {
-      const id = div.id;
-      const isPersistent = ['user-display', 'bgm-player', 'persistent-nav'].includes(id);
+      const isPersistent = persistentRoots.some(rootId => {
+        const rootEl = document.getElementById(rootId);
+        return rootEl && (div === rootEl || rootEl.contains(div));
+      });
       if (!isPersistent) {
         div.classList.add('hidden');
       }
@@ -642,17 +648,19 @@ function goBack() {
       target.classList.add('fade-in');
     }
 
-    // 고정된 UI는 확실히 다시 보이게
-    ['user-display', 'bgm-player', 'persistent-nav'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.classList.remove('hidden');
-    });
+    // 텍스트 강제 갱신 (혹시라도 브라우저 캐시가 날려버린 경우)
+    if (currentUser) {
+      const idLine = document.getElementById('user-class-line');
+      const coinLine = document.getElementById('coin-line');
+      if (idLine) idLine.innerText = `User ID: ${currentUser.id}`;
+      if (coinLine) coinLine.innerText = `Coin: ${currentUser.coin || 0}`;
+    }
 
-    // ✅ 여기에 유저 정보 갱신 함수 호출
-    if (currentUser) showUserInfo();
+    // 출력 영역 초기화
     clearOutputs();
   }
 }
+
 
 
 //★★★★★해당 버튼을 누를 시, 페이지 이동과 동시에 zzapseaAudio 중지★★★★★
