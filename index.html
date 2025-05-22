@@ -712,9 +712,8 @@ function checkSecretCode() {
 }
 
 // 최종 결과
-// 🔹 Final Report Page (Standalone Render with Typing + Per-line Ghost Typing Effect)
+// 🔹 Final Report Page (Typing in Hangul Jamo Units)
 function loadFinalReport() {
-  // 모든 요소 제거
   document.body.innerHTML = '';
 
   const div = document.createElement('div');
@@ -733,48 +732,55 @@ function loadFinalReport() {
   `;
 
   const lines = [
-    `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`,
-    `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`,
-    `<span style="color: black;">User ID : ${currentUser.id}</span>`,
-    `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`,
-    `<span style="color: black;">Coin : ${currentUser.coin}</span>`
+    { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left' },
+    { html: `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`, align: 'left' },
+    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left' },
+    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left' },
+    { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left' }
   ];
 
   if (currentUser.coin === 1) {
-    lines.push(`<div style="text-align: right; color: black;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`);
+    lines.push({ html: `<div style="color: black;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right' });
   }
 
-  lines.push(`<div style="text-align: right; color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`);
+  lines.push({ html: `<div style="color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right' });
 
   const content = document.createElement('div');
   div.appendChild(content);
   document.body.appendChild(div);
 
+  function splitHangul(text) {
+    return Array.from(text.normalize('NFD'));
+  }
+
   let index = 0;
   function typeLine() {
     if (index < lines.length) {
+      const { html: realText, align } = lines[index];
+      const clean = realText.replace(/<[^>]+>/g, '');
+      const units = splitHangul(clean);
+
       const container = document.createElement('div');
-      container.style = 'position: relative; margin-bottom: 1.5em; min-height: 1.5em;';
+      container.style = `position: relative; margin-bottom: 1.5em; min-height: 1.5em; text-align: ${align};`;
 
       const ghost = document.createElement('div');
       ghost.className = 'ghost-line';
+      ghost.style.textAlign = align;
       container.appendChild(ghost);
 
       const real = document.createElement('div');
       real.className = 'typed-line';
+      real.style = `text-align: ${align};`;
       container.appendChild(real);
 
       content.appendChild(container);
 
-      const realText = lines[index];
-      const clean = realText.replace(/<[^>]+>/g, '');
-
-      let ghostCharIndex = 0;
+      let ghostIndex = 0;
       function typeGhostChar() {
-        if (ghostCharIndex <= clean.length) {
-          ghost.innerText = 'ipsum lorem ipsum dolor sit amet...'.substring(0, ghostCharIndex);
-          ghostCharIndex++;
-          setTimeout(typeGhostChar, 15);
+        if (ghostIndex <= units.length) {
+          ghost.innerText = 'ipsum lorem ipsum dolor sit amet...'.substring(0, ghostIndex);
+          ghostIndex++;
+          setTimeout(typeGhostChar, 35);
         } else {
           ghost.style.animation = 'ghostFade 1s ease forwards';
           typeRealChar();
@@ -783,14 +789,14 @@ function loadFinalReport() {
 
       let charIndex = 0;
       function typeRealChar() {
-        if (charIndex <= clean.length) {
-          real.innerHTML = clean.substring(0, charIndex) + '<span class="final-cursor">|</span>';
+        if (charIndex <= units.length) {
+          real.innerHTML = `<span class="final-text">` + units.slice(0, charIndex).join('') + `</span><span class="final-cursor">▋</span>`;
           charIndex++;
-          setTimeout(typeRealChar, 25);
+          setTimeout(typeRealChar, 60);
         } else {
           real.innerHTML = realText;
           index++;
-          setTimeout(typeLine, 400);
+          setTimeout(typeLine, 600);
         }
       }
 
@@ -817,13 +823,19 @@ style.innerHTML = `
     to { opacity: 0; display: none; }
   }
   .typed-line {
-    text-align: left;
     position: relative;
     z-index: 1;
+    white-space: pre-wrap;
   }
   .final-cursor {
     color: #3f40d3;
     animation: blink-final 0.8s step-end infinite;
+    font-weight: bold;
+    margin-left: 2px;
+  }
+  .final-text {
+    color: #3f40d3;
+    font-style: italic;
   }
   @keyframes blink-final {
     from, to { opacity: 1; }
