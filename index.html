@@ -685,6 +685,18 @@ function goTo(page) {
     currentUser.key = 1;
     updateCoinDisplay();
   }
+    if (['street2-1-2'].includes(page)) {
+    currentUser.unicycle = true;
+    updateCoinDisplay();
+  }
+    if (['pond-nota2'].includes(page)) {
+    currentUser.notalove = true;
+    updateCoinDisplay();
+  }
+      if (['pond-friend'].includes(page)) {
+    currentUser.wishticket = true;
+    updateCoinDisplay();
+  }
     if (page === 'starting-point') {
     document.getElementById('persistent-nav').style.display = 'flex';
   }
