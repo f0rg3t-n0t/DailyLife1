@@ -713,6 +713,7 @@ function checkSecretCode() {
 
 // 최종 결과
 // 🔹 Final Report Page (Typing in Hangul Jamo Units)
+// 🔹 Final Report Page (Typing in Hangul Jamo Units)
 function loadFinalReport() {
   document.body.innerHTML = '';
 
@@ -732,18 +733,18 @@ function loadFinalReport() {
   `;
 
   const lines = [
-    { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left' },
-    { html: `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`, align: 'left' },
-    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left' },
-    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left' },
-    { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left' }
+    { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left', style: 'color: #3f40d3; font-style: italic;' },
+    { html: `<em style="color: #3f40d3;">조사 결과 불러오는 중…</em>`, align: 'left', style: 'color: #3f40d3; font-style: italic;' },
+    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left', style: 'color: black;' },
+    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left', style: 'color: black;' },
+    { html: `<span style="color: black;">Coin : ${currentUser.coin}<br></span>`, align: 'left', style: 'color: black;' }
   ];
 
   if (currentUser.coin === 1) {
-    lines.push({ html: `<div style="color: black;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right' });
+    lines.push({ html: `<div style="color: black;" "font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', style: 'color: black;' });
   }
 
-  lines.push({ html: `<div style="color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right' });
+  lines.push({ html: `<div style="color: #888" >본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right', style: 'color: #888;' });
 
   const content = document.createElement('div');
   div.appendChild(content);
@@ -756,7 +757,7 @@ function loadFinalReport() {
   let index = 0;
   function typeLine() {
     if (index < lines.length) {
-      const { html: realText, align } = lines[index];
+      const { html: realText, align, style } = lines[index];
       const clean = realText.replace(/<[^>]+>/g, '');
       const units = splitHangul(clean);
 
@@ -770,7 +771,7 @@ function loadFinalReport() {
 
       const real = document.createElement('div');
       real.className = 'typed-line';
-      real.style = `text-align: ${align};`;
+      real.style = `text-align: ${align}; ${style}`;
       container.appendChild(real);
 
       content.appendChild(container);
@@ -778,7 +779,7 @@ function loadFinalReport() {
       let ghostIndex = 0;
       function typeGhostChar() {
         if (ghostIndex <= units.length) {
-          ghost.innerText = 'ipsum lorem ipsum dolor sit amet...'.substring(0, ghostIndex);
+          ghost.innerText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...'.substring(0, ghostIndex);
           ghostIndex++;
           setTimeout(typeGhostChar, 35);
         } else {
@@ -790,7 +791,7 @@ function loadFinalReport() {
       let charIndex = 0;
       function typeRealChar() {
         if (charIndex <= units.length) {
-          real.innerHTML = `<span class="final-text">` + units.slice(0, charIndex).join('') + `</span><span class="final-cursor">▋</span>`;
+          real.innerHTML = `<span style="${style}">` + units.slice(0, charIndex).join('') + `</span><span class="final-cursor">▋</span>`;
           charIndex++;
           setTimeout(typeRealChar, 60);
         } else {
@@ -832,10 +833,6 @@ style.innerHTML = `
     animation: blink-final 0.8s step-end infinite;
     font-weight: bold;
     margin-left: 2px;
-  }
-  .final-text {
-    color: #3f40d3;
-    font-style: italic;
   }
   @keyframes blink-final {
     from, to { opacity: 1; }
