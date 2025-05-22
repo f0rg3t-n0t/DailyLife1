@@ -507,7 +507,7 @@
   <div id="street2-1" class="hidden"> <p><span style="font-weight: bold;">[산책로]<br>[자전거 대여소]</span><br><br>어떤 자전거를 빌릴까?</p> 
   <button onclick="goTo('street2-1-1')">평범한 자전거</button>
   <button onclick="goTo('street2-1-1')">전기 자전거</button>
-  <button onclick="goTo('street2-1-2')">전기 자전거</button>
+  <button onclick="goTo('street2-1-2')">외바퀴 자전거</button>
   </div>
 
   <!-- 산책로:2-1-1 (일반 자전거) --> 
@@ -522,12 +522,40 @@
   <button onclick="goTo('street2-2')">계속 달린다</button>
   </div>
   
-    <!-- 산책로:2-2 소원의 호수 --> 
+  <!-- 산책로:2-2 소원의 호수 입구 --> 
   <div id="street2-2" class="hidden"> 
-  <p><span style="font-weight: bold;">[산책로]</span><br><br>어느새 산책로의 끝이다. 눈앞에 보이는 것은 작은 호수인데… 자세히 보니 "소원의 호수"라고 적혀 있다.</p>
-  <button onclick="goTo('street2-2')">계속 달린다</button>
+  <p><span style="font-weight: bold;">[산책로]</span><br><br>어느새 산책로의 끝이다. 눈앞에 보이는 것은 작은 호수인데… 자세히 보니 <span style="color: #3f40d3;">소원의 호수</span>라고 적힌 팻말이 꽂혀 있다.</p>
+  <button onclick="goTo('street3')">소원의 호수</button><br>
   <button class="nav-button" onclick="goTo('street')">이만 돌아간다</button>
   </div>
+
+   <!-- 산책로: 3 소원의 호수 --> 
+  <div id="street3" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>이 호수는 1700년대에 시작되어</p>
+  <button id="makeawish" onclick="goTodel('pond', 'makeawish')">소원을 빈다</button><br>
+  <button class="nav-button" onclick="goTo('street2-2')">나가기</button>
+  </div>
+
+  <!-- asdf소원 빌기 --> 
+  <div id="pond" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
+  <button onclick="goTo('pond-money')">부자가 되고 싶다</button><br>
+  <button onclick="goTo('pond-friend')">인기인이 되고 싶다</button><br>
+  <button onclick="goTo('street3')">소원의 호수</button><br>
+  </div>
+
+  <!-- asdf소원 빌기 --> 
+  <div id="pond-money" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>"부자가 되고 싶다!"<br>소원을 빌었다...<br><br>어라? 아무것도 없던 하늘에서 갑자기 코인 두 개가 떨어졌다.<br>이 호수, 정말 효험이 있는 걸까...?<br><br><span style="font-weight: bold;">2코인을 획득했다.</span></p>
+  <button class="nav-button" onclick="goTo('street3')">나가기</button>
+  </div>
+
+  <div id="pond-friend" class="hidden"> 
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
+  <button class="nav-button" onclick="goTo('street3')">나가기</button>
+  </div>
+
+
   
     
 <!-- !!!!여기서부터 스크립트!!!! -->
@@ -621,7 +649,7 @@ function goTo(page) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
-  if (['notary5'].includes(page)) {
+  if (['notary5','pond-money'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 2;
     updateCoinDisplay();
   }
