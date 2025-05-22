@@ -712,7 +712,6 @@ function checkSecretCode() {
 }
 
 // 최종 결과
-// 🔹 Final Report Page (Typing in Hangul Jamo Units)
 // 🔹 Final Report Page (Typing in Hangul Jamo Units with Directional Ghost Effect)
 function loadFinalReport() {
   document.body.innerHTML = '';
@@ -776,7 +775,7 @@ function loadFinalReport() {
 
       content.appendChild(container);
 
-      const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...';
+      const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...';
       const loremUnits = splitHangul(lorem);
       const maxLength = Math.max(units.length, loremUnits.length);
 
@@ -785,7 +784,7 @@ function loadFinalReport() {
         if (frame <= maxLength) {
           // 방향에 따라 ghost 사라지는 방향 결정
           let ghostChars;
-          if (align === 'right') {
+          if (align === 'left') {
             ghostChars = loremUnits.slice(frame).join(''); // 오른쪽 → 왼쪽
           } else {
             ghostChars = loremUnits.slice(0, maxLength - frame).join(''); // 왼쪽 → 오른쪽
@@ -796,12 +795,12 @@ function loadFinalReport() {
           real.innerHTML = `<span style="${style}">${realChars}</span><span class="final-cursor">▋</span>`;
 
           frame++;
-          setTimeout(typeBoth, 60);
+          setTimeout(typeBoth, 40);
         } else {
           ghost.innerHTML = '';
           real.innerHTML = realText;
           index++;
-          setTimeout(typeLine, 600);
+          setTimeout(typeLine, 500);
         }
       }
 
