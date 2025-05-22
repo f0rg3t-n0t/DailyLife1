@@ -255,19 +255,14 @@
       opacity: 1;
     }
   }
-
-  /* Hover 시 기존 위치 유지 + 이동/회전 효과 */
-  .initiation:hover {
-    transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
-  }
-
-  .guide:hover {
-    transform: translateX(0) scale(1) translateX(12px) rotate3d(0, 1, 0, -17deg);
-  }
-
-  .report:hover {
-    transform: translateX(0) scale(1) translateX(-12px) rotate3d(0, 1, 0, 17deg);
-  }
+  /* Hover 효과 */
+.initiation:hover,
+.guide:hover,
+.report:hover {
+  opacity: 0.9;
+  filter: brightness(1.1);
+  transition: all 0.3s ease;
+}
 </style>
 
 <!-- !!!!여기서부터 작동시킬 페이지들!!!! -->
