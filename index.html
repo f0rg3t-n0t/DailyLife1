@@ -588,6 +588,12 @@
     
 <!-- !!!!여기서부터 스크립트!!!! -->
   <script>
+  // 애니메이션이 끝난 뒤 hover 작동 허용
+  document.querySelectorAll('.menu-button').forEach(button => {
+    button.addEventListener('animationend', () => {
+      button.style.pointerEvents = 'auto';
+    });
+  });
 //★★★★★[중요]유저 데이터★★★★★
     const userData = {
       mung0515: {
