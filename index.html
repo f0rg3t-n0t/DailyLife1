@@ -713,6 +713,7 @@ function checkSecretCode() {
 
 // 최종 결과
 // 🔹 Final Report Page (Typing in Hangul Jamo Units with Directional Ghost Effect)
+// 🔹 Final Report Page (Typing in Hangul Jamo Units with Ghost Type + Fade)
 function loadFinalReport() {
   document.body.innerHTML = '';
 
@@ -775,32 +776,42 @@ function loadFinalReport() {
 
       content.appendChild(container);
 
-      const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit...';
+      const lorem = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla lacinia, justo ac consequat rhoncus...';
       const loremUnits = splitHangul(lorem);
-      const maxLength = Math.max(units.length, loremUnits.length);
 
-      let frame = 0;
+      const ghostSpan = document.createElement('span');
+      ghostSpan.className = 'ghost-fade';
+      ghostSpan.style = `${style}`;
+      ghostSpan.dataset.align = align;
+      ghost.appendChild(ghostSpan);
+
+      let ghostFrame = 0;
+      let realFrame = 0;
+      const totalGhost = loremUnits.length;
+      const totalReal = units.length;
+
       function typeBoth() {
-        if (frame <= maxLength) {
-          // 방향에 따라 ghost 사라지는 방향 결정
-          let ghostChars;
-          if (align === 'left') {
-            ghostChars = loremUnits.slice(frame).join(''); // 오른쪽 → 왼쪽
-          } else {
-            ghostChars = loremUnits.slice(0, maxLength - frame).join(''); // 왼쪽 → 오른쪽
-          }
-          ghost.innerHTML = `<span style="${style}">${ghostChars}</span>`;
+        if (ghostFrame <= totalGhost) {
+          ghostSpan.innerHTML = `<span class="ghost-text">${loremUnits.slice(0, ghostFrame).join('')}</span>`;
+          ghostFrame++;
+        }
+        if (ghostFrame > 5 && ghostFrame <= totalGhost + 10) {
+          const ghostText = ghostSpan.querySelector('.ghost-text');
+          const fadePercent = (ghostFrame - 5) / (totalGhost - 5);
+          ghostText.style.opacity = `${1 - fadePercent}`;
+        }
+        if (realFrame <= totalReal) {
+          real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+          realFrame++;
+        }
 
-          const realChars = units.slice(0, frame).join('');
-          real.innerHTML = `<span style="${style}">${realChars}</span><span class="final-cursor">▋</span>`;
-
-          frame++;
-          setTimeout(typeBoth, 40);
+        if (realFrame <= totalReal || ghostFrame <= totalGhost + 10) {
+          setTimeout(typeBoth, 60);
         } else {
           ghost.innerHTML = '';
           real.innerHTML = realText;
           index++;
-          setTimeout(typeLine, 500);
+          setTimeout(typeLine, 600);
         }
       }
 
@@ -822,6 +833,10 @@ style.innerHTML = `
     white-space: pre-wrap;
     z-index: 0;
   }
+  .ghost-fade {
+    display: inline-block;
+    color: rgba(150, 200, 255, 0.4);
+  }
   .typed-line {
     position: relative;
     z-index: 1;
@@ -839,7 +854,6 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
-
 
 
   </script>
