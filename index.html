@@ -643,18 +643,20 @@ function goBack() {
       target.classList.add('fade-in');
     }
 
-    // 절대 숨기면 안 되는 요소는 다시 한 번 확실하게 보이게
+    // 절대 숨기면 안 되는 요소 다시 보이게
     ['user-display', 'bgm-player', 'persistent-nav'].forEach(id => {
       const el = document.getElementById(id);
       if (el) el.classList.remove('hidden');
     });
 
-    // 🔥 유저 정보 텍스트 다시 보장
+    // ✅ 유저 정보 다시 써주기 (직접)
     if (currentUser) {
-      showUserInfo();
+      const idLine = document.getElementById('user-class-line');
+      const coinLine = document.getElementById('coin-line');
+      if (idLine) idLine.innerText = `User ID: ${currentUser.id}`;
+      if (coinLine) coinLine.innerText = `Coin: ${currentUser.coin || 0}`;
     }
 
-    // 출력 초기화
     clearOutputs();
   }
 }
