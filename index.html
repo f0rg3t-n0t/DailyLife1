@@ -713,7 +713,6 @@ function checkSecretCode() {
 
 // 최종 결과
 // 🔹 Final Report Page (Typing in Hangul Jamo Units with Directional Ghost Effect)
-// 🔹 Final Report Page (Typing in Hangul Jamo Units with Ghost Type + Fade)
 function loadFinalReport() {
   document.body.innerHTML = '';
 
@@ -733,18 +732,18 @@ function loadFinalReport() {
   `;
 
   const lines = [
-    { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left', style: 'color: #3f40d3; font-style: italic;' },
-    { html: `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`, align: 'left', style: 'color: #3f40d3; font-style: italic;' },
-    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left', style: 'color: black;' },
-    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left', style: 'color: black;' },
-    { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left', style: 'color: black;' }
+    { html: `<em style="color: #3f40d3;">초세계급 ${currentUser.class} 님이 조사를 완료하였습니다…</em>`, align: 'left', lineStyle: 'color: #3f40d3; font-style: italic;' },
+    { html: `<em style="color: #3f40d3;">조사 결과 저장 중…</em>`, align: 'left', lineStyle: 'color: #3f40d3; font-style: italic;' },
+    { html: `<span style="color: black;">User ID : ${currentUser.id}</span>`, align: 'left', lineStyle: 'color: black;' },
+    { html: `<span style="color: black;">STR ${currentUser.STR}  INT ${currentUser.INT}  OBS ${currentUser.OBS}  POW ${currentUser.POW}  LUC ${currentUser.LUC}</span>`, align: 'left', lineStyle: 'color: black;' },
+    { html: `<span style="color: black;">Coin : ${currentUser.coin}</span>`, align: 'left', lineStyle: 'color: black;' }
   ];
 
-  if (currentUser.coin === 1) {
-    lines.push({ html: `<div style="color: black; font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', style: 'color: black; font-style: italic;' });
+  if (currentUser.key === 1) {
+    lines.push({ html: `<div style="color: black; font-style: italic;">손끝에 미세하게 꽃향기가 남아 있다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
   }
 
-  lines.push({ html: `<div style="color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right', style: 'color: #888;' });
+  lines.push({ html: `<div style="color: #888">본 페이지를 스크린샷하여 총괄계 DM으로 제출하면 조사 완료 처리됩니다.</div>`, align: 'right', lineStyle: 'color: #888;' });
 
   const content = document.createElement('div');
   div.appendChild(content);
@@ -758,7 +757,7 @@ function loadFinalReport() {
   function typeLine() {
     if (index >= lines.length) return;
 
-    const { html: realText, align, style } = lines[index];
+    const { html: realText, align, lineStyle } = lines[index];
     const clean = realText.replace(/<[^>]+>/g, '');
     const units = splitHangul(clean);
 
@@ -767,12 +766,12 @@ function loadFinalReport() {
 
     const ghost = document.createElement('div');
     ghost.className = 'ghost-line';
-    ghost.style = `text-align: ${align}; ${style}`;
+    ghost.style = `text-align: ${align}; ${lineStyle}`;
     container.appendChild(ghost);
 
     const real = document.createElement('div');
     real.className = 'typed-line';
-    real.style = `text-align: ${align}; ${style}`;
+    real.style = `text-align: ${align}; ${lineStyle}`;
     container.appendChild(real);
 
     content.appendChild(container);
@@ -782,7 +781,7 @@ function loadFinalReport() {
 
     const ghostSpan = document.createElement('span');
     ghostSpan.className = 'ghost-fade';
-    ghostSpan.style = `${style}`;
+    ghostSpan.style = `${lineStyle}`;
     ghostSpan.dataset.align = align;
     ghost.appendChild(ghostSpan);
 
@@ -793,29 +792,35 @@ function loadFinalReport() {
 
     function typeBoth() {
       // ghost 타자기 + fade 효과: 글자마다 opacity 적용
-      if (ghostFrame <= totalGhost) {
+      if (ghostFrame < totalGhost) {
+        const fadeDistance = 6; // 최근 n글자만 선명하게
         const fadedUnits = loremUnits.slice(0, ghostFrame).map((char, idx, arr) => {
-          let fadeRatio = align === 'left'
-            ? (arr.length - idx - 1) / arr.length
-            : idx / arr.length;
-          opacity = 1 - Math.min(fadeRatio ** 4, 1);
+          const age = arr.length - idx;
+          const opacity = Math.max(0, (fadeDistance - age) / fadeDistance);
           return `<span style="opacity: ${opacity.toFixed(2)}">${char}</span>`;
         }).join('');
         ghostSpan.innerHTML = `<span class="ghost-text">${fadedUnits}</span>`;
         ghostFrame++;
+        setTimeout(typeBoth, 20); // 빠르게 ghost만 타자
+        return;
       }
 
-      // 실제 텍스트 타이핑
-      if (realFrame <= totalReal) {
-        real.innerHTML = `<span style="${style}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
-        realFrame++;
-        setTimeout(typeBoth, 60);
-      } else {
-        ghost.innerHTML = '';
-        real.innerHTML = realText;
-        index++;
-        setTimeout(typeLine, 600);
-      }
+      // ghost가 끝났다면, 0.3초 후에 real 텍스트 시작
+      setTimeout(() => {
+        function typeReal() {
+          if (realFrame <= totalReal) {
+            real.innerHTML = `<span style="${lineStyle}">${units.slice(0, realFrame).join('')}</span><span class="final-cursor">▋</span>`;
+            realFrame++;
+            setTimeout(typeReal, 60);
+          } else {
+            ghost.innerHTML = '';
+            real.innerHTML = realText;
+            index++;
+            setTimeout(typeLine, 600);
+          }
+        }
+        typeReal();
+      }, 300); // 0.3초 지연
     }
 
     typeBoth();
@@ -824,6 +829,7 @@ function loadFinalReport() {
   typeLine();
 }
 
+// 스타일 삽입
 const style = document.createElement('style');
 style.innerHTML = `
   .ghost-line {
@@ -839,6 +845,9 @@ style.innerHTML = `
   .ghost-fade {
     display: inline-block;
     color: rgba(150, 200, 255, 0.4);
+  }
+  .ghost-text span {
+    transition: opacity 0.2s linear;
   }
   .typed-line {
     position: relative;
@@ -857,6 +866,7 @@ style.innerHTML = `
   }
 `;
 document.head.appendChild(style);
+
 
   </script>
 </body>
