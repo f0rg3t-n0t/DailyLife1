@@ -37,7 +37,7 @@ function loadFinalReport() {
   }
   if (currentUser.gongmo && currentUser.gongmo.length > 0) {
   lines.push({
-    html: `<div style="color: black; font-style: italic;">"${currentUser.class}"로 랜덤 음료 공모전에 참여했다 …</div>`,
+    html: `<div style="color: black; font-style: italic;">"${currentUser.gongmo}"로 랜덤 음료 공모전에 참여했다 …</div>`,
     align: 'right',
     lineStyle: 'color: black; font-style: italic;'
   });
