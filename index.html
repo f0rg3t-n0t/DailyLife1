@@ -418,9 +418,21 @@
     <div id="sofa1-1" class="hidden">
     <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
     어차피 자유시간이겠다, 잠깐 휴식을 취해서 안 될 것도 없겠지... 잠시 눈을 감기로 한다.<br><br>... ...<br><br>얼마나 시간이 지난 거지? 눈을 떠 보니 머리맡에 코인이 하나 놓여 있다. 그 옆에는... 쪽지?
-    <br><em>'일상 속에서 숨을 돌리는 시간은 중요합니다. 휴식의 소중함을 아는 당신에게.'</em><br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
-    <button onclick="goTo('sofa1-1')">잠깐 눈을 붙인다</button><br>
-    <button onclick="goTo('sofa1-2')">졸음은 기합으로 이겨낸다!</button><br>
+    <br><em>'일상 속에서 숨을 돌리는 시간은 중요합니다. 휴식의 소중함을 아는 당신에게.'</em><br>무척 기분 좋은 수면이었다.<span style="font-weight: bold;">1코인을 획득했다.</span></p>
+    <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
+ </div>
+
+      <!-- 로비:라운지:소파 1-2 --> 
+    <div id="sofa1-2" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
+    모처럼 나왔는데 잠이나 자고 있을 수는 없지! 졸음은 기합으로 이겨낸다.<br>벌떡! 자리에서 일어났다... 세수라도 하고 올까?</p>
+    <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
+ </div>
+
+      <!-- 로비:라운지:소파 1-3 --> 
+    <div id="sofa1-3" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
+    음. 이 천은 벨벳인 걸까? 촉감이 아주 고급스럽군...<br>소파를 구석구석 살펴보며 졸음을 잊어 보려고 노력했다.<br>여기저기 들여다보다 보니 소파 아래쪽에 떨어진 코인을 하나 발견했다. 이거, 눈이 번쩍 뜨이네!<br>무척 기분 좋은 수면이었다.<span style="font-weight: bold;">1코인을 획득했다.</span></p>
     <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
  </div>
   
@@ -945,7 +957,7 @@ function goTo(page) {
   clearOutputs();
   pageHistory.push(page);
   //[중요]특정 페이지 진입 시 스탯(코인 등)변동
-  if (['notary3-2','flowerpage','sofa1-1'].includes(page)) {
+  if (['notary3-2','flowerpage','sofa1-1','sofa1-3'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
