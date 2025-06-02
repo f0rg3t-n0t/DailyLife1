@@ -515,7 +515,7 @@
   </div>
 
   <!-- 레스토랑 : 조리실 : 조리대 : 토스터 3초 --> 
-  <div id="overcook" class="hidden">
+  <div id="undercook" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   이거 구운 거 맞아?! 토스트는 딱 3초간 따뜻한 열기를 쐬었을 뿐이다.<br>이래서야 맨 식빵과 다름없겠군...</p>
   <button class="nav-button" onclick="goTo('cooker')">나가기</button>
@@ -1041,8 +1041,7 @@ function maketoast(buttonId) {
 function toasttime(buttonId) {
   if (currentUser.LUC <= 2) {
     goTo('overcook');
-  } 
-    if (currentUser.LUC >= 4) {
+  } else if (currentUser.LUC >= 4) {
     goTo('perfecttoast');
   } else {
     goTo('undercook');
