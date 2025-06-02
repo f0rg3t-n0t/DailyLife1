@@ -319,8 +319,8 @@
   <div id="inside" class="hidden">
     <p><span style="font-weight: bold;">[건물 1층]</span><br><br>대리석 바닥이 반짝거리는 건물 1층.<br>정면에 방문객을 맞이하는 <span style="color: #3f40d3;">로비</span>가 보이고, 로비 뒤편에는 뒤편에는 유리로 된 <span style="color: #3f40d3;">엘리베이터</span>가 배치되어 있어 시선이 저절로 천장을 향한다.<br>더 안쪽에 있는 복도는 <span style="color: #3f40d3;">레스토랑</span>으로 이어지는 듯하다.</p>
     <button onclick="goTo('lobby')">로비</button>
-    <button onclick="goTo('elevator')">엘리베이터</button><br>
-    <button onclick="goTo('restaurant')">레스토랑</button>
+    <button onclick="goTo('elevator')">엘리베이터</button>
+    <button onclick="goTo('restaurant')">레스토랑</button><br>
     <button class="nav-button" onclick="goTo('starting-point')">건물 입구로 돌아가기</button>
   </div>
 
@@ -328,7 +328,7 @@
     <div id="lobby" class="hidden">
     <p><span style="font-weight: bold;">[로비]</span><br><br>건물에 들어오면 가장 먼저 보게 되는 곳.<br>우아한 석조 <span style="color: #3f40d3;">카운터</span>를 중심으로 내빈을 위한 <span style="color: #3f40d3;">라운지</span>가 마련되어 있다.</p>
     <button onclick="goTo('counter')">카운터</button>
-    <button onclick="goTo('waitingspace')">라운지</button>
+    <button onclick="goTo('waitingspace')">라운지</button><br>
     <button class="nav-button" onclick="goTo('inside')">나가기</button>
   </div>
 
@@ -398,7 +398,7 @@
     <!-- 로비:엘리베이터 --> 
     <div id="elevator" class="hidden">
     <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>유리로 되어 있어 내부가 전부 들여다보이는 엘리베이터.<br>이 건물은 엘리베이터 주변의 공간이 뻥 뚫린 구조로 설계된 모양이다. 층고가 꽤 높아 보이는데 몇 층까지 있는 걸까...</p>
-    <button onclick="goTo('elevator1')">탑승한다</button>
+    <button onclick="goTo('elevator1')">탑승한다</button><br>
     <button class="nav-button" onclick="goTo('inside')">나가기</button>
  </div>      
   
@@ -559,9 +559,9 @@
 
     <!-- 2층 --> 
     <div id="2ndfloor" class="hidden">
-    <p><span style="font-weight: bold;">[2층]</span><br><br>사무실, 내빈용 객실로 향하는 복도</p>
-    <button onclick="goTo('elevator1')">엘리베이터</button><br>
-    <button onclick="goTo('suite')">내빈용 객실</button><br>
+    <p><span style="font-weight: bold;">[2층]</span><br><br>사무실, 내빈용 객실로 향하는 복도. 1층으로 돌아갈 때는 엘리베이터를 이용하자.</p>
+    <button onclick="goTo('elevator1')">엘리베이터</button><
+    <button onclick="goTo('suite')">내빈용 객실</button>
     <button onclick="goTo('office')">사무실</button><br>
  </div>     
   
