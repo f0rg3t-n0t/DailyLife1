@@ -467,10 +467,26 @@
   물론 원한다면 자동화 설비에 맡기는 대신 직접 <span style="color: #3f40d3;">조리대</span>에서 요리를 할 수도 있다.<span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
   <button onclick="goTo('cooker')">조리대</button>
   <button onclick="goTo('fridge')">냉장고</button>
-  <button onclick="goTo('drawer')">서랍</button>
+  <button onclick="goTo('drawer')">찬장</button>
   <button class="nav-button" onclick="goTo('restaurant')">나가기</button>
   </div>
 
+  <!-- 레스토랑 : 조리실 : 찬장 --> 
+  <div id="drawer" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[찬장]</span><br><br>
+  냉장 보관하지 않아도 되는 식재료들이 가득 들어 있다. 소스류, 빵, 보존 식품 등등...<br>
+  여기 있는 음식만으로도 꽤 근사한 식사를 할 수 있을 것 같다.</p>
+  <button id="toastbtn" onclick="maketoast('drawer1')">식빵 가져가기</button><br>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 찬장 1 --> 
+  <div id="drawer1" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[찬장]</span><br><br>
+  식빵 한 장을 가져갔다. 향긋한 빵 냄새가 기분 좋다.</p>
+  <button class="nav-button" onclick="goTo('drawer')">나가기</button>
+  </div>
+  
   <!-- 레스토랑 : 조리실 : 조리대 --> 
   <div id="cooker" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
@@ -487,7 +503,29 @@
   몇 초 정도 굽는 게 좋을까?</p>
   <button onclick="goTo('overcook')">600초</button>
   <button onclick="goTo('undercook')">3초</button>
-  <button id="toastbtn" onclick="maketoast('toastbtn')">운명에 맡긴다</button><br>
+  <button id="toasttimebtn" onclick="toasttime('toasttimebtn')">운명에 맡긴다</button><br>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 조리대 : 토스터 600초 --> 
+  <div id="overcook" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
+  ......<br>......<br>
+  토스트는 끔찍하게 타 버렸다. 이런 건 먹을 수 없어...<br>새까매진 식빵이 처량하게 바스러졌다.</p>
+  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 조리대 : 토스터 3초 --> 
+  <div id="overcook" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
+  이거 구운 거 맞아?! 토스트는 딱 3초간 따뜻한 열기를 쐬었을 뿐이다.<br>이래서야 맨 식빵과 다름없겠군...</p>
+  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
+  </div>
+
+    <!-- 레스토랑 : 조리실 : 조리대 : 토스터 퍼펙트 --> 
+  <div id="perfect" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
+  완벽한 골든 브라운 토스트다! 겉은 바삭하고 안쪽은 부드럽게 결이 살아 있다.<br>운명에 맡겼는데 이 정도라니, 럭키!</p>
+  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
   </div>
   
   <!-- 레스토랑 : 조리실 : 냉장고 --> 
@@ -852,6 +890,10 @@ function goTo(page) {
     currentUser.wishticket = true;
     updateCoinDisplay();
   }
+        if (['drawer1'].includes(page)) {
+    currentUser.bread = 1;
+    updateCoinDisplay();
+  }
     if (page === 'starting-point') {
     document.getElementById('persistent-nav').style.display = 'flex';
   }
@@ -993,6 +1035,17 @@ function maketoast(buttonId) {
     goTo('toaster');
   } else {
     alert("식빵을 가지고 있지 않다. 어디 있으려나?");
+  }
+}
+//★★★★★토스트 굽기★★★★★
+function toasttime(buttonId) {
+  if (currentUser.LUC <= 2) {
+    goTo('overcook');
+  } 
+    if (currentUser.LUC >= 4) {
+    goTo('perfecttoast');
+  } else {
+    goTo('undercook');
   }
 }
 //★★★★★퀴즈★★★★★
