@@ -317,7 +317,7 @@
 
   <!-- 내부 1층 --> 
   <div id="inside" class="hidden">
-    <p><span style="font-weight: bold;">[건물 1층]</span><br><br>대리석 바닥이 반짝거리는 건물 1층. 정면에 방문객을 맞이하는 <span style="color: #3f40d3;">로비</span>가 보이고, 로비 좌측과 우측으로 긴 복도가 뻗어나간다. 왼쪽은 <span style="color: #3f40d3;">'레스토랑'</span>, 오른쪽은 <span style="color: #3f40d3;">'내빈용 객실'</span>.</p>
+    <p><span style="font-weight: bold;">[건물 1층]</span><br><br>대리석 바닥이 반짝거리는 건물 1층.<br>정면에 방문객을 맞이하는 <span style="color: #3f40d3;">로비</span>가 보이고, 로비 좌측과 우측으로 긴 복도가 뻗어나간다. 왼쪽은 <span style="color: #3f40d3;">'레스토랑'</span>, 오른쪽은 <span style="color: #3f40d3;">'내빈용 객실'</span>.</p>
     <button onclick="goTo('restaurant')">레스토랑</button>
     <button onclick="goTo('lobby')">로비</button>
     <button onclick="goTo('suite')">내빈용 객실</button><br>
@@ -345,7 +345,7 @@
     <button id="nota1" onclick="goTodel('notary1', 'nota1')">이 섬에 대해서</button><br>
     <button id="nota2" onclick="goTodel('notary2', 'nota2')">초세계급 기록자 로렘에 대해서</button><br>
     <button id="nota3" onclick="goTodel('notary3', 'nota3')">공증인에 대해서</button><br>
-    <button onclick="goTo('notary4')">퀴즈를 푼다</button><br><br>
+    <button onclick="goTo('notary4')">퀴즈를 푼다</button><br>
     <button class="nav-button" onclick="goTo('counter')">대화를 끝낸다</button>
  </div>
     <!-- 로비:카운터:notary1 --> 
@@ -484,7 +484,7 @@
   <div id="drawer1" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[찬장]</span><br><br>
   식빵 한 장을 가져갔다. 향긋한 빵 냄새가 기분 좋다.</p>
-  <button class="nav-button" onclick="goTo('drawer')">나가기</button>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
   
   <!-- 레스토랑 : 조리실 : 조리대 --> 
@@ -511,21 +511,21 @@
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   ......<br>......<br>
   토스트는 끔찍하게 타 버렸다. 이런 건 먹을 수 없어...<br>새까매진 식빵이 처량하게 바스러졌다.</p>
-  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
   <!-- 레스토랑 : 조리실 : 조리대 : 토스터 3초 --> 
   <div id="undercook" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   이거 구운 거 맞아?! 토스트는 딱 3초간 따뜻한 열기를 쐬었을 뿐이다.<br>이래서야 맨 식빵과 다름없겠군...</p>
-  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
     <!-- 레스토랑 : 조리실 : 조리대 : 토스터 퍼펙트 --> 
   <div id="perfect" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   완벽한 골든 브라운 토스트다! 겉은 바삭하고 안쪽은 부드럽게 결이 살아 있다.<br>운명에 맡겼는데 이 정도라니, 럭키!</p>
-  <button class="nav-button" onclick="goTo('cooker')">나가기</button>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
   
   <!-- 레스토랑 : 조리실 : 냉장고 --> 
