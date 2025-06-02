@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>Chapter1-DAILY LIFE</title>
+  <title>Chapter 1-DAILY LIFE</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
   <style>
 
@@ -467,7 +467,7 @@
   물론 원한다면 자동화 설비에 맡기는 대신 직접 <span style="color: #3f40d3;">조리대</span>에서 요리를 할 수도 있다.<span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
   <button onclick="goTo('cooker')">조리대</button>
   <button onclick="goTo('fridge')">냉장고</button>
-  <button onclick="goTo('drawer')">찬장</button>
+  <button onclick="goTo('drawer')">찬장</button><br>
   <button class="nav-button" onclick="goTo('restaurant')">나가기</button>
   </div>
 
@@ -476,7 +476,7 @@
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[찬장]</span><br><br>
   냉장 보관하지 않아도 되는 식재료들이 가득 들어 있다. 소스류, 빵, 보존 식품 등등...<br>
   여기 있는 음식만으로도 꽤 근사한 식사를 할 수 있을 것 같다.</p>
-  <button id="toastbtn" onclick="maketoast('drawer1')">식빵 가져가기</button><br>
+  <button onclick="goTo('drawer1')">식빵 가져가기</button><br>
   <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
@@ -866,7 +866,7 @@ function goTo(page) {
   clearOutputs();
   pageHistory.push(page);
   //[중요]특정 페이지 진입 시 스탯(코인 등)변동
-  if (['kitchen', 'elevator1', 'notary3-2','flowerpage'].includes(page)) {
+  if (['elevator1', 'notary3-2','flowerpage'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
