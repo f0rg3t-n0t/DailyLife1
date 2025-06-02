@@ -392,11 +392,38 @@
     <!-- 로비:라운지 --> 
     <div id="waitingspace" class="hidden">
     <p><span style="font-weight: bold;">[로비]<br>[라운지]</span><br><br>카운터 앞쪽에 배치된 라운지. <span style="color: #3f40d3;">소파</span>에 앉아 잠시 쉬어가거나 담소를 나누기에 좋은 곳이다.<br>라운지 양쪽으로는 큰 유리창이 나 있어 섬의 풍경이 한눈에 들어온다.<br>잔잔한 파도가 치는 바닷가, 그 위를 평화롭게 날아다니는 바닷새들…<br>라운지 중앙에는 무료함을 달래기 위해서인지 작은 <span style="color: #3f40d3;">책꽂이</span>가 설치되어 있다. </p>
-    <button onclick="goTo('sofa')">소파</button><br>
+    <button onclick="goTo('sofa')">소파</button>
     <button onclick="goTo('bookshelf')">책꽂이</button><br>
     <button class="nav-button" onclick="goTo('lobby')">나가기</button>
  </div>
 
+    <!-- 로비:라운지:소파 --> 
+    <div id="sofa" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
+    멋들어진 흰색 소파가 여러 개 놓여 있다. 누군가를 기다릴 때 앉아 있기 딱일 것 같다. 잠깐 앉아서 휴식을 취해 볼까?</p>
+    <button id="sit" onclick="goTodel('sofa1', 'sit')">앉는다</button><br>
+    <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
+ </div>
+  
+      <!-- 로비:라운지:소파에 앉기 --> 
+    <div id="sofa1" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
+    소파를 감싸고 있는 천의 촉감은 무척 부드럽고, 등을 받치는 쿠션은 딱 좋을 정도로 푹신하다.<br>창문 너머로 들어오는 햇빛을 받으며 계속 앉아 있으니 어쩐지 졸음이 쏟아진다...</p>
+    <button onclick="goTo('sofa1-1')">잠깐 눈을 붙인다</button><br>
+    <button onclick="goTo('sofa1-2')">졸음은 기합으로 이겨낸다!</button><br>
+    <button onclick="goTo('sofa1-3')">소파의 재질을 탐구하며 졸음을 잊어 본다</button>
+ </div>
+
+    <!-- 로비:라운지:소파 1-1 --> 
+    <div id="sofa1-1" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[소파]</span><br><br>
+    어차피 자유시간이겠다, 잠깐 휴식을 취해서 안 될 것도 없겠지... 잠시 눈을 감기로 한다.<br><br>... ...<br><br>얼마나 시간이 지난 거지? 눈을 떠 보니 머리맡에 코인이 하나 놓여 있다. 그 옆에는... 쪽지?
+    <br><em>'일상 속에서 숨을 돌리는 시간은 중요합니다. 휴식의 소중함을 아는 당신에게.'</em><br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+    <button onclick="goTo('sofa1-1')">잠깐 눈을 붙인다</button><br>
+    <button onclick="goTo('sofa1-2')">졸음은 기합으로 이겨낸다!</button><br>
+    <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
+ </div>
+  
     <!-- 로비:라운지:책꽂이 --> 
     <div id="bookshelf" class="hidden">
     <p><span style="font-weight: bold;">[로비]/[라운지]<br>[책꽂이]</span><br><br>
@@ -442,8 +469,8 @@
       <!-- 로비:엘리베이터:탑승 --> 
     <div id="elevator1" class="hidden">
     <p><span style="font-weight: bold;">[엘리베이터]</span><br><br>원하는 층으로 이동할 수 있다.<br>하지만 3층 이상부터는 정비 중인지, 버튼을 눌러도 불이 들어오지 않는다.</p>
-    <button onclick="goTo('inside')">1층</button>
-    <button onclick="goTo('2ndfloor')">2층</button>
+    <button onclick="goToWithSound('inside','zzapelevator.mp3')">1층</button><br>
+    <button onclick="goToWithSound('2ndfloor','zzapelevator.mp3')">2층</button><br>
  </div>     
   
     <!-- 레스토랑 --> 
@@ -502,7 +529,7 @@
   <div id="kitchen" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]</span><br><br>
   조리는 물론 설거지나 정리까지 완전 자동화된 신식 주방. 지켜보는 사람이 아무도 없어도 요리가 가능하다.<br>
-  물론 원한다면 자동화 설비에 맡기는 대신 직접 <span style="color: #3f40d3;">조리대</span>에서 요리를 할 수도 있다.<span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
+  물론 원한다면 자동화 설비에 맡기는 대신 직접 <span style="color: #3f40d3;">조리대</span>에서 요리를 할 수도 있다. <span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
   <button onclick="goTo('cooker')">조리대</button>
   <button onclick="goTo('fridge')">냉장고</button>
   <button onclick="goTo('drawer')">찬장</button><br>
@@ -529,7 +556,7 @@
   <div id="cooker" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   가스레인지, 오븐, 토스터 등을 갖춘 조리대. 요리를 할 때에는 늘 화재에 조심.<br>
-  지금 제대로 된 요리를 하기에는 시간이 없지만, 식빵이 있다면 간단하게 토스트 정도를 만들 수 있으려나?</p>
+  지금 제대로 된 요리를 하기에는 시간이 없지만, 식빵이 있다면 간단하게 토스트 정도는 만들 수 있으려나?</p>
   <button id="toastbtn" onclick="maketoast('toastbtn')">식빵 굽기</button><br>
   <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
@@ -555,11 +582,11 @@
   <!-- 레스토랑 : 조리실 : 조리대 : 토스터 3초 --> 
   <div id="undercook" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
-  이거 구운 거 맞아?! 토스트는 딱 3초간 따뜻한 열기를 쐬었을 뿐이다.<br>이래서야 맨 식빵과 다름없겠군...</p>
+  이거 구운 거 맞아?! 토스트는 딱 3초간 따뜻한 열기를 쐬었을 뿐이다.<br>이래서야 맨 식빵과 다름없겠군... 그래도 먹을 수는 있다.</p>
   <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
-    <!-- 레스토랑 : 조리실 : 조리대 : 토스터 퍼펙트 --> 
+  <!-- 레스토랑 : 조리실 : 조리대 : 토스터 퍼펙트 --> 
   <div id="perfect" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
   완벽한 골든 브라운 토스트다! 겉은 바삭하고 안쪽은 부드럽게 결이 살아 있다.<br>운명에 맡겼는데 이 정도라니, 럭키!</p>
@@ -584,7 +611,7 @@
   <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
-        <!-- 레스토랑 : 조리실 : 서랍--> 
+  <!-- 레스토랑 : 조리실 : 서랍--> 
   <div id="drawer" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[서랍]</span><br><br>
   조리는 물론 설거지나 정리까지 완전 자동화된 신식 주방. 지켜보는 사람이 없어도 요리가 가능하다.<br>
@@ -597,7 +624,7 @@
     <!-- 2층 --> 
     <div id="2ndfloor" class="hidden">
     <p><span style="font-weight: bold;">[2층]</span><br><br>사무실, 내빈용 객실로 향하는 복도. 1층으로 돌아갈 때는 엘리베이터를 이용하자.</p>
-    <button onclick="goTo('elevator1')">엘리베이터</button><
+    <button onclick="goTo('elevator1')">엘리베이터</button>
     <button onclick="goTo('suite')">내빈용 객실</button>
     <button onclick="goTo('office')">사무실</button><br>
  </div>     
@@ -918,7 +945,7 @@ function goTo(page) {
   clearOutputs();
   pageHistory.push(page);
   //[중요]특정 페이지 진입 시 스탯(코인 등)변동
-  if (['notary3-2','flowerpage'].includes(page)) {
+  if (['notary3-2','flowerpage','sofa1-1'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
