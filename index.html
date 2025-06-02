@@ -389,10 +389,47 @@
     <button class="nav-button" onclick="goTo('notary')">다른 이야기</button>
  </div>
   
-    <!-- 로비:대기 공간 --> 
+    <!-- 로비:라운지 --> 
     <div id="waitingspace" class="hidden">
-    <p><span style="font-weight: bold;">[로비]<br>[라운지]</span><br><br>공사중.</p>
+    <p><span style="font-weight: bold;">[로비]<br>[라운지]</span><br><br>카운터 앞쪽에 배치된 라운지. <span style="color: #3f40d3;">소파</span>에 앉아 잠시 쉬어가거나 담소를 나누기에 좋은 곳이다.<br>라운지 양쪽으로는 큰 유리창이 나 있어 섬의 풍경이 한눈에 들어온다.<br>잔잔한 파도가 치는 바닷가, 그 위를 평화롭게 날아다니는 바닷새들…<br>라운지 중앙에는 무료함을 달래기 위해서인지 작은 <span style="color: #3f40d3;">책꽂이</span>가 설치되어 있다. </p>
+    <button onclick="goTo('sofa')">소파</button><br>
+    <button onclick="goTo('bookshelf')">책꽂이</button><br>
     <button class="nav-button" onclick="goTo('lobby')">나가기</button>
+ </div>
+
+    <!-- 로비:라운지:책꽂이 --> 
+    <div id="bookshelf" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[책꽂이]</span><br><br>
+    책의 종류는 많지 않다. 미래기관이나 초세계급에 대한 책자가 대부분이다.<br>살짝 살펴볼까?</p>
+    <button onclick="goToWithSound('book1','zzapbook.mp3')">《섬 안내서》</button><br>
+    <button onclick="goToWithSound('book2','zzapbook.mp3')">《궁금해요! 초세계급 A to Z》</button><br>
+    <button onclick="goToWithSound('book3','zzapbook.mp3')">《미래기관 연감》</button><br>
+    <button class="nav-button" onclick="goTo('waitingspace')">나가기</button>
+ </div>
+
+
+    <!-- 로비:라운지:책1 --> 
+    <div id="book1" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[책꽂이]</span><br><br>
+    흰 표지의 책.<br><br>섬의 약도와 더불어 여러 안내가 쓰여 있다. <br><br>
+‘이 섬은 다양한 야생 새들의 서식지입니다. 특히 여러 해양 조류를 만나 보실 수 있습니다. 새들을 위해 건물의 모든 유리창에는 조류 충돌 방지 필름을 부착하고 있으니 안심하세요.’<br>…<br>
+‘몸이 찌뿌둥할 때는 운동이 특효약이라고 합니다. 바다를 바라보며 자전거 타기는 어떠신가요?’<br>…<br>
+‘섬 어딘가에는 소원을 들어 주는 마법 같은 호수가 있다고 합니다. 진심을 다해 빌면 오랜 바람이 이루어질지도 모릅니다.’ ... 등등.</p>
+    <button class="nav-button" onclick="goTo('bookshelf')">나가기</button>
+ </div>
+
+      <!-- 로비:라운지:책2 --> 
+    <div id="book2" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[책꽂이]</span><br><br>
+푸른색 표지의 책.<br><br>초세계급으로 선발된 인원들에 대한 소개를 담고 있다.<br><br>초세계급의 평균 신장은 165.47cm, 2025년 기준 평균 연령은 만 23세…<br>…<br>…이런 정보까지 기록했다고?</p>
+    <button class="nav-button" onclick="goTo('bookshelf')">나가기</button>
+ </div>
+
+    <!-- 로비:라운지:책3 --> 
+    <div id="book3" class="hidden">
+    <p><span style="font-weight: bold;">[로비]/[라운지]<br>[책꽂이]</span><br><br>
+    두꺼운 회색 표지의 책.<br><br>미래기관의 설립 과정과 활동 기록을 정리했다.<br><br>미래기관이 설립된 연도는 2000년. 그 이후 범지구적 과제를 해결하기 위해 다방면의 활동을 거듭해 왔다.<br>미래기관 설립으로부터 25년이 지난 지금도 인류는 수많은 역경을 마주하고 있지만, 우리의 노력은 분명 세상을 조금 더 나은 곳으로 만들었을 것이다.</p>
+    <button class="nav-button" onclick="goTo('bookshelf')">나가기</button>
  </div>
   
     <!-- 로비:엘리베이터 --> 
