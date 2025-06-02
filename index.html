@@ -310,7 +310,7 @@
   
   <!-- 스타팅 포인트 -->  
   <div id="starting-point" class="hidden">
-    <p><span style="font-weight: bold;">[건물 입구]</span><br><br>흰 관을 연상시키는 건물의 입구에 다다른다.<br>돌로 된 정문 표면에는 알 수 없는 문자가 빼곡히 음각으로 새겨져 있다. 무엇을 기록한 것인지는 알 수 없지만 이유 모를 깊이와 장엄함이 느껴진다.<br>이 입구를 기점 삼아 건물 안으로 들어가거나, 섬의 시설물을 둘러보고 돌아올 수 있을 것 같다.</p>
+    <p><span style="font-weight: bold;">[건물 입구]</span><br><br>흰 관을 연상시키는 건물. 그 입구에 다다른다.<br>돌로 된 정문 표면에는 알 수 없는 문자가 빼곡히 음각으로 새겨져 있다. 무엇을 기록한 것인지는 알 수 없지만 이유 모를 깊이와 장엄함이 느껴진다.<br>이 입구를 기점 삼아 건물 안으로 들어가거나, 섬의 시설물을 둘러보고 돌아올 수 있을 것 같다.</p>
     <button onclick="goTo('inside')">건물 안으로 들어간다</button>
     <button onclick="goTo('outside')">건물 밖으로 나간다</button>
   </div>
@@ -463,9 +463,59 @@
       <!-- 레스토랑 : 조리실 --> 
   <div id="kitchen" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[조리실]</span><br><br>
-  조리는 물론 설거지나 정리까지 완전 자동화된 신식 주방. 지켜보는 사람이 없어도 요리가 가능하다.<br>
-  물론 원한다면 자동화 설비에 맡기는 대신 직접 요리를 할 수도 있다.<span style="color: #3f40d3;">서랍</span>과 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 물건이 구비되어 있다.</p>
+  조리는 물론 설거지나 정리까지 완전 자동화된 신식 주방. 지켜보는 사람이 아무도 없어도 요리가 가능하다.<br>
+  물론 원한다면 자동화 설비에 맡기는 대신 직접 <span style="color: #3f40d3;">조리대</span>에서 요리를 할 수도 있다.<span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">찬장</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
+  <button onclick="goTo('cooker')">조리대</button>
+  <button onclick="goTo('fridge')">냉장고</button>
+  <button onclick="goTo('drawer')">서랍</button>
   <button class="nav-button" onclick="goTo('restaurant')">나가기</button>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 조리대 --> 
+  <div id="cooker" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
+  가스레인지, 오븐, 토스터 등을 갖춘 조리대. 요리를 할 때에는 늘 화재에 조심.<br>
+  지금 제대로 된 요리를 하기에는 시간이 없지만, 식빵이 있다면 간단하게 토스트 정도를 만들 수 있으려나?</p>
+  <button id="toastbtn" onclick="maketoast('toastbtn')">식빵 굽기</button><br>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 조리대 : 토스터 --> 
+  <div id="toaster" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[조리대]</span><br><br>
+  식빵을 토스터에 넣었다!<br>
+  몇 초 정도 굽는 게 좋을까?</p>
+  <button onclick="goTo('overcook')">600초</button>
+  <button onclick="goTo('undercook')">3초</button>
+  <button id="toastbtn" onclick="maketoast('toastbtn')">운명에 맡긴다</button><br>
+  </div>
+  
+  <!-- 레스토랑 : 조리실 : 냉장고 --> 
+  <div id="fridge" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[냉장고]</span><br><br>
+  주방 한켠에 자리잡은 냉장고. 어마어마하게 크다. 보통 냉장고의 2~3배 크기는 되는 것 같다.<br>
+  금속 문이 꽤 무거워 보이는데, 이거... 사람 힘으로 열 수는 있는 건가?</p>
+  <button id="fridgebtn" onclick="openfridge('fridgebtn')">열어 본다</button><br>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
+  <p id="fridge-result"></p>
+  </div>
+
+  <!-- 레스토랑 : 조리실 : 냉장고 1 --> 
+  <div id="fridge1" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[냉장고]</span><br><br>
+  영차! 온 힘을 다해 당겼더니 겨우 열렸다. 냉장고 안은 식재료로 꽉 채워져 있다.<br>
+  파릇파릇한 야채, 신선한 육류, 유제품과 계란... 기본적인 재료부터 값나가는 고급 식재료까지 무엇이든 구비되어 있다.<br>이 냉장고의 문을 열 수 있을 정도로 강한 사람에게만 주어지는 식재료의 향연이다...</p>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
+  </div>
+
+        <!-- 레스토랑 : 조리실 : 서랍--> 
+  <div id="drawer" class="hidden">
+  <p><span style="font-weight: bold;">[레스토랑]/[조리실]<br>[서랍]</span><br><br>
+  조리는 물론 설거지나 정리까지 완전 자동화된 신식 주방. 지켜보는 사람이 없어도 요리가 가능하다.<br>
+  물론 원한다면 자동화 설비에 맡기는 대신 직접 요리를 할 수도 있다.<span style="color: #3f40d3;">냉장고</span>와 <span style="color: #3f40d3;">서랍</span>에 요리에 필요한 재료와 물건들이 구비되어 있다.</p>
+  <button onclick="goTo('fridge')">냉장고</button>
+  <button onclick="goTo('dispenser')">음료 디스펜서</button>
+  <button class="nav-button" onclick="goTo('kitchen')">나가기</button>
   </div>
 
     <!-- 내빈용 객실 --> 
@@ -609,7 +659,7 @@
   <button class="nav-button" onclick="goTo('street2-2')">나가기</button>
   </div>
 
-  <!-- asdf소원 빌기 --> 
+  <!-- 소원 빌기 --> 
   <div id="pond" class="hidden"> 
   <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>어떤 소원을 빌까?</p>
   <button onclick="goTo('pond-money')">부자가 되고 싶다</button><br>
@@ -923,6 +973,26 @@ function giveflower(buttonId) {
     goTo('flowerpage');
   } else {
     alert("꽃을 가지고 있지 않다. 어디서 구할 수 있을까...");
+  }
+}
+//★★★★★냉장고★★★★★
+function openfridge(buttonId) {
+  if (currentUser.STR >= 4) {
+    goTo('fridge1');
+  } else {
+    const result = document.getElementById('fridge-result');
+    result.innerText = "열심히 문을 당겨 봤지만... 꿈쩍도 하지 않는다. 힘이 부족해...!";
+  }
+}
+//★★★★★토스트★★★★★
+function maketoast(buttonId) {
+  if (currentUser.bread === 1) {
+    // 버튼 제거
+    const btn = document.getElementById(buttonId);
+    if (btn) btn.remove();  // 단 한 번만 제거
+    goTo('toaster');
+  } else {
+    alert("식빵을 가지고 있지 않다. 어디 있으려나?");
   }
 }
 //★★★★★퀴즈★★★★★
