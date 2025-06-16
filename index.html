@@ -761,7 +761,7 @@
     <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 3(정=3) --> 
     <div id="feed3" class="hidden">
     <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
-   위협에도 아랑곳않고 과감히 과자 통을 열고는 갈매기들에게 강력한 시선을 보냈다!<br>갈매기들의 울음소리가 확 줄어들었다. 설마 기세 싸움에서 이긴 걸까?<br><br>얌전해진 새들은 과자를 잘 받아먹은 뒤 돌아가는가 싶더니… 어디선가 반짝 빛나는 코인 하나를 물고 돌아왔다.<br><br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+   과자 통에 손을 얹은 채로 한동안 갈매기들과 대치했다.<br><br>…<br>…<br><br>긴장감을 유지하며 하나씩 과자를 꺼내자, 갈매기들은 만족스럽게 과자를 먹고 바다 저편으로 날아갔다…<br>갈매기 먹이 주기는 생각보다 각오가 필요한 일이었다. </p>
       <button class="nav-button" onclick="goTo('deck')">나가기</button>
   </div>
 
@@ -1134,7 +1134,7 @@ function goTo(page) {
   clearOutputs();
   pageHistory.push(page);
   //[중요]특정 페이지 진입 시 스탯(코인 등)변동
-  if (['notary3-2','flowerpage','sofa1-1','sofa1-3'].includes(page)) {
+  if (['notary3-2','flowerpage','sofa1-1','sofa1-3','feed2'].includes(page)) {
     currentUser.coin = (currentUser.coin || 0) + 1;
     updateCoinDisplay();
   }
