@@ -715,9 +715,9 @@
       <!-- 항구 : 배 --> 
       <div id="ship" class="hidden">
     <p><span style="font-weight: bold;">[항구]<br>[배]</span><br><br>
-      세계 각지에서 모인 초세계급들을 이곳으로 데려다 준 배. 작지만 섬세한 이 배 덕분에 바다 위를 가로지르는 여행은 무척 평온했다.<br>크게 <span style="color: #3f40d3;">선실</span>과 <br><span style="color: #3f40d3;">갑판</span>으로 나뉜 구조.</p>
+      세계 각지에서 모인 초세계급들을 이곳으로 데려다 준 배. 작지만 섬세한 이 배 덕분에 바다 위를 가로지르는 여행은 무척 평온했다.<br>크게 <span style="color: #3f40d3;">선실</span>과 <span style="color: #3f40d3;">갑판</span>으로 나뉜 구조.</p>
     <button onclick="goTo('cabin')">선실</button>
-    <button onclick="goTo('deck')">백사장</button><br>
+    <button onclick="goTo('deck')">갑판</button><br>
     <button class="nav-button" onclick="goTo('port1')">나가기</button>
   </div>
 
@@ -731,7 +731,7 @@
         <!-- 항구 : 배 : 갑판 --> 
       <div id="deck" class="hidden">
     <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
-     갑판에 오르는 순간 시원한 바람이 온몸을 휘감는다.<br>배 위쪽에서 바라보자 섬 전체의 풍경이 한눈에 들여다보인다. 전체적으로 평평하게 잘 다듬어진 섬, 한가운데에 우뚝 선 흰 건물...<br><br>풍경을 바라보고 있자 갈매기 우는 소리가 바로 옆에서 들린다.<br>마침 '갈매기 먹이용' 이라고 쓰인 과자 통이 갑판 난간에 매달려 있긴 한데...</p>
+     갑판에 오르는 순간 시원한 바람이 온몸을 휘감는다.<br>배 위쪽에서 바라보자 섬 전체의 풍경이 한눈에 들여다보인다. 평평하게 잘 다듬어진 섬, 한가운데에 우뚝 선 흰 건물...<br><br>풍경을 바라보고 있자 갈매기 우는 소리가 바로 옆에서 들린다.<br>마침 '갈매기 먹이용' 이라고 쓰인 과자 통이 갑판 난간에 매달려 있긴 한데...</p>
       <button id="galmaegi" onclick="goTodel('birdfeed', 'galmaegi')">갈매기 먹이 주기</button><br>
       <button class="nav-button" onclick="goTo('ship')">나가기</button>
   </div>
@@ -777,7 +777,7 @@
       <div id="sand" class="hidden">
     <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
     끝없는 바다와 모래사장이 시야를 채운다.<br>너울거리는 파도가 흰 모래에 섞여 부서지고, 열기를 싣은 바람이 피부를 간질인다.<br>기분 좋은 날씨를 만끽할 수 있는 백사장.<br>육지와 가까운 곳에 <span style="color: #3f40d3;">망원경</span>이 몇 개 설치되어 있다.</p>
-    <button onclick="goTo('sand1')">망원경을 사용한다</button><br>
+    <button id="mangwongyeong" onclick="goTodel('sand1', 'mangwongyeong')">망원경을 사용한다</button><br>
     <button class="nav-button" onclick="goTo('port1')">나가기</button>
   </div>
 
@@ -985,7 +985,7 @@
 
    <!-- 산책로: 3 소원의 호수 --> 
   <div id="street3" class="hidden"> 
-  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>이 호수는 1700년대에 시작되어</p>
+  <p><span style="font-weight: bold;">[산책로]<br>[소원의 호수]</span><br><br>'간절히 바라는 마음은 형태를 가지게 된다는 말이 있습니다.<br>원하는 것을 소리내서 말하면, 호수에 걸린 마법이 당신의 소원을 이루어 줄지도...'</p>
   <button id="makeawish" onclick="goTodel('pond', 'makeawish')">소원을 빈다</button><br>
   <button class="nav-button" onclick="goTo('street2-2')">나가기</button>
   </div>
@@ -1052,22 +1052,22 @@
       mung0515: {
         class: "피자마스터 으믕",
         id: "ThePizzaMaster",
-        STR: 2,
-        INT: 5,
-        OBS: 5,
-        POW: 5,
-        LUC: 5,
+        STR: 6,
+        INT: 6,
+        OBS: 6,
+        POW: 6,
+        LUC: 6,
         key: 0,
         coin: 0
       },
       sese0409: {
         class: "감자마스터 세세",
         id: "Linguistics",
-        STR: 5,
-        INT: 5,
-        OBS: 5,
-        POW: 5,
-        LUC: 5,
+        STR: 1,
+        INT: 1,
+        OBS: 1,
+        POW: 1,
+        LUC: 1,
         key: 0,
         coin: 0
       },
