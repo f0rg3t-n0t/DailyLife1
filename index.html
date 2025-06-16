@@ -729,7 +729,7 @@
   </div>
   
         <!-- 항구 : 배 : 갑판 --> 
-      <div id="cabin" class="hidden">
+      <div id="deck" class="hidden">
     <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
      갑판에 오르는 순간 시원한 바람이 온몸을 휘감는다.<br>배 위쪽에서 바라보자 섬 전체의 풍경이 한눈에 들여다보인다. 전체적으로 평평하게 잘 다듬어진 섬, 한가운데에 우뚝 선 흰 건물...<br><br>풍경을 바라보고 있자 갈매기 우는 소리가 바로 옆에서 들린다.<br>마침 '갈매기 먹이용' 이라고 쓰인 과자 통이 갑판 난간에 매달려 있긴 한데...</p>
       <button id="galmaegi" onclick="goTodel('birdfeed', 'galmaegi')">갈매기 먹이 주기</button><br>
@@ -744,13 +744,34 @@
    <button onclick="goTo('feed4')">포기하고 도망친다!</button>
   </div>
 
-      <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 --> 
+      <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 1(정<=2) --> 
     <div id="feed1" class="hidden">
     <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
-    간신히 </p>
-   <button id="gwakgwak" onclick="feedgalmaegi('gwakgwak')">먹이를 ... 준다!</button><br>
-   <button onclick="goTo('feed4')">포기하고 도망친다!</button>
+    어떻게든 상황을 수습해야 해…! 과자 통을 열어보려 했지만, 갈매기들의 기백에 완전히 압도당하고 말았다…<br>기가 눌려서인지, 손이 제대로 움직이지 않는다.<br>갈매기들이 매섭게 달려들어 몸 이곳저곳을 쪼기 시작한다. 아야야…!<br><br>흉폭한 새들은 한참 동안 항의와 분노의 표시를 하다가 돌아갔다…<br>정신력으로 이길 각오가 없다면 함부로 과자 통을 열어서는 안 되는 거구나…</p>
+     <button class="nav-button" onclick="goTo('deck')">나가기</button>
   </div>
+
+        <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 2(정>=4) --> 
+    <div id="feed2" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+   위협에도 아랑곳않고 과감히 과자 통을 열고는 갈매기들에게 강력한 시선을 보냈다!<br>갈매기들의 울음소리가 확 줄어들었다. 설마 기세 싸움에서 이긴 걸까?<br><br>얌전해진 새들은 과자를 잘 받아먹은 뒤 돌아가는가 싶더니… 어디선가 반짝 빛나는 코인 하나를 물고 돌아왔다.<br><br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+      <button class="nav-button" onclick="goTo('deck')">나가기</button>
+  </div>
+
+    <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 3(정=3) --> 
+    <div id="feed3" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+   위협에도 아랑곳않고 과감히 과자 통을 열고는 갈매기들에게 강력한 시선을 보냈다!<br>갈매기들의 울음소리가 확 줄어들었다. 설마 기세 싸움에서 이긴 걸까?<br><br>얌전해진 새들은 과자를 잘 받아먹은 뒤 돌아가는가 싶더니… 어디선가 반짝 빛나는 코인 하나를 물고 돌아왔다.<br><br><span style="font-weight: bold;">1코인을 획득했다.</span></p>
+      <button class="nav-button" onclick="goTo('deck')">나가기</button>
+  </div>
+
+      <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 4(도망) --> 
+    <div id="feed4" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+    제발 공격하지 마…!!<br>과자 통이고 뭐고, 허겁지겁 그 자리에서 벗어났다. 다행히 쫓아오지는 않을 생각인가 보다…<br>갈매기는 생각보다 무서운 존재라는 사실을 배웠다. 휴…</span></p>
+      <button class="nav-button" onclick="goTo('deck')">나가기</button>
+   </div>
+
   
         <!-- 항구 : 백사장 --> 
       <div id="sand" class="hidden">
