@@ -706,9 +706,64 @@
   
     <!-- 항구 : 1 --> 
       <div id="port1" class="hidden">
-    <p><span style="font-weight: bold;">[항구]</span><br><br>백사장이랑... 음... 아직 폭파되기 전이니까 우리가 타고 온 배...<br>항구에 또 뭐가 있더라? 아이디어 부탁합니다 갈매기 밥주기?</p>
+    <p><span style="font-weight: bold;">[항구]</span><br><br>작은 규모의 항구에는 이곳으로 올 때 탔던 <span style="color: #3f40d3;">배</span>가 단단히 닻을 내린 채로 선착장에 머무르고 있다.<br>그 옆으로 이어지는 <span style="color: #3f40d3;">백사장</span>에서는 제법 휴양지 분위기가 풍긴다.</p>
+    <button onclick="goTo('ship')">배</button>
+    <button onclick="goTo('sand')">백사장</button><br>
     <button class="nav-button" onclick="goToWithoutzzapsea('port')">나가기</button>
   </div>
+
+      <!-- 항구 : 배 --> 
+      <div id="ship" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[배]</span><br><br>
+      세계 각지에서 모인 초세계급들을 이곳으로 데려다 준 배. 작지만 섬세한 이 배 덕분에 바다 위를 가로지르는 여행은 무척 평온했다.<br>크게 <span style="color: #3f40d3;">선실</span>과 <br><span style="color: #3f40d3;">갑판</span>으로 나뉜 구조.</p>
+    <button onclick="goTo('cabin')">선실</button>
+    <button onclick="goTo('deck')">백사장</button><br>
+    <button class="nav-button" onclick="goTo('port1')">나가기</button>
+  </div>
+
+      <!-- 항구 : 배 : 선실 --> 
+      <div id="cabin" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[선실]</span><br><br>
+     선실에 뭐가 있는지 배를 타봤어야 알지... </p>
+    <button class="nav-button" onclick="goTo('ship')">나가기</button>
+  </div>
+  
+        <!-- 항구 : 배 : 갑판 --> 
+      <div id="cabin" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+     갑판에 오르는 순간 시원한 바람이 온몸을 휘감는다.<br>배 위쪽에서 바라보자 섬 전체의 풍경이 한눈에 들여다보인다. 전체적으로 평평하게 잘 다듬어진 섬, 한가운데에 우뚝 선 흰 건물...<br><br>풍경을 바라보고 있자 갈매기 우는 소리가 바로 옆에서 들린다.<br>마침 '갈매기 먹이용' 이라고 쓰인 과자 통이 갑판 난간에 매달려 있긴 한데...</p>
+      <button id="galmaegi" onclick="goTodel('birdfeed', 'galmaegi')">갈매기 먹이 주기</button><br>
+      <button class="nav-button" onclick="goTo('ship')">나가기</button>
+  </div>
+
+    <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 --> 
+    <div id="birdfeed" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+    과자 통의 뚜껑을 들어올리는 순간, 눈치 빠른 갈매기들이 한꺼번에 울어 대며 몰려들기 시작한다!<br>귀엽다는 감상도 잠시, 잠깐만... 너무 맹렬하게 돌격해 오는 것 아닌가?!?!<br>순식간에 갈매기 떼에 포위당하고 말았다... 절체절명!</p>
+   <button id="gwakgwak" onclick="feedgalmaegi('gwakgwak')">먹이를 ... 준다!</button><br>
+   <button onclick="goTo('feed4')">포기하고 도망친다!</button>
+  </div>
+
+      <!-- 항구 : 배 : 갑판 : 갈매기 먹이 주기 --> 
+    <div id="feed1" class="hidden">
+    <p><span style="font-weight: bold;">[항구]/[배]<br>[갑판]</span><br><br>
+    과자 통의 뚜껑을 들어올리는 순간, 눈치 빠른 갈매기들이 한꺼번에 울어 대며 몰려들기 시작한다!<br>귀엽다는 감상도 잠시, 잠깐만... 너무 맹렬하게 돌격해 오는 것 아닌가?!?!<br>순식간에 갈매기 떼에 포위당하고 말았다... 절체절명!</p>
+   <button id="gwakgwak" onclick="feedgalmaegi('gwakgwak')">먹이를 ... 준다!</button><br>
+   <button onclick="goTo('feed4')">포기하고 도망친다!</button>
+  </div>
+  
+        <!-- 항구 : 백사장 --> 
+      <div id="sand" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
+      작은 규모의 항구에는 이곳으로 올 때 탔던 <span style="color: #3f40d3;">배</span>가 단단히 닻을 내린 채로 선착장에 머무르고 있다.
+      <br>그 옆으로 이어지는 <span style="color: #3f40d3;">백사장</span>에서는 제법 휴양지 분위기가 풍긴다.</p>
+    <button onclick="goTo('ship')">배</button>
+    <button onclick="goTo('sand')">백사장</button><br>
+    <button class="nav-button" onclick="goTo('port1')">나가기</button>
+  </div>
+
+
+  
 
     <!-- 메모리얼 파크 --> 
     <div id="memorial" class="hidden">
@@ -728,7 +783,7 @@
 
       <!-- !!메모리얼 파크:화원 --> 
     <div id="garden" class="hidden">
-    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]</span><br><br>오색의 꽃이 화려하게 피어난 화원. 장미 덤불이 시야를 가릴 정도의 높이로 다듬어져 있어 마치 미로를 연상케 한다.<br>한켠에는 <span style="color: #3f40d3;">헌화용 꽃</span>을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...<br>화원 안쪽에는 공중전화 박스를 닮은 작은 <span style="color: #3f40d3;">부스</span>가 설치되어 있다.</p>
+    <p><span style="font-weight: bold;">[메모리얼 파크]<br>[화원]</span><br><br>오색의 꽃이 화려하게 피어난 화원. 장미 덤불이 시야를 가릴 정도의 높이로 다듬어져 있어 마치 미로를 연상케 한다.<br>한켠에는 <span style="color: #3f40d3;">헌화용 꽃</span>을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...<br>화원 안쪽에는 공중전화 박스를 닮은 작은 <span style="color: #3f40d3;">부스</span>가 설치되어 있다.</p>
     <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다</button>
     <button onclick="goTo('fltest0')">부스</button><br>
     <button class="nav-button" onclick="goTo('memorial1')">나가기</button>
@@ -1253,6 +1308,16 @@ function toasttime(buttonId) {
     goTo('perfect');
   } else {
     goTo('undercook');
+  }
+}
+//★★★★★갈매기 밥★★★★★
+function feedgalmaegi(buttonId) {
+  if (currentUser.POW <= 2) {
+    goTo('feed1');
+  } else if (currentUser.POW >= 4) {
+    goTo('feed2');
+  } else {
+    goTo('feed3');
   }
 }
 //★★★★★퀴즈★★★★★
