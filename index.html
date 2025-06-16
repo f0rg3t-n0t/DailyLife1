@@ -776,16 +776,41 @@
         <!-- 항구 : 백사장 --> 
       <div id="sand" class="hidden">
     <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
-      작은 규모의 항구에는 이곳으로 올 때 탔던 <span style="color: #3f40d3;">배</span>가 단단히 닻을 내린 채로 선착장에 머무르고 있다.
-      <br>그 옆으로 이어지는 <span style="color: #3f40d3;">백사장</span>에서는 제법 휴양지 분위기가 풍긴다.</p>
-    <button onclick="goTo('ship')">배</button>
-    <button onclick="goTo('sand')">백사장</button><br>
+    끝없는 바다와 모래사장이 시야를 채운다.<br>너울거리는 파도가 흰 모래에 섞여 부서지고, 열기를 싣은 바람이 피부를 간질인다.<br>기분 좋은 날씨를 만끽할 수 있는 백사장.<br>육지와 가까운 곳에 <span style="color: #3f40d3;">망원경</span>이 몇 개 설치되어 있다.</p>
+    <button onclick="goTo('sand1')">망원경을 사용한다</button><br>
     <button class="nav-button" onclick="goTo('port1')">나가기</button>
   </div>
 
+          <!-- 항구 : 백사장:망원경 --> 
+      <div id="sand1" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
+    이 망원경은 바닷새들을 관찰하는 용도로 만들어진 것 같다. 조류 도감에서 발췌한 페이지들이 코팅된 채 망원경에 걸려 있다.<br>그럼 어디 한 번 탐조를 시작해 볼까...</p>
+   <button id="gwak" onclick="watchbird('gwak')">탐조를 시작한다</button><br>
+  </div>
 
+              <!-- 항구 : 백사장:망원경2 (실패) --> 
+      <div id="sand2" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
+    망원경에 얼굴을 가져다 댄 채로 한참 동안 기다렸지만 출렁거리는 파도만이 보일 뿐이었다…<br>아니, 방금까지만 해도 새들이 많았던 것 같은데...<br>스스로의 관찰력을 원망할 수밖에. 탐조는 장렬히 실패했다...</p>
+    <button class="nav-button" onclick="goTo('sand')">나가기</button>
+  </div>
+
+            <!-- 항구 : 백사장:망원경3 (성공) --> 
+      <div id="sand3" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
+    잠시 망원경을 들여다보고 있으면... 갈색 깃털에, 검은 부리를 가진 새가 비행하는 모습이 눈에 들어온다.<br>이 새 이름은 뭐지? '넓적부리도요'...?<br>아무래도 희귀한 보호종을 관찰한 것 같다! 탐조는 대성공이다.</p>
+    <button class="nav-button" onclick="goTo('sand')">나가기</button>
+  </div>
+
+              <!-- 항구 : 백사장:망원경4 (그냥그럼) --> 
+      <div id="sand4" class="hidden">
+    <p><span style="font-weight: bold;">[항구]<br>[백사장]</span><br><br>
+    잠시 망원경을 들여다보고 있으면... 끼룩끼룩, 갈매기들의 모습이 보인다.<br>확대해서 보니 뭔가 유달리 생생한 것 같기도 하고...<br>희귀한 새를 찾은 것은 아니지만, 그럭저럭 나쁘지 않은 탐조였을지도.</p>
+    <button class="nav-button" onclick="goTo('sand')">나가기</button>
+  </div>
   
 
+  
     <!-- 메모리얼 파크 --> 
     <div id="memorial" class="hidden">
     <p><span style="font-weight: bold;">[메모리얼 파크 입구]</span><br><br>흰 울타리로 둘러싸여 구획지어진 공간이 바다와 접하고 있다.<br>조금은 엄숙한 기분이 들지도...<br><br>
@@ -1341,10 +1366,20 @@ function feedgalmaegi(buttonId) {
     goTo('feed3');
   }
 }
+//★★★★★탐조★★★★★
+function watchbird(buttonId) {
+  if (currentUser.OBS <= 2) {
+    goTo('sand2');
+  } else if (currentUser.OBS >= 4) {
+    goTo('sand3');
+  } else {
+    goTo('sand4');
+  }
+}
 //★★★★★퀴즈★★★★★
 function checkSecretCode() {
   const input = document.getElementById('secret-code-input').value;
-  if (input === "20020409") { // 원하는 정답
+  if (input === "19850609") { // 원하는 정답
     const codebox = document.getElementById('codebox');
     if (codebox) {
       codebox.style.display = 'none';
