@@ -37,7 +37,7 @@ function loadFinalReport() {
   }
   if (currentUser.post) {
   lines.push({
-    html: `<div style="color: black; font-style: italic;">${currentUser.post} 압화된 엽서를 손에 넣었다.</div>`,
+    html: `<div style="color: black; font-style: italic;">${currentUser.post} 압화된 엽서를 손에 넣었다 …</div>`,
     align: 'right',
     lineStyle: 'color: black; font-style: italic;'
   });
