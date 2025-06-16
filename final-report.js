@@ -35,6 +35,13 @@ function loadFinalReport() {
   if (currentUser.notalove === true) {
     lines.push({ html: `<div style="color: black; font-style: italic;">공증인의 호의를 얻은 것 같다 …</div>`, align: 'right', lineStyle: 'color: black; font-style: italic;' });
   }
+  if (currentUser.post) {
+  lines.push({
+    html: `<div style="color: black; font-style: italic;">${currentUser.post} 압화된 엽서를 손에 넣었다.</div>`,
+    align: 'right',
+    lineStyle: 'color: black; font-style: italic;'
+  });
+}
   if (currentUser.gongmo && currentUser.gongmo.length > 0) {
   lines.push({
     html: `<div style="color: black; font-style: italic;">"${currentUser.gongmo}"로 랜덤 음료 공모전에 참여했다 …</div>`,
