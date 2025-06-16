@@ -643,16 +643,30 @@
   
     <!-- 내빈용 객실 --> 
     <div id="suite" class="hidden">
-    <p><span style="font-weight: bold;">[내빈용 객실]</span><br><br>이 자리에 초청된 초세계급들이 편히 쉴 수 있도록 개인실이 준비되어 있다. 벌써 들어가서 쉬기에는 기껏 나온 보람이 없다!</p>
+    <p><span style="font-weight: bold;">[내빈용 객실]</span><br><br>이 자리에 초청된 초세계급들이 편히 쉴 수 있도록 <span style="color: #3f40d3;">개인실</span>이 준비되어 있다. 문 앞에 붙은 명패에는 각자의 이름과 재능이 쓰여 있어 찾아가기 편하다.<br>객실이 이어지는 복도 끝에는 '<span style="color: #3f40d3;">비품실</span>'이라고 표시된 작은 방이 보인다.</p>
+    <button onclick="goTo('suite1')">개인실</button>
+    <button onclick="goTo('bipum')">비품실</button><br>
     <button class="nav-button" onclick="goTo('2ndfloor')">나가기</button>
   </div>
 
+    <!-- 내빈용 객실 --> 
+    <div id="suite1" class="hidden">
+    <p><span style="font-weight: bold;">[내빈용 객실]/[개인실]</span><br><br> 설명 </p>
+    <button class="nav-button" onclick="goTo('suite')">나가기</button>
+  </div>
+
+    <!-- 비품실 --> 
+    <div id="bipum" class="hidden">
+    <p><span style="font-weight: bold;">[내빈용 객실]/[개인실]</span><br><br> 설명 </p>
+    <button class="nav-button" onclick="goTo('suite')">나가기</button>
+  </div>
+  
       <!-- 회의실 --> 
     <div id="office" class="hidden">
     <p><span style="font-weight: bold;">[회의실]</span><br><br>세미나 등을 진행할 수 있는 회의실. 사무실의 역할도 겸하고 있는지 전화기, 프린터기 등도 배치되어 있다.<br>이곳에 머무는 초세계급이라면 자유롭게 이용할 수 있는 것 같다.
     <br>물론 지금 당장은 회의실을 사용할 만한 안건이 없지만, 어떤 물건이 구비되어 있는지 확인해 둬서 나쁠 것은 없겠지.<br><span style="color: #3f40d3;">사무용 책상</span>과 그 위의<span style="color: #3f40d3;">컴퓨터</span>가 눈에 띈다.</p>
     <button onclick="goTo('pcdesk')">사무용 책상</button>
-    <button onclick="goTo('computer')">내빈용 객실</button>   
+    <button onclick="goTo('computer')">내빈용 객실</button><br>   
     <button class="nav-button" onclick="goTo('2ndfloor')">나가기</button>
   </div>
 
