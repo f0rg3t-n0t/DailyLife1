@@ -520,7 +520,7 @@
     <!-- 레스토랑 : 음료 디스펜서 2 (음료 공모전) -->
   <div id="dispenser2" class="hidden">
   <p><span style="font-weight: bold;">[레스토랑]/[음료 디스펜서]</span><br><br>
-  "랜덤 음료 공모전. 당신이 원하는 음료의 이름을 적어서 제출하면 검토 후 랜덤 음료 디스펜서에 출시될지도... 초세계급 여러분의 많은 참여 바랍니다!"<br>라고 쓰여 있다.</p>
+  "랜덤 음료 공모전. 당신이 원하는 음료의 이름을 적어서 제출하면 검토 후 랜덤 음료 디스펜서에 출시될지도... 초세계급 여러분의 많은 참여 바랍니다!"<br>라고 쓰여 있다. 한 사람당 2개까지 응모 가능한 모양이다.</p>
    <input type="text" id="gongmo">
   <div id="gongmobox" style="display: block; margin-top: 1em;">
   <button onclick="addgongmo()">확인</button>
@@ -694,11 +694,78 @@
 
       <!-- !!메모리얼 파크:화원 --> 
     <div id="garden" class="hidden">
-    <p><span style="font-weight: bold;">[화원]</span><br><br>어쩌고저쩌고 묘사<br>화원에는 헌화용 꽃을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...</p>
-    <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button><br>
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]</span><br><br>오색의 꽃이 화려하게 피어난 화원. 장미 덤불이 시야를 가릴 정도의 높이로 다듬어져 있어 마치 미로를 연상케 한다.<br>한켠에는 <span style="color: #3f40d3;">헌화용 꽃</span>을 자유롭게 가져갈 수 있는 공간이 있다. 하나 골라 보는 것도 좋겠지...<br>화원 안쪽에는 공중전화 박스를 닮은 작은 <span style="color: #3f40d3;">부스</span>가 설치되어 있다.</p>
+    <button id="flowerpick" onclick="goTodel('gardenflower', 'flowerpick')">헌화용 꽃을 고른다.</button>
+    <button onclick="goTo('fltest0')">부스</button><br>
     <button class="nav-button" onclick="goTo('memorial1')">나가기</button>
   </div>
 
+      <!-- !!메모리얼 파크:부스0 --> 
+    <div id="fltest0" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>부스 안쪽으로 들어가 보면, 공중전화를 닮은 전화기가 놓여 있다. 정말 공중전화 박스였던 걸까?<br>하지만 전화기는 무척 구식이고, 숫자 버튼도 눌리지 않는다.<br>전화기 아래에 작게 안내문이 쓰여 있다.<br><br><em>'당신에게 맞는 꽃을 추천해 드립니다. 수화기를 들어 질문에 응답해 주세요.'</em></p>
+    <button id="flt" onclick="goTodel('fltest1', 'flt')">수화기를 든다</button>
+    <button class="nav-button" onclick="goTo('garden')">나가기</button>
+  </div>
+
+      <!-- !!메모리얼 파크:부스1 --> 
+    <div id="fltest1" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>수화기 저편에서 목소리가 들려온다. 질문에 답하면 되는 것 같은데...<br><br><em>"취향을 모르는 상대에게 선물을 줄 때에는, 내가 받는다면 기쁠 만한 것을 선물하나요?<br>아니면 호불호가 갈리지 않아 누구나 좋아할 만한 것을 선물하나요?"</em></p>
+    <button onclick="goTo('fltest2')">내가 받는다면 기쁠 만한 것</button><br>
+    <button onclick="goTo('fltest3')">호불호 없이 누구나 좋아할 만한 것</button><br>
+  </div>
+
+      <!-- !!메모리얼 파크:부스2 --> 
+    <div id="fltest2" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br><em>"어떻게 해도 꺾을 수 없는 상대를 만난다면, 좋은 라이벌을 만나 기쁘다는 생각이 드나요?<br>아니면 솔직히 조금은 무력감을 느끼나요?"</em></p>
+    <button onclick="goTo('fltest4')">기쁘다는 생각이 들 것 같다</button><br>
+    <button onclick="goTo('fltest5')">조금은 무력감이 들 것 같다</button><br>
+  </div>
+
+        <!-- !!메모리얼 파크:부스3 --> 
+    <div id="fltest3" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br><em>"새로 만나는 사람을 상대로는 먼저 자기소개를 하는 편인가요?<br>아니면 상대가 자기소개를 할 때까지 기다리나요?"</em></p>
+    <button onclick="goTo('fltest4')">먼저 자기소개를 한다</button><br>
+    <button onclick="goTo('fltest5')">상대가 자기소개를 할 때까지 기다린다</button><br>
+  </div>
+
+        <!-- !!메모리얼 파크:부스4 --> 
+    <div id="fltest4" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br><em>"행운이 당신의 편에 있다고 믿나요?"</em></p>
+    <button onclick="goTo('fltest6')">그렇다</button><br>
+    <button onclick="goTo('fltest7')">아니다</button><br>
+  </div>
+  
+        <!-- !!메모리얼 파크:부스5 --> 
+    <div id="fltest5" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br><em>"이름도, 얼굴도 모르는 상대와 사랑에 빠질 수 있다고 생각하나요?"</em></p>
+    <button onclick="goTo('fltest7')">그렇다</button><br>
+    <button onclick="goTo('fltest8')">아니다</button><br>
+  </div>
+
+        <!-- !!메모리얼 파크:부스6 --> 
+    <div id="fltest6" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>목소리가 끊기더니, 전화기 아래쪽에서 종이 한 장이 팔랑 떨어졌다. 꽃이 압화된 엽서 한 장이다.<br><br><em>'열정과 의지를 갖춘 당신에게 어울리는 꽃, 아데니움.<br>꽃말은 '무모한 사랑, 열정'.<br>과감한 결단이 필요할 때 이 꽃이 행운의 증표가 되어 줄 것입니다.'</em><br>...라는 글이 새겨져 있다.</p>
+    <button class="nav-button" onclick="goTo('garden')">나가기</button>
+  </div>
+
+          <!-- !!메모리얼 파크:부스7 --> 
+    <div id="fltest7" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>목소리가 끊기더니, 전화기 아래쪽에서 종이 한 장이 팔랑 떨어졌다. 꽃이 압화된 엽서 한 장이다.<br><br><em>'성장의 여지와 잠재력을 품은 당신에게 어울리는 꽃, 능소화.<br>꽃말은 '기다림, 명예, 영광, 그리움'.<br>앞으로 한 발을 내딛고자 할 때 이 꽃이 행운의 증표가 되어 줄 것입니다.'</em><br>...라는 글이 새겨져 있다.</p>
+    <button class="nav-button" onclick="goTo('garden')">나가기</button>
+  </div>
+
+          <!-- !!메모리얼 파크:부스8 --> 
+    <div id="fltest8" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>목소리가 끊기더니, 전화기 아래쪽에서 종이 한 장이 팔랑 떨어졌다. 꽃이 압화된 엽서 한 장이다.<br><br><em>'오묘한 매력을 가지고 있는 당신에게 어울리는 꽃, 거베라.<br>꽃말은 '풀 수 없는 수수께끼, 신비'.<br>진정한 자신을 내보이고 싶을 때 이 꽃이 행운의 증표가 되어 줄 것입니다.'</em><br>...라는 글이 새겨져 있다.</p>
+    <button class="nav-button" onclick="goTo('garden')">나가기</button>
+  </div>
+
+          <!-- !!메모리얼 파크:부스9 --> 
+    <div id="fltest9" class="hidden">
+    <p><span style="font-weight: bold;">[메모리얼 파크]/[화원]<br>[부스]</span><br><br>목소리가 끊기더니, 전화기 아래쪽에서 종이 한 장이 팔랑 떨어졌다. 꽃이 압화된 엽서 한 장이다.<br><br><em>'신중하고 섬세한 당신에게 어울리는 꽃, 라벤더.<br>꽃말은 '침묵, 행복이 다시 온다'.<br>스스로에게 믿음이 필요할 때 이 꽃이 행운의 증표가 되어 줄 것입니다.'</em><br>...라는 글이 새겨져 있다.</p>
+   <button class="nav-button" onclick="goTo('garden')">나가기</button>
+  </div>
+  
       <!-- !!메모리얼 파크:화원:꽃 --> 
     <div id="gardenflower" class="hidden">
     <p><span style="font-weight: bold;">[화원]</span><br><br>마음에 드는 꽃을 고르자.</p>
